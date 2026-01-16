@@ -1,0 +1,331 @@
+# Implementation Plan: Gemini Live Migration
+
+## Overview
+
+This implementation plan migrates the Voiceter backend from ElevenLabs Conversational AI to Google Gemini Live API. The tasks are organized to build incrementally, starting with core infrastructure (authentication, client), then adding features (audio, tools, transcription), and finally cleanup and testing.
+
+## Tasks
+
+- [x] 1. Set up project dependencies and configuration
+  - [x] 1.1 Add google-auth-library dependency to package.json
+    - Run `npm install google-auth-library`
+    - _Requirements: 1.1_
+  - [x] 1.2 Create GeminiLiveConfig interface and configuration loader
+    - Create `voiceter-backend/src/gemini-live/config.ts`
+    - Define GeminiLiveConfig interface with all required fields
+    - Implement loadGeminiConfig() function reading from environment variables
+    - Add validation for required fields (GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_REGION)
+    - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9_
+  - [ ]* 1.3 Write property test for configuration loading
+    - **Property 26: Configuration Loading**
+    - **Property 27: Configuration Validation**
+    - **Validates: Requirements 12.1-12.9**
+  - [x] 1.4 Update .env.example with Gemini environment variables
+    - Remove all ELEVENLABS_* variables
+    - Add USE_GEMINI_LIVE, GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_REGION, GEMINI_MODEL, GEMINI_DEFAULT_VOICE, etc.
+    - _Requirements: 12.1-12.8_
+
+- [x] 2. Implement Google Cloud authentication
+  - [x] 2.1 Create GeminiAuthManager class
+    - Create `voiceter-backend/src/gemini-live/auth.ts`
+    - Implement getAccessToken() using google-auth-library
+    - Implement isTokenExpiringSoon() checking 5-minute threshold
+    - Implement refreshToken() for manual refresh
+    - Add error handling with proper logging
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ]* 2.2 Write property test for token refresh timing
+    - **Property 1: Token Refresh Timing**
+    - **Validates: Requirements 1.2**
+  - [ ]* 2.3 Write property test for authentication error handling
+    - **Property 2: Authentication Error Event Completeness**
+    - **Validates: Requirements 1.3, 11.6**
+
+- [x] 3. Implement Gemini Live types and message builders
+  - [x] 3.1 Create Gemini Live type definitions
+    - Create `voiceter-backend/src/gemini-live/types.ts`
+    - Define GeminiSetupMessage, GeminiAudioInputMessage, GeminiToolResponseMessage
+    - Define GeminiServerContentEvent, GeminiToolCallEvent, GeminiSetupCompleteEvent, GeminiGoAwayEvent
+    - Define GeminiSessionConfig, VADConfig interfaces
+    - _Requirements: 2.2, 3.1-3.6, 7.7_
+  - [x] 3.2 Create setup message builder
+    - Implement buildSetupMessage(config: GeminiSessionConfig) function
+    - Include model, responseModalities, speechConfig, systemInstruction, tools, transcription config
+    - Include VAD configuration with defaults
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 5.1, 5.2, 5.3, 5.4, 6.3_
+  - [ ]* 3.3 Write property test for setup message completeness
+    - **Property 5: Setup Message Completeness**
+    - **Property 12: VAD Configuration Defaults**
+    - **Validates: Requirements 3.1-3.6, 5.1-5.4**
+
+- [x] 4. Implement voice configuration
+  - [x] 4.1 Create VoiceConfigManager
+    - Create `voiceter-backend/src/gemini-live/voice-config.ts`
+    - Define GEMINI_VOICES constant array
+    - Define VOICE_MAPPING for legacy names (matthew→Charon, tiffany→Aoede, amy→Kore)
+    - Implement mapVoice(), getDefaultVoice(), isValidVoice(), getAvailableVoices()
+    - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+  - [ ]* 4.2 Write property test for voice mapping
+    - **Property 19: Voice Mapping Consistency**
+    - **Validates: Requirements 9.1, 9.2, 9.3**
+
+- [x] 5. Checkpoint - Core infrastructure complete
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 6. Implement GeminiLiveClient WebSocket connection
+  - [x] 6.1 Create GeminiLiveClient class skeleton
+    - Create `voiceter-backend/src/gemini-live/client.ts`
+    - Extend EventEmitter for event handling
+    - Define connection state management
+    - Implement connect(), disconnect(), isConnected() methods
+    - _Requirements: 2.1, 2.7_
+  - [x] 6.2 Implement WebSocket connection with authentication
+    - Build Vertex AI WebSocket URL with region and model
+    - Add Authorization header with Bearer token from GeminiAuthManager
+    - Handle connection open, close, error events
+    - _Requirements: 2.1, 1.5_
+  - [x] 6.3 Implement setup message sending
+    - Send setup message on connection open
+    - Wait for setupComplete before allowing audio
+    - Emit 'setupComplete' event with Gemini session ID
+    - _Requirements: 2.2, 2.3_
+  - [ ]* 6.4 Write property test for setup message ordering
+    - **Property 4: Setup Message Ordering**
+    - **Validates: Requirements 2.2**
+  - [x] 6.5 Implement reconnection with exponential backoff
+    - Track connection attempts
+    - Calculate delay as baseDelay * 2^attempt
+    - Limit to maxRetries (default 3)
+    - Emit error after max retries exceeded
+    - _Requirements: 2.4, 2.5_
+  - [ ]* 6.6 Write property test for reconnection backoff
+    - **Property 6: Reconnection Exponential Backoff**
+    - **Property 7: Reconnection Retry Limit**
+    - **Validates: Requirements 2.4, 2.5**
+  - [x] 6.7 Implement goAway message handling
+    - Parse goAway event with timeLeft
+    - Gracefully close connection
+    - Trigger reconnection
+    - _Requirements: 2.6_
+
+- [x] 7. Implement audio streaming
+  - [x] 7.1 Implement sendAudioChunk method
+    - Accept base64 audio data
+    - Format as realtimeInput.audio message with mimeType 'audio/pcm;rate=16000'
+    - Send via WebSocket
+    - _Requirements: 4.1_
+  - [x] 7.2 Implement audio output handling
+    - Parse serverContent.modelTurn.parts[].inlineData
+    - Extract audio data and mimeType
+    - Emit 'audioOutput' event
+    - _Requirements: 4.2, 4.3_
+  - [ ]* 7.3 Write property test for audio forwarding
+    - **Property 8: Audio Input Forwarding**
+    - **Property 9: Audio Output Forwarding**
+    - **Validates: Requirements 4.1, 4.2**
+  - [x] 7.4 Implement audio chunk ordering
+    - Maintain sequence numbers or timestamps
+    - Ensure FIFO ordering
+    - _Requirements: 4.4_
+  - [x] 7.5 Implement invalid audio handling
+    - Validate audio format before sending
+    - Log errors for invalid chunks
+    - Skip invalid chunks without terminating session
+    - _Requirements: 4.5_
+  - [ ]* 7.6 Write property test for invalid audio resilience
+    - **Property 11: Invalid Audio Resilience**
+    - **Validates: Requirements 4.5**
+
+- [x] 8. Implement interruption handling
+  - [x] 8.1 Implement interrupted event handling
+    - Parse serverContent.interrupted
+    - Clear pending audio buffers
+    - Emit 'interrupted' event
+    - _Requirements: 6.1, 6.2_
+  - [ ]* 8.2 Write property test for interruption handling
+    - **Property 13: Interruption Event Forwarding**
+    - **Validates: Requirements 6.1**
+
+- [x] 9. Checkpoint - Audio streaming complete
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 10. Implement tool execution
+  - [x] 10.1 Create GeminiToolAdapter
+    - Create `voiceter-backend/src/gemini-live/tool-adapter.ts`
+    - Implement toGeminiFormat() converting internal tools to functionDeclarations
+    - Implement parseToolCall() extracting function calls from toolCall event
+    - Implement formatToolResponse() creating toolResponse message
+    - _Requirements: 7.7_
+  - [x] 10.2 Implement tool call handling in GeminiLiveClient
+    - Parse toolCall event with functionCalls array
+    - Emit 'toolCall' event for each function call
+    - _Requirements: 7.1, 7.2_
+  - [x] 10.3 Implement sendToolResponse method
+    - Accept call ID and result
+    - Format as toolResponse.functionResponses
+    - Send via WebSocket
+    - _Requirements: 7.3_
+  - [x]* 10.4 Write property test for tool execution
+    - **Property 14: Tool Call Execution**
+    - **Property 15: Tool Response Round-Trip**
+    - **Validates: Requirements 7.1, 7.2, 7.3**
+    - Created `voiceter-backend/tests/property/gemini-tool-execution.test.ts`
+  - [x] 10.5 Implement tool timeout handling
+    - Add timeout wrapper around tool execution
+    - Return error response on timeout
+    - _Requirements: 7.4_
+  - [x]* 10.6 Write property test for tool timeout
+    - **Property 16: Tool Timeout Enforcement**
+    - **Validates: Requirements 7.4**
+    - Added to `voiceter-backend/tests/property/gemini-tool-execution.test.ts`
+  - [x] 10.7 Implement toolCallCancellation handling
+    - Parse toolCallCancellation event
+    - Cancel pending tool executions
+    - _Requirements: 6.4_
+
+- [x] 11. Implement transcription handling
+  - [x] 11.1 Create TranscriptionHandler
+    - Create `voiceter-backend/src/gemini-live/transcription-handler.ts`
+    - Implement handleInputTranscription() for user speech
+    - Implement handleOutputTranscription() for assistant speech
+    - Store transcriptions in conversation history
+    - _Requirements: 8.1, 8.2, 8.3, 8.4_
+  - [x] 11.2 Integrate transcription handling in GeminiLiveClient
+    - Parse serverContent.inputTranscription
+    - Parse serverContent.outputTranscription
+    - Emit transcription events
+    - _Requirements: 8.1, 8.2_
+  - [ ]* 11.3 Write property test for transcription handling
+    - **Property 17: Transcription Event Transformation**
+    - **Property 18: Transcription Persistence**
+    - **Validates: Requirements 8.1, 8.2, 8.3, 8.4**
+
+- [x] 12. Checkpoint - Tool and transcription complete
+  - Ensure all tests pass, ask the user if questions arise.
+  - Note: 532 tests pass. 8 failures are pre-existing infrastructure issues (missing @aws-sdk/client-bedrock-runtime, database integration child process exceptions) unrelated to Gemini Live migration.
+
+- [x] 13. Implement session state management
+  - [x] 13.1 Update session types for Gemini
+    - Update `voiceter-backend/src/session/types.ts`
+    - Replace ElevenLabsSessionFields with GeminiSessionFields
+    - Add geminiSessionId, voiceName, connectionAttempts, lastReconnectTime
+    - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
+  - [x] 13.2 Update SessionManager for Gemini state transitions
+    - Update status transitions: connecting → active → completed/terminated/error
+    - Update lastActivityTime on events
+    - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6_
+  - [ ]* 13.3 Write property test for session state machine
+    - **Property 20: Session State Machine**
+    - **Property 21: Activity Time Tracking**
+    - **Validates: Requirements 10.1-10.6**
+  - [x] 13.4 Update session cleanup for Gemini
+    - Update `voiceter-backend/src/session/cleanup.ts`
+    - Replace ElevenLabs client references with Gemini client
+    - Implement 30-minute timeout cleanup
+    - _Requirements: 10.7_
+  - [ ]* 13.5 Write property test for session timeout
+    - **Property 22: Session Timeout Cleanup**
+    - **Validates: Requirements 10.7**
+
+- [x] 14. Implement error handling
+  - [x] 14.1 Define Gemini error codes
+    - Update `voiceter-backend/src/errors/codes.ts`
+    - Add GEMINI_CONNECTION_FAILED, GEMINI_AUTH_FAILED, GEMINI_RATE_LIMITED, GEMINI_STREAM_ERROR, GEMINI_TOOL_TIMEOUT
+    - Remove ELEVENLABS_* error codes
+    - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5_
+  - [x] 14.2 Implement error categorization in GeminiLiveClient
+    - Map WebSocket errors to appropriate error codes
+    - Determine recoverability for each error type
+    - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.7_
+  - [ ]* 14.3 Write property test for error handling
+    - **Property 23: Error Code Categorization**
+    - **Property 24: Error Event Completeness**
+    - **Property 25: Error Logging Completeness**
+    - **Validates: Requirements 11.1-11.8**
+
+- [x] 15. Integrate with WebSocket handler
+  - [x] 15.1 Update WebSocket handler imports
+    - Update `voiceter-backend/src/websocket/handler.ts`
+    - Replace elevenlabs imports with gemini-live imports
+    - _Requirements: 13.4_
+  - [x] 15.2 Update event routing for Gemini
+    - Route audio:chunk events to GeminiLiveClient.sendAudioChunk()
+    - Route tool responses to GeminiLiveClient.sendToolResponse()
+    - Handle Gemini events and emit Socket.IO events
+    - _Requirements: 14.1-14.10_
+    - Route audio:chunk events to GeminiLiveClient.sendAudioChunk()
+    - Route tool responses to GeminiLiveClient.sendToolResponse()
+    - Handle Gemini events and emit Socket.IO events
+    - _Requirements: 14.1-14.10_
+  - [ ]* 15.3 Write property test for Socket.IO compatibility
+    - **Property 28: Socket.IO Event Format Compatibility**
+    - **Validates: Requirements 14.1-14.10**
+
+- [x] 16. Update tool executor
+  - [x] 16.1 Update tool executor for Gemini format
+    - Update `voiceter-backend/src/tools/executor.ts`
+    - Replace convertFromElevenLabsFormat with convertFromGeminiFormat
+    - Replace convertToElevenLabsFormat with convertToGeminiFormat
+    - Rename executeFromElevenLabs to executeFromGemini
+    - _Requirements: 13.5_
+
+- [x] 17. Create module index and exports
+  - [x] 17.1 Create gemini-live module index
+    - Create `voiceter-backend/src/gemini-live/index.ts`
+    - Export GeminiLiveClient, GeminiAuthManager, VoiceConfigManager, GeminiToolAdapter, TranscriptionHandler
+    - Export types and interfaces
+    - _Requirements: N/A (code organization)_
+
+- [x] 18. Checkpoint - Integration complete
+  - Ensure all tests pass, ask the user if questions arise.
+  - Note: 532 tests pass. 8 failures are pre-existing infrastructure issues (missing @aws-sdk/client-bedrock-runtime module, database integration child process exceptions) unrelated to Gemini Live migration - same issues documented in Task 12.
+
+- [x] 19. Remove ElevenLabs code
+  - [x] 19.1 Delete ElevenLabs module directory
+    - Delete `voiceter-backend/src/elevenlabs/` directory (all files)
+    - _Requirements: 13.1_
+  - [x] 19.2 Delete ElevenLabs test files
+    - Delete `voiceter-backend/tests/unit/elevenlabs/` directory
+    - _Requirements: 13.7_
+  - [x] 19.3 Remove ElevenLabs references from other files
+    - Search and remove any remaining elevenlabs imports
+    - Update any remaining type references
+    - Renamed ElevenLabsError to GeminiLiveError in errors/types.ts
+    - Updated error handler methods from handleElevenLabsError to handleGeminiLiveError
+    - Updated formatter.ts sanitization for Gemini URLs
+    - Updated bedrock/index.ts comment
+    - Note: config.ts ElevenLabs references left for Task 20
+    - _Requirements: 13.2, 13.3, 13.4, 13.5, 13.6_
+
+- [x] 20. Update server configuration
+  - [x] 20.1 Update server config for Gemini
+    - Update `voiceter-backend/src/server/config.ts`
+    - Remove ElevenLabsConfig interface
+    - Add GeminiLiveConfig to main config
+    - Update config loading logic
+    - _Requirements: 12.1-12.9_
+
+- [ ] 21. Final integration testing
+  - [ ]* 21.1 Write integration test for end-to-end flow
+    - Test complete session lifecycle: connect → setup → audio → tools → complete
+    - Test error recovery scenarios
+    - Test backward compatibility with frontend events
+    - _Requirements: All_
+
+- [x] 22. Final checkpoint - Migration complete
+  - Ensure all tests pass, ask the user if questions arise.
+  - Verify all ElevenLabs code removed
+  - Verify all Gemini Live functionality working
+  - **COMPLETED**: Migration verified complete:
+    - 518 tests pass
+    - ElevenLabs directories empty (`src/elevenlabs/`, `tests/unit/elevenlabs/`)
+    - Gemini Live module fully implemented with all components
+    - 8 test suite failures are pre-existing infrastructure issues (missing @aws-sdk/client-bedrock-runtime, Jest worker exceptions) - same as documented in Task 12 and Task 18
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for faster MVP
+- Each task references specific requirements for traceability
+- Checkpoints ensure incremental validation
+- Property tests validate universal correctness properties (100+ iterations each)
+- Unit tests validate specific examples and edge cases
+- The migration maintains backward compatibility with the existing Socket.IO interface

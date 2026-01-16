@@ -1,0 +1,699 @@
+{
+"common": {
+    "tryLiveDemo": "Canlı Demo",
+    "joinWaitlist": "Bekleme Listesine Katıl",
+    "learnMore": "Daha Fazla Bilgi",
+    "getStarted": "Hemen Başla",
+    "close": "Kapat",
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "backToLandingPage": "Ana Sayfaya Dön",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "recommended": "ÖNERİLEN",
+    "variable": "Değişken",
+    "consistent": "Tutarlı"
+  },
+  "nav": {
+    "demo": "Demo",
+    "howItWorks": "Nasıl Çalışır",
+    "features": "Özellikler",
+    "useCases": "Kullanım Alanları",
+    "faq": "SSS"
+  },
+  "hero": {
+    "badge": "Yeni Nesil Pazar Araştırma Platformu",
+    "headline": "Daha Akıllı Diyaloglar. Daha Hızlı İçgörüler.",
+    "subheadline": "Voiceter.ai, insan benzeri AI sesli ajanlarla çalışan bir Telefonla Anket (CATI) platformudur. 20'yi aşkın dilde anketler yürütür, tüm yanıtları anında yazıya döker ve nicel & nitel içgörüleri manuel çağrı merkezlerine göre 10 kat daha hızlı sunar."
+  },
+  "interactiveDemo": {
+    "title": "AI Sesli Anketleri Deneyimleyin",
+    "subtitle": "Yapay zekânın doğal konuşmaları nasıl yürüttüğünü görün",
+    "selectScenario": "Demo Senaryosu Seçin",
+    "startConversation": "Görüşmeyi Başlat"
+  },
+  "valueProposition": {
+    "title": "10× Daha Hızlı. %70 Daha Ucuz. %100 Tutarlı.",
+    "subtitle": "Manuel telefon anketleri 2026 için tasarlanmadı. Voiceter.ai tasarlandı.",
+    "traditionalCallCenter": "Geleneksel Çağrı Merkezi",
+    "manualSurveyProcess": "Manuel anket süreci",
+    "aiVoiceAgents": "AI Sesli Ajanlar",
+    "automatedAiProcess": "Otomatik AI süreci",
+    "completionTime": "Tamamlanma Süresi",
+    "totalCost": "Toplam Maliyet",
+    "dataQuality": "Veri Kalitesi",
+    "theOldWay": "Eski yöntem:",
+    "oldWayItems": [
+      "Soru formu oluşturma, eğitim ve planlama için haftalar",
+      "Yüksek görüşme maliyeti ve tutarsız kalite",
+      "Dil, saat dilimi ve erişim kısıtları",
+      "Çağrılar, konuşma dökümleri ve analiz için birbirinden kopuk araçlar"
+    ],
+    "theVoiceterWay": "Voiceter.ai yaklaşımı:",
+    "voiceterWayItems": [
+      "Binlerce görüşmeyi paralel yürüten AI sesli ajanlar",
+      "Her görüşmede tutarlı senaryo, ton ve uyumluluk",
+      "20+ dil ve bölgesel varyantlar",
+      "Gerçek zamanlı kalite kontrol, analiz ve raporlama"
+    ],
+    "calculateYourRoi": "ROI Hesapla",
+    "sampleSize": "Örneklem Büyüklüğü",
+    "surveyComplexity": "Anket Karmaşıklığı",
+    "simple": "Basit (5-10 soru)",
+    "moderate": "Orta (10-20 soru)",
+    "complex": "Karmaşık (20+ soru)",
+    "timeSaved": "Zaman Tasarrufu",
+    "costSaved": "Maliyet Tasarrufu",
+    "timeSavedDesc": "Anketleri haftalar yerine saatler içinde tamamlayın",
+    "costSavedDesc": "Operasyonel maliyetleri %70 azaltın",
+    "visionStatement": "Sadece sesli anketleri otomatikleştirmiyoruz — ses tabanlı içgörülerin geleceğini yeniden tanımlıyoruz.",
+    "hours": "saat",
+    "hourAbbr": "sa"
+  },
+
+  "howItWorks": {
+    "title": "Nasıl Çalışır",
+    "subtitle": "Kurulumdan aksiyona dönüşen içgörülere 3 basit adımda. Haftalar değil, dakikalar içinde başlayın.",
+    "step": "Adım",
+    "estimatedTime": "Tahmini Süre",
+    "keyFeatures": "Öne Çıkan Özellikler",
+    "steps": {
+      "step1": {
+        "title": "Anketinizi Tasarlayın",
+        "description": "AI destekli soru formu oluşturucu ile anketinizi hazırlayın veya sektöre özel şablonlardan seçin",
+        "duration": "5-10 dakika",
+        "details": [
+          "Brief’ten otomatik anket üretimi",
+          "Sürükle-bırak anket editörü",
+          "50+ sektör şablonu",
+          "Otomatik atlama mantığı",
+          "Çok dilli çeviri"
+        ]
+      },
+      "step2": {
+        "title": "Başlatın & Otomatikleştirin",
+        "description": "Çağrı listenizi yükleyin veya API ile bağlayın. Zamanlamayı ayarlayın, gerisini AI yapsın.",
+        "duration": "7/24 otomatik",
+        "details": [
+          "Otomatik saat dilimi optimizasyonu",
+          "DNC kontrolü",
+          "Açık rıza yönetimi",
+          "Gerçek zamanlı ilerleme takibi",
+          "Meşgul / cevap yok durumları için yeniden arama"
+        ]
+      },
+      "step3": {
+        "title": "Analiz Edin & Aksiyon Alın",
+        "description": "AI destekli içgörülerle sonuçlara anında erişin",
+        "duration": "Gerçek zamanlı",
+        "details": [
+          "Canlı yanıt izleme",
+          "Duygu analizi",
+          "NPS / CSAT / CES hesaplamaları",
+          "Özelleştirilebilir dashboardlar",
+          "Özet içgörüler",
+          "Ham veri için API erişimi"
+        ]
+      }
+    }
+  },
+"features": {
+  "title": "Kurumsal Seviyede AI Sesli Araştırma Platformu",
+  "subtitle": "Ölçeklenebilir şekilde tasarlandı, derin ve aksiyona dönük içgörüler için geliştirildi. Sesli araştırmaları dönüştüren profesyonel seviye özellikler.",
+  "items": {
+    "conversationAi": {
+      "title": "Gelişmiş Konuşma Yapay Zekâsı",
+      "description": "Bağlamı anlayan, söz kesilmelerini yöneten ve deneyimli bir araştırmacı gibi akıllı takip soruları soran AI destekli konuşma zekâsı.",
+      "details": [
+        "Doğal konuşma akışı",
+        "Açıklayıcı takip soruları",
+        "Duygu farkındalıklı yanıtlar",
+        "Dinamik soru uyarlama",
+        "Açık uçlu yanıt analizi"
+      ]
+    },
+    "multilingual": {
+      "title": "Gerçek Çok Dilli Destek",
+      "description": "20'yi aşkın dilde yerel aksanlar ve kültürel bağlam. Sadece çeviri değil — her pazarda doğal ve otantik konuşmalar.",
+      "details": [
+        "Ana dil seviyesinde sesler",
+        "Kültürel deyim uyarlamaları",
+        "Bölgesel aksan seçenekleri",
+        "Otomatik dil algılama",
+        "Geniş coğrafi araştırmalar"
+      ]
+    },
+    "realtime": {
+      "title": "Gerçek Zamanlı İçgörü",
+      "description": "Her yanıt anında analiz edilir. Görüşmeler devam ederken duygu skorları, trendler ve anomali uyarıları oluşturulur.",
+      "details": [
+        "Canlı dashboard güncellemeleri",
+        "Otomatik trend tespiti",
+        "Kalite izleme",
+        "Özet içgörüler",
+        "Anlık bildirimler"
+      ]
+    },
+    "compliance": {
+      "title": "Uyumluluk Otomasyonu",
+      "description": "TCPA, GDPR ve KVKK uyumluluğu her çağrıya entegredir. Otomatik açık rıza yönetimi, DNC kontrolü ve detaylı denetim kayıtları.",
+      "details": [
+        "Çağrı öncesi açık rıza doğrulaması",
+        "DNC listesi entegrasyonu",
+        "Çağrı kaydı bilgilendirmesi",
+        "KVKK ve GDPR uyumlu veri işleme",
+        "Uyumluluk raporları",
+        "Denetim izi (audit trail)"
+      ]
+    },
+    "apiFirst": {
+      "title": "API-First Mimari",
+      "description": "REST API ve webhook’lar ile sorunsuz entegrasyon. Sesli anketleri doğrudan ürünlerinize veya iş akışlarınıza entegre edin.",
+      "details": [
+        "Tam API kapsamı",
+        "Webhook bildirimleri",
+        "SDK kütüphaneleri (Python, Node, Java)",
+        "Gerçek zamanlı veri erişimi",
+        "Özel entegrasyonlar",
+        "Zapier bağlantısı"
+      ]
+    },
+    "targeting": {
+      "title": "Hassas Hedefleme",
+      "description": "Akıllı hedefleme kuralları, kota yönetimi ve segmentasyon. Doğru kişiye, doğru zamanda ulaşın.",
+      "details": [
+        "Demografik hedefleme",
+        "Davranışsal segmentasyon",
+        "Kota kontrolleri",
+        "Arama zamanı optimizasyonu",
+        "Geri arama planlaması",
+        "İletişim listesi yönetimi"
+      ]
+    }
+  }
+ },
+"useCases": {
+  "title": "Tüm Araştırma Ekipleri İçin Tasarlandı",
+  "subtitle": "İster araştırma profesyoneli, ister ajans ya da ürün geliştirme ekibi olun — Voiceter.ai ihtiyaçlarınıza göre ölçeklenir",
+  "scenario": "Senaryo",
+  "tabs": {
+    "marketResearch": {
+      "title": "Pazar Araştırması Profesyonelleri",
+      "headline": "Anketör Yönetmeyi Bırakın. İçgörüleri Analiz Etmeye Başlayın.",
+      "scenario": "5 ülkede, ülke başına 2.000 yanıt içeren bir marka takip araştırması yürüttüğünüzü düşünün. Geleneksel yöntemlerle bu; çok dilli anketör ekiplerini koordine etmeyi, saat dilimlerine göre planlama yapmayı ve haftalar süren saha sürecini yönetmeyi gerektirir.",
+      "withVoiceter": "Voiceter.ai ile:",
+      "items": [
+        "Anketinizi tasarlayın (veya AI ile otomatik oluşturun)",
+        "AI, anketi 5 dile kültürel uyarlamalarla otomatik çevirir",
+        "10.000 görüşmeyi aynı anda başlatın",
+        "Tüm araştırmayı 4 hafta yerine 48 saatte tamamlayın",
+        "Gerçek zamanlı duygu analizi ile trendleri anında yakalayın",
+        "Maliyet: Geleneksel CATI’ye kıyasla %70 daha düşük"
+      ],
+      "results": "Sonuçlar:",
+      "savedOnBudget": "Proje bütçesinde tasarruf",
+      "completionTime": "Tamamlanma süresi",
+      "budgetValue": "$35.000",
+      "timeValue": "4 haftadan 2 güne"
+    },
+    "agencies": {
+      "title": "Pazar Araştırma Ajansları",
+      "headline": "Daha Fazla Müşteri. Daha Hızlı Teslimat. Ekibinizi Büyütmeden Ölçeklenin.",
+      "scenario": "Pazar araştırma ajansınız aynı anda 15 aktif müşteriyi ile çalışıyor ve her biri çeyrek başına birden fazla çalışma yürütüyor. Görüşmeci planlaması, kalite kontrol, son dakika müşteri talepleri ve kapasite sınırları nedeniyle yeni iş almakta zorlanıyorsunuz.",
+      "withVoiceter": "Voiceter.ai ile:",
+      "items": [
+        "Her müşteri için izole çalışma alanları ve faturalama hesabı oluşturun",
+        "Kapasite sınırı olmadan aynı anda 15+ araştırma yürütün",
+        "Yeni müşteri çalışmalarını günler yerine saatler içinde başlatın",
+        "Görüşmeci maliyetlerini %70 azaltın",
+        "Aynı ekip büyüklüğüyle çeyrek başına 40 çalışmadan 120 çalışmaya çıkın",
+        "Daha önce reddettiğiniz acil projeleri aynı gün kabul edin",
+        "Tüm müşteriler için tek dashboard’dan gerçek zamanlı kalite takibi",
+        "Ekibinizi görüşmeci yönetiminden stratejik danışmanlığa kaydırın"
+      ],
+      "results": "Sonuçlar:",
+      "revenueGrowth": "Yıllık gelir artışı",
+      "teamReduction": "Ekip küçülmesi",
+      "revenueValue": "%110",
+      "teamValue": "%80"
+    },
+    "developers": {
+      "title": "Geliştiriciler & Ürün Ekipleri",
+      "headline": "API ile Sesli Anketler. Daha Hızlı Ürün Geliştirin.",
+      "scenario": "Bir SaaS ürünü geliştiriyorsunuz ve kullanıcılarınızdan kritik adımlardan sonra sesli geri bildirim toplamak istiyorsunuz. Bunu sıfırdan geliştirmek; telekom altyapısı, sesli AI entegrasyonu, uyumluluk süreçleri ve aylar süren geliştirme gerektirir.",
+      "withVoiceter": "Voiceter.ai ile:",
+      "results": "Sonuçlar:",
+      "savedOnDev": "Geliştirme maliyetinde tasarruf",
+      "integrationTime": "Entegrasyon süresi",
+      "devValue": "$168.000",
+      "timeValue": "2 gün"
+     }
+    }
+  },
+"waitlist": {
+  "title": "Bekleme Listesine Katıl",
+  "subtitle": "AI destekli pazar araştırmasını ilk deneyimleyenler arasında yer alın. Erken erişim avantajları ve öncelikli onboarding kazanın.",
+  "workEmail": "İş E-postası",
+  "name": "Ad Soyad",
+  "companyName": "Şirket Adı",
+  "companySize": "Şirket Büyüklüğü",
+  "role": "Rol",
+  "selectSize": "Boyut seçin",
+  "selectRole": "Rol seçin",
+  "emailPlaceholder": "isim@sirketiniz.com",
+  "namePlaceholder": "Ad Soyad",
+  "companyPlaceholder": "Şirketiniz A.Ş.",
+  "submit": "Yerimi Ayırt",
+  "submitting": "Gönderiliyor...",
+  "success": "Bekleme listesine başarıyla katıldınız!",
+  "successDetail": "Onay detayları için e-postanızı kontrol edin.",
+  "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+  "required": "zorunlu",
+  "emailRequired": "E-posta adresi zorunludur",
+  "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+  "nameRequired": "Ad Soyad zorunludur",
+  "nameInvalid": "Lütfen geçerli bir ad girin",
+  "companyRequired": "Şirket adı zorunludur",
+  "privacyNote": "Gönderim yaparak Voiceter AI’dan iletişim almayı kabul etmiş olursunuz. Gizliliğinize saygı duyuyor, bilgilerinizi asla paylaşmıyoruz.",
+  "companySizes": {
+    "1-50": "1-50 çalışan",
+    "51-200": "51-200 çalışan",
+    "201-500": "201-500 çalışan",
+    "501-1000": "501-1000 çalışan",
+    "1000+": "1000+ çalışan"
+  },
+  "roles": {
+    "marketResearch": "Pazar Araştırması Profesyoneli",
+    "developer": "Geliştirici",
+    "productManager": "Ürün Yöneticisi",
+    "cx": "CX",
+    "insightsLead": "İçgörü Lideri",
+    "agencyOwner": "Ajans Sahibi",
+    "other": "Diğer"
+  },
+  "benefits": {
+    "earlyAccess": "Erken Erişim",
+    "earlyAccessDesc": "Yeni özellikleri ilk kullananlardan olun",
+    "exclusivePricing": "Özel Fiyatlandırma",
+    "exclusivePricingDesc": "Erken katılanlara özel fiyatlar",
+    "prioritySupport": "Öncelikli Destek",
+    "prioritySupportDesc": "Özel onboarding ekibi"
+  }
+},
+"footer": {
+  "description": "Pazar araştırmaları için AI destekli CATI platformu. İnsan benzeri konuşmalarla anketleri 10 kat daha hızlı yürütün.",
+  "product": "Ürün",
+  "resources": "Kaynaklar",
+  "company": "Şirket",
+  "features": "Özellikler",
+  "useCases": "Kullanım Alanları",
+  "demo": "Demo",
+  "howItWorks": "Nasıl Çalışır",
+  "faq": "Sıkça Sorulan Sorular",
+  "securityCompliance": "Güvenlik ve Uyumluluk",
+  "joinWaitlist": "Bekleme Listesine Katıl",
+  "privacyPolicy": "Gizlilik Politikası",
+  "copyright": "© 2026 Voiceter AI. Tüm hakları saklıdır.",
+  "soc2": "SOC 2 Sertifikalı",
+  "gdpr": "GDPR Uyumlu",
+  "tcpa": "TCPA Uyumlu"
+},
+"demo": {
+  "title": "Canlı AI Sesli Demo",
+  "subtitle": "AI ajanımızla gerçek zamanlı konuşma deneyimi yaşayın",
+  "selectLanguage": "Dil Seçin",
+  "readyToStart": "Başlamaya Hazır",
+  "readyDescription": "AI sesli ajanımızla konuşmaya başlamak için aşağıya tıklayın",
+  "startDemo": "Demoyu Başlat",
+  "connecting": "Bağlanıyor...",
+  "connectingDescription": "Voiceter.ai ile güvenli bağlantı kuruluyor",
+  "connected": "Bağlandı",
+  "endDemo": "Demoyu Bitir",
+  "waitingForConversation": "Konuşmanın başlaması bekleniyor...",
+  "listening": "Dinleniyor... Konuşabilirsiniz",
+  "clickToSpeak": "Konuşmak için mikrofona tıklayın",
+  "browserCompatibility": "Tarayıcı Uyumluluğu",
+  "browserCompatibilityDescription": "Bu demo WebRTC destekli modern bir tarayıcı gerektirir. En iyi deneyim için Chrome, Firefox veya Safari kullanın."
+},
+"languages": {
+  "en": "İngilizce",
+  "tr": "Türkçe",
+  "es": "İspanyolca",
+  "fr": "Fransızca",
+  "de": "Almanca",
+  "zh": "Çince",
+  "ja": "Japonca",
+  "ar": "Arapça",
+  "hi": "Hintçe"
+},
+"faq": {
+  "title": "Sıkça Sorulan Sorular",
+  "subtitle": "AI sesli ajanlar ve platformumuz hakkında en sık sorulan soruların yanıtları",
+  "categories": {
+    "technology": "Teknoloji",
+    "languages": "Diller",
+    "compliance": "Uyumluluk",
+    "useCases": "Kullanım Alanları",
+    "integration": "Entegrasyon",
+    "performance": "Performans",
+    "features": "Özellikler",
+    "pricing": "Fiyatlandırma",
+    "availability": "Kullanılabilirlik",
+    "support": "Destek",
+    "analytics": "Analitik",
+    "operations": "Operasyonlar"
+  },
+  "questions": {
+    "q1": {
+      "question": "Bu çözüm geleneksel CATI yazılımlarından nasıl farklı?",
+      "answer": "Geleneksel CATI çözümleri, görüşmeleri manuel olarak gerçekleştiren insan görüşmecilere dayanır. Voiceter.ai ise konuşmaları otomatik olarak yürüten AI sesli ajanlar kullanır. Bu sayede 7/24 çalışma, anında ölçeklenebilirlik ve kaliteyi koruyarak %80’e varan maliyet avantajı sağlar."
+    },
+    "q2": {
+      "question": "Hangi dilleri destekliyorsunuz?",
+      "answer": "Başlangıçta Almanca, Arapça, Bengalce (Bangladeş), Endonezce (Endonezya), Fransızca, Hintçe, Hollandaca, İngilizce (ABD), İngilizce (Hindistan), İspanyolca, İtalyanca, Japonca, Korece, Lehçe, Marathi (Hindistan), Portekizce, Romence, Rusça, Tamilce (Hindistan), Türkçce, Ukraynaca ve Vietnamca dillerini destekliyoruz. Yol haritamız kapsamında yeni diller eklenecektir."
+    },
+    "q3": {
+      "question": "Gerçekten TCPA ve GDPR uyumlu mu?",
+      "answer": "Evet. Uyumluluk her çağrının merkezine yerleştirilmiştir. TCPA (ABD) ve GDPR (AB) başta olmak üzere ilgili düzenlemelere uygun olarak açık rıza doğrulaması, DNC kontrolleri, çağrı kaydı bilgilendirmeleri, opt-out yönetimi ve veri işleme gereklilikleri otomatik olarak yönetilir."
+    },
+    "q4": {
+      "question": "AI sesli ajanlar hangi tür anketlerde en iyi sonucu verir?",
+      "answer": "Voiceter.ai; NPS, CSAT, CES gibi yapılandırılmış anketlerde, ürün geri bildirimlerinde, marka algısı çalışmalarında, siyasi araştırmalarda, çalışan memnuniyeti ve müşteri deneyimi araştırmalarında son derece etkilidir. Karmaşık atlama mantıkları, çoklu soru tipleri ve açık uçlu sorular sorunsuz şekilde yönetilir."
+    },
+    "q5": {
+      "question": "Mevcut platformuma entegre edebilir miyim?",
+      "answer": "Kesinlikle. Voiceter.ai API-first bir mimariye sahiptir. REST API ve webhook’lar ile sesli anketleri ürününüze entegre edebilir, CRM sistemlerinize bağlayabilir veya mevcut araştırma platformlarınızla entegre edebilirsiniz. Salesforce, Zapier ve büyük CX platformları için hazır bağlantılar da sunuyoruz."
+    },
+    "q6": {
+      "question": "Yanıt oranları geleneksel yöntemlere kıyasla nasıl?",
+      "answer": "Voiceter.ai, geleneksel CATI yöntemlerine kıyasla %40–60 daha yüksek yanıt oranları elde eder. Doğal ve sohbet odaklı yaklaşım, robocall hissi yaratmaz ve akıllı zamanlama ile doğru anda arama yapılmasını sağlar."
+    },
+    "q7": {
+      "question": "Açık uçlu sorular nasıl ele alınıyor?",
+      "answer": "Gelişmiş doğal dil işleme (NLP) sayesinde AI; açık uçlu yanıtları anlar, gerektiğinde açıklayıcı takip soruları sorar ve yanıtları yüksek doğrulukla yazıya döker. Ayrıca duygu analizi yapar ve temaları otomatik olarak tespit eder."
+    },
+    "q8": {
+      "question": "Fiyatlandırma modeli nasıl?",
+      "answer": "Farklı ihtiyaçlara uygun esnek fiyatlandırma sunuyoruz: ara sıra kullanım için dakika bazlı fiyatlama, düzenli araştırmalar için aylık abonelikler ve yüksek hacimli kurumsal kullanımlar için özel anlaşmalar. Erken katılma avantajlarından yararlanmak için bekleme listesine katılabilirsiniz."
+    },
+    "q9": {
+      "question": "Voiceter.ai ne zaman genel kullanıma açılacak?",
+      "answer": "İlk herkese açık beta sürümümüz için hazırlık yapıyoruz. Bekleme listesine katılarak yayına alınma süreci hakkında güncel bilgileri alabilirsiniz."
+    },
+    "q10": {
+      "question": "Hangi destek seçeneklerini sunuyorsunuz?",
+      "answer": "Tüm planlarda e-posta desteği ve kapsamlı dokümantasyon yer alır. Professional ve Enterprise planlarda öncelikli destek, özel müşteri yöneticisi ve onboarding desteği sunulur. API kullanıcıları mühendislik ekibimizden teknik destek alır."
+    },
+    "q11": {
+      "question": "Verilerimi gerçek zamanlı görebilir miyim?",
+      "answer": "Evet. Dashboard’larımız, yanıtlar geldikçe gerçek zamanlı olarak güncellenir. Çağrı ilerlemesini izleyebilir, tamamlanan yanıtları anında görebilir ve canlı analizlere erişebilirsiniz. API kullanıcıları için webhook bildirimleri de mevcuttur."
+    },
+    "q12": {
+      "question": "Bir kişi çağrıya cevap vermezse ne olur?",
+      "answer": "Sistemimiz tercihlerinize göre otomatik yeniden arama (retry) mantığını yönetir. Arama zamanları optimize edilir, rahatsız etmeme saatlerine uyulur ve gerekirse geri arama planlanır. Yeniden arama stratejisini tamamen siz belirlersiniz."
+    }
+  }
+},
+  "metadata": {
+  "title": "Voiceter AI – Pazar Araştırmaları için AI Sesli Ajanlar",
+  "description": "AI destekli CATI platformu ile pazar araştırmalarını 10 kat daha hızlı yürütün. Çok dilli sesli ajanlar, insan benzeri konuşmalar ve anında veri içgörüleri sunar."
+},
+
+"demoShowcase": {
+  "title": "Voiceter.ai ile Konuşun — Canlı Demolar",
+  "subtitle": "Aşağıdaki senaryolardan birine tıklayarak AI sesli ajanımızla canlı bir konuşma başlatın.",
+  "liveDemoPreview": "Canlı Demo Önizleme",
+  "avgDuration": "Ort. Süre: 3–4 dakika",
+  "launchFullDemo": "Tam Demo Deneyimini Başlat",
+  "features": {
+    "realTimeTranscription": "Gerçek Zamanlı Transkripsiyon",
+    "naturalConversations": "Doğal Konuşmalar",
+    "instantDataExtraction": "Anında Veri Çıkarımı"
+  },
+  "useCases": {
+    "electronicsRetail": {
+      "title": "Elektronik Perakende – Mağaza İçi Satın Alma Deneyimi",
+      "description": "Offline elektronik mağaza alışverişleri sonrası kişiselleştirilmiş CSAT ve NPS anketi."
+    },
+    "conceptTest": {
+      "title": "Konsept Testi Anlık Görünüm",
+      "description": "Yeni bir ürün veya yaratıcı fikri, spontane sözlü tepkiler ve takip soruları ile test edin."
+    },
+    "politicalPolling": {
+      "title": "Siyasi & Kamuoyu Araştırmaları",
+      "description": "Tarafsız ve uyumlu şekilde tarama soruları, kotlar ve hassas soruların AI tarafından nasıl yönetildiğini görün."
+    },
+    "brandTracker": {
+      "title": "Marka Takip Nabzı",
+      "description": "2 dakikalık sesli görüşme ile bilinirlik, tercih ve NPS ölçümü."
+    },
+    "ecommerceDelivery": {
+      "title": "E-Ticaret – Online Teslimat Deneyimi",
+      "description": "Online pazar yeri siparişleri sonrası işlem bazlı CSAT ve NPS anketi."
+    },
+    "automotiveService": {
+      "title": "Otomotiv Satış Sonrası Servis",
+      "description": "Servis merkezi sonrası hizmet detaylarına göre kişiselleştirilmiş CSAT ve NPS anketi."
+    }
+  }
+},
+  "compliance": {
+  "title": "Güvenlik ve Uyumluluk Entegre, Sonradan Eklenmiş Değil",
+  "subtitle": "Veri güvenliğiniz bizim için en yüksek önceliktir. En yüksek uyumluluk ve koruma standartlarını uygularız.",
+  "certificationsTitle": "Sertifikalar ve Uyumluluk",
+  "securityFeaturesTitle": "Güvenlik Özellikleri",
+  "certifications": {
+    "soc2": {
+      "name": "SOC 2 Type II",
+      "description": "Kapsamlı güvenlik ve erişilebilirlik kontrolleri"
+    },
+    "tcpa": {
+      "name": "TCPA Uyumlu",
+      "description": "Çağrılar için Telephone Consumer Protection Act uyumluluğu"
+    },
+    "gdpr": {
+      "name": "GDPR Uyumlu",
+      "description": "AB veri koruma düzenlemeleriyle tam uyum"
+    },
+    "ccpa": {
+      "name": "KVKK Uyumlu",
+      "description": "Kişisel Verileri Koruma Kanunu uyumluluğu"
+    },
+    "stirShaken": {
+      "name": "STIR/SHAKEN Uyumlu",
+      "description": "Robocall’larla mücadele için çağrı kimlik doğrulama çerçevesi"
+    }
+  },
+  "securityFeatures": {
+    "encryption": {
+      "title": "Uçtan Uca Şifreleme",
+      "description": "Tüm veriler, aktarım sırasında ve depolamada AES-256 ile şifrelenir"
+    },
+    "consent": {
+      "title": "Otomatik Açık Rıza ve Kayıt Bilgilendirmesi",
+      "description": "Yerleşik açık rıza metinleri ve otomatik çağrı kaydı bilgilendirmeleri"
+    },
+    "accessControls": {
+      "title": "Erişim Kontrolleri",
+      "description": "Rol bazlı yetkilendirme ve çok faktörlü kimlik doğrulama"
+    },
+    "dncCompliance": {
+      "title": "DNC ve Arama Zamanı Uyumluluğu",
+      "description": "Akışlarda DNC listesi kontrolleri, arama zaman pencereleri ve kayıt bilgilendirmeleri"
+    }
+  }
+},
+  "scrollProgress": {
+  "demo": "Demo",
+  "howItWorks": "Nasıl Çalışır",
+  "features": "Özellikler",
+  "useCases": "Kullanım Alanları",
+  "faq": "SSS"
+},
+
+"about": {
+  "email": "E-posta",
+  "location": "Konum"
+},
+"fullDemo": {
+  "title": "Voiceter AI Demo",
+  "chooseDemo": "Demo Deneyiminizi Seçin",
+  "selectDemo": "Bir Sesli Anket Demosu Seçin",
+  "selectDemoDescription": "AI destekli sesli anketlerin gücünü deneyimleyin. Voiceter AI’nin araştırma ve geri bildirim toplama süreçlerini nasıl dönüştürdüğünü görmek için demo senaryolarından birini seçin.",
+  "loadingDemos": "Demo seçenekleri yükleniyor...",
+  "keyFeatures": "Öne Çıkan Özellikler",
+  "more": "daha fazla",
+  "startThisDemo": "Bu Demoyu Başlat",
+  "unableToLoad": "Demolar Yüklenemedi",
+  "unableToLoadDescription": "Demo anketleri yüklenemedi. Lütfen sayfayı yenileyin.",
+  "refreshPage": "Sayfayı Yenile",
+  "realTimeVoiceSurvey": "AI ile Gerçek Zamanlı Sesli Anket",
+  "demoScenario": "Demo Senaryosu",
+  "language": "Dil",
+  "voiceGender": "Ses Cinsiyeti",
+  "voiceOption": "Ses Seçeneği",
+  "male": "Erkek",
+  "female": "Kadın",
+  "maleVoices": "Erkek Sesler",
+  "femaleVoices": "Kadın Sesler",
+  "showingMaleVoices": "Sadece erkek sesler gösteriliyor",
+  "showingFemaleVoices": "Sadece kadın sesler gösteriliyor",
+  "connecting": "Bağlanıyor...",
+  "startDemoCall": "Demo Çağrısını Başlat",
+  "endCall": "Çağrıyı Bitir",
+  "voiceAccents": {
+    "Warm & Friendly": "Sıcak ve Samimi",
+    "Firm & Professional": "Kararlı ve Profesyonel",
+    "Calm & Soothing": "Sakin ve Rahatlatıcı",
+    "Light & Airy": "Hafif ve Havadar",
+    "Clear & Bright": "Net ve Parlak",
+    "Gentle & Soft": "Nazik ve Yumuşak",
+    "Melodic": "Melodik",
+    "Expressive": "İfade Dolu",
+    "Warm": "Sıcak",
+    "Elegant": "Zarif",
+    "Informative & Clear": "Bilgilendirici ve Net",
+    "Upbeat & Energetic": "Neşeli ve Enerjik",
+    "Excitable & Dynamic": "Heyecanlı ve Dinamik",
+    "Easygoing & Relaxed": "Rahat ve Sakin",
+    "Deep & Resonant": "Derin ve Çınlayan",
+    "Neutral": "Nötr",
+    "Confident": "Kendinden Emin",
+    "Strong": "Güçlü",
+    "Smooth": "Pürüzsüz",
+    "Steady": "Dengeli",
+    "Calm": "Sakin",
+    "Rich": "Zengin",
+    "Friendly": "Arkadaş Canlısı",
+    "Professional": "Profesyonel",
+    "Authoritative": "Otoriter",
+    "Distinctive": "Ayırt Edici"
+  },
+  "voiceNames": {
+    "Aoede": "Aoede",
+    "Kore": "Kore",
+    "Leda": "Leda",
+    "Zephyr": "Zefir",
+    "Achernar": "Achernar",
+    "Autonoe": "Autonoe",
+    "Callirrhoe": "Callirrhoe",
+    "Gacrux": "Gacrux",
+    "Sulafat": "Sulafat",
+    "Vindemiatrix": "Vindemiatrix",
+    "Charon": "Charon",
+    "Puck": "Puck",
+    "Fenrir": "Fenrir",
+    "Orbit": "Orbit",
+    "Orus": "Orus",
+    "Achird": "Achird",
+    "Algenib": "Algenib",
+    "Algieba": "Algieba",
+    "Alnilam": "Alnilam",
+    "Enceladus": "Enceladus",
+    "Iapetus": "Iapetus",
+    "Umbriel": "Umbriel",
+    "Rasalgethi": "Rasalgethi",
+    "Sadachbia": "Sadachbia",
+    "Sadaltager": "Sadaltager",
+    "Schedar": "Schedar",
+    "Zubenelgenubi": "Zubenelgenubi"
+  },
+  "callActive": "Çağrı Aktif – Dinleniyor",
+  "realTimeTranscription": "Gerçek Zamanlı Transkripsiyon",
+  "liveConversation": "Konuşmacı ayrımı ile canlı konuşma",
+  "startDemoPrompt": "Konuşma dökümünü gerçek zamanlı görmek için demo çağrısını başlatın",
+  "surveyAnswers": "Anket Yanıtları",
+  "questionsAnswered": "soru yanıtlandı",
+  "forDevelopers": "Geliştiriciler için",
+  "surveyAnswersPrompt": "Sorular yanıtlandıkça anket yanıtları burada görünecek",
+  "processingResults": "Anket sonuçları işleniyor...",
+  "pleaseWait": "Lütfen bekleyin",
+  "textAnalytics": "Metin Analitiği",
+  "nlpAnalysis": "Açık uçlu yanıtlar için NLP analizi",
+  "waitingForResponse": "Açık uçlu yanıt bekleniyor",
+  "nlpWillAppear": "NLP analizi, açık uçlu bir soruya yanıt verdiğinizde görünecektir",
+  "analyzingResponse": "Yanıt analiz ediliyor...",
+  "overallSentiment": "Genel Duygu Skoru",
+  "speaking": "konuşuyor...",
+  "ai": "AI",
+  "you": "Siz",
+  "analyzedResponse": "Analiz Edilen Yanıt",
+  "detectedTopics": "Tespit Edilen Konular",
+  "topic": "Konu",
+  "sentiment": "Duygu",
+  "intent": "Niyet",
+  "emotion": "Duygu Durumu",
+  "collectedDataJson": "Toplanan Veri (JSON)",
+  "copyToClipboard": "Panoya Kopyala",
+  "close": "Kapat",
+  "demos": {
+    "demo-01a-electronics-retail-personalized": {
+      "title": "Elektronik Perakende – Mağaza İçi Satın Alma Deneyimi",
+      "description": "Offline elektronik mağaza alışverişleri sonrası, işlem verileriyle kişiselleştirilmiş CSAT ve NPS anketi.",
+      "industry": "Perakende – Elektronik",
+      "features": [
+        "CSAT değerlendirme ölçekleri",
+        "NPS skoru",
+        "Kişiselleştirilmiş sorular",
+        "Açık uçlu geri bildirim"
+      ]
+    },
+    "demo-02-concept-test": {
+      "title": "FlexiDesk Pro – Konsept Testi Anlık Görünüm",
+      "description": "Yeni ürün konseptinin (AI destekli ayarlanabilir masa) spontane tepkiler, satın alma niyeti, özellik öncelikleri ve itiraz noktalarıyla test edilmesi.",
+      "industry": "Tüketici Ürünleri ve Mobilya",
+      "features": [
+        "Spontane tepki yakalama",
+        "Satın alma niyeti ölçümü",
+        "Özellik önceliklendirme",
+        "İtiraz noktalarının tespiti"
+      ]
+    },
+    "demo-03-political-polling": {
+      "title": "Siyasi & Kamuoyu Araştırmaları",
+      "description": "Yaş taraması, seçmen kaydı ve siyasi eğilim soruları içeren, tamamen tarafsız profesyonel kamuoyu yoklaması.",
+      "industry": "Siyasi Araştırmalar",
+      "features": [
+        "Yaş taraması",
+        "Seçmen kaydı",
+        "Siyasi eğilim",
+        "Tam tarafsızlık"
+      ]
+    },
+    "demo-04-brand-tracker": {
+      "title": "Marka Takip Nabzı",
+      "description": "Yardımlı ve yardımsız bilinirlik, değerlendirme hunisi ve marka algısı ölçümü ile hızlı marka takibi.",
+      "industry": "Pazar Araştırması",
+      "features": [
+        "Yardımsız marka bilinirliği",
+        "Yardımlı marka bilinirliği",
+        "Satın alma değerlendirmesi",
+        "Marka tercihi"
+      ]
+    },
+    "demo-01b-ecommerce-delivery-personalized": {
+      "title": "E-Ticaret – Online Teslimat Deneyimi",
+      "description": "Online pazar yeri siparişleri sonrası, teslimat süresi ve memnuniyet ölçümü içeren CSAT ve NPS anketi.",
+      "industry": "E-Ticaret",
+      "features": [
+        "Teslimat memnuniyeti",
+        "NPS skoru",
+        "Kişiselleştirilmiş sorular",
+        "Açık uçlu geri bildirim"
+      ]
+    },
+    "demo-01c-automotive-service-personalized": {
+      "title": "Otomotiv Satış Sonrası Servis",
+      "description": "Servis kalitesi ve servis danışmanı memnuniyeti içeren, işlem bazlı CSAT ve NPS anketi.",
+      "industry": "Otomotiv",
+      "features": [
+        "Servis memnuniyeti",
+        "Danışman değerlendirmesi",
+        "NPS skoru",
+        "Açık uçlu geri bildirim"
+      ]
+    }
+  }
+}
+}

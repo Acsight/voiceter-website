@@ -1,0 +1,110 @@
+[
+    {
+      "topic_name": "Genel Konsept Çekiciliği",
+      "description": "SecureView 360 Kamera konseptinin katılımcılar tarafından algılanan genel çekiciliği ve ilgi düzeyi."
+    },
+    {
+      "topic_name": "Algılanan Değer Önerisi",
+      "description": "Konseptin sunduğu faydaların algılanan çaba veya maliyete kıyasla netliği ve gücü."
+    },
+    {
+      "topic_name": "Özellik Çekiciliği",
+      "description": "360 derece kapsama, yapay zeka algılama ve gece görüşü gibi konsepte dahil edilen özelliklere müşteri tepkileri."
+    },
+    {
+      "topic_name": "360 Derece Kapsama Avantajı",
+      "description": "Sabit açılı kameralara kıyasla tam pan-tilt kapsamanın algılanan kullanışlılığı ve farklılaşması."
+    },
+    {
+      "topic_name": "Video Kalitesi Algısı",
+      "description": "2K HD video kalitesine ilişkin müşteri beklentileri ve görüşleri."
+    },
+    {
+      "topic_name": "Yapay Zeka Algılama Kullanışlılığı",
+      "description": "Yapay zeka destekli kişi, evcil hayvan ve araç algılamanın gerçek yaşam senaryolarındaki algılanan kullanışlılığı."
+    },
+    {
+      "topic_name": "Yanlış Alarm Endişeleri",
+      "description": "Gereksiz veya yanlış hareket uyarıları alma konusundaki endişeler."
+    },
+    {
+      "topic_name": "Uyarı Zamanlaması",
+      "description": "Anlık hareket uyarılarının ne kadar hızlı ve güvenilir olacağına dair beklentiler."
+    },
+    {
+      "topic_name": "Gizlilik ve Veri Güvenliği",
+      "description": "Veri gizliliği, yerel depolama ve kaydedilen görüntülerin işlenmesiyle ilgili endişeler veya güven."
+    },
+    {
+      "topic_name": "Aboneliksiz Model Çekiciliği",
+      "description": "Tek seferlik satın alma modeline ve zorunlu aylık ücret olmamasına ilişkin müşteri algısı."
+    },
+    {
+      "topic_name": "Bulut Depolama Teklifi",
+      "description": "Ücretsiz 7 günlük bulut depolamanın dahil edilmesine ve yeterli görülüp görülmediğine verilen tepkiler."
+    },
+    {
+      "topic_name": "Yerel Depolama Tercihi",
+      "description": "Bulut depolamaya alternatif veya tamamlayıcı olarak yerel depolamaya olan ilgi."
+    },
+    {
+      "topic_name": "Kurulum Kolaylığı",
+      "description": "Kurulum sürecinin ve montaj seçeneklerinin algılanan basitliği ve rahatlığı."
+    },
+    {
+      "topic_name": "İç ve Dış Mekan Kullanılabilirliği",
+      "description": "Hava koşullarına dayanıklılık nedeniyle kameranın hem iç hem dış mekan kullanımına algılanan uygunluğu."
+    },
+    {
+      "topic_name": "Tasarım ve Form Faktörü",
+      "description": "Kameranın fiziksel tasarımına, boyutuna ve görsel çekiciliğine verilen tepkiler."
+    },
+    {
+      "topic_name": "Akıllı Ev Uyumluluğu",
+      "description": "Alexa ve Google Home ekosistemleriyle uyumluluğun algılanan değeri."
+    },
+    {
+      "topic_name": "Çift Yönlü Ses Kullanım Senaryoları",
+      "description": "İletişim, caydırıcılık veya izleme için çift yönlü ses kullanımına ilişkin müşteri beklentileri."
+    },
+    {
+      "topic_name": "Özelleştirme ve Kontrol",
+      "description": "Özelleştirilebilir aktivite bölgeleri, ayarlar ve uyarılar ile izleme üzerinde kullanıcı kontrolüne olan ilgi."
+    },
+    {
+      "topic_name": "Güvenilirlik Beklentileri",
+      "description": "Bağlantı, çalışma süresi ve tutarlı performans açısından kameranın algılanan güvenilirliği."
+    },
+    {
+      "topic_name": "Rakip Karşılaştırması",
+      "description": "Katılımcıların konsepti bildikleri veya kullandıkları mevcut güvenlik kamerası çözümleriyle nasıl karşılaştırdığı."
+    },
+    {
+      "topic_name": "Kullanım Senaryosu Uyumu",
+      "description": "Konseptin ev güvenliği, evcil hayvan izleme veya dış mekan gözetimi gibi kişisel ihtiyaçlara algılanan uygunluğu."
+    },
+    {
+      "topic_name": "Satın Alma Niyeti",
+      "description": "Konsept açıklamasına dayanarak SecureView 360 Kamerayı satın alma olasılığı."
+    },
+    {
+      "topic_name": "Fiyat Hassasiyeti",
+      "description": "İma edilen fiyatlandırma modeline ve algılanan kabul edilebilir fiyat aralığına verilen tepkiler."
+    },
+    {
+      "topic_name": "Güven ve Marka Güvenilirliği",
+      "description": "Katılımcıların ürün konseptine ve arkasındaki şirkete duydukları güven düzeyi."
+    },
+    {
+      "topic_name": "İyileştirme Önerileri",
+      "description": "Konsepti geliştirmek için katılımcıların önerdiği fikirler, özellik talepleri veya değişiklikler."
+    },
+    {
+      "topic_name": "Konu Yok",
+      "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+    },
+    {
+      "topic_name": "Diğer",
+      "description": "Başka herhangi bir konu içeren geri bildirimler."
+    }
+]

@@ -1,0 +1,666 @@
+{
+  "common": {
+    "tryLiveDemo": "Try Live Demo",
+    "joinWaitlist": "Join the Waitlist",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "backToLandingPage": "Back to Landing Page",
+    "previous": "Previous",
+    "next": "Next",
+    "recommended": "RECOMMENDED",
+    "variable": "Variable",
+    "consistent": "Consistent"
+  },
+  "nav": {
+    "demo": "Demo",
+    "howItWorks": "How It Works",
+    "features": "Features",
+    "useCases": "Use Cases",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "badge": "Next-Generation Market Research Platform",
+    "headline": "Smarter Conversations. Faster Insights.",
+    "subheadline": "Voiceter.ai is your AI-powered Telephony Interview platform: human-like voice agents that run surveys in 20+ languages, transcribe every answer, and deliver clean, quantitative and qualitative insights — 10× faster than manual call centers."
+  },
+  "interactiveDemo": {
+    "title": "Experience AI Voice Surveys",
+    "subtitle": "See how our AI conducts natural conversations",
+    "selectScenario": "Select a Demo Scenario",
+    "startConversation": "Start Conversation"
+  },
+  "valueProposition": {
+    "title": "10× Faster. 70% Cheaper. 100% Accurate.",
+    "subtitle": "Manual Telephony Interviews wasn't built for 2025. Voiceter.ai is.",
+    "traditionalCallCenter": "Traditional Call Center",
+    "manualSurveyProcess": "Manual survey process",
+    "aiVoiceAgents": "AI Voice Agents",
+    "automatedAiProcess": "Automated AI process",
+    "completionTime": "Completion Time",
+    "totalCost": "Total Cost",
+    "dataQuality": "Data Quality",
+    "theOldWay": "The old way:",
+    "oldWayItems": [
+      "Weeks of scripting, training, and scheduling interviewers",
+      "High per-interview cost and unpredictable quality",
+      "Limited time zones, languages, and reach",
+      "Fragmented tools for calls, transcripts, and analysis"
+    ],
+    "theVoiceterWay": "The Voiceter.ai way:",
+    "voiceterWayItems": [
+      "AI voice agents that can run thousands of calls in parallel",
+      "Consistent scripts, tone, and compliance — on every interview",
+      "20+ languages and regional variants out of the box",
+      "Real-time quality check, analytics, dashboard and reporting"
+    ],
+    "calculateYourRoi": "Calculate Your ROI",
+    "sampleSize": "Sample Size",
+    "surveyComplexity": "Survey Complexity",
+    "simple": "Simple (5-10 questions)",
+    "moderate": "Moderate (10-20 questions)",
+    "complex": "Complex (20+ questions)",
+    "timeSaved": "Time Saved",
+    "costSaved": "Cost Saved",
+    "timeSavedDesc": "Complete surveys in hours, not weeks",
+    "costSavedDesc": "Reduce operational costs by 70%",
+    "visionStatement": "We're not just automating Voice Interview — we're redefining the future of voice-based insights globally.",
+    "hours": "hours",
+    "hourAbbr": "h"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "From setup to actionable insights in 3 simple steps. Get started in minutes, not weeks.",
+    "step": "Step",
+    "estimatedTime": "Estimated Time",
+    "keyFeatures": "Key Features",
+    "steps": {
+      "step1": {
+        "title": "Design Your Survey",
+        "description": "Create your questionnaire using our AI-powered builder or choose from industry-specific templates",
+        "duration": "5-10 minutes",
+        "details": [
+          "AI-generated questionnaire from brief",
+          "Drag-and-drop questionnaire builder",
+          "50+ industry templates",
+          "Automatic skip logic",
+          "Multi-language translation"
+        ]
+      },
+      "step2": {
+        "title": "Launch & Automate",
+        "description": "Upload your contact list or connect via API. Set your schedule and let our AI voice agents handle the rest",
+        "duration": "24/7 automated",
+        "details": [
+          "Automatic timezone optimization",
+          "DNC list checking",
+          "Consent management",
+          "Real-time progress tracking",
+          "Retry logic for busy/no-answer"
+        ]
+      },
+      "step3": {
+        "title": "Analyze & Act",
+        "description": "Access real-time results with AI-powered insights. Turn conversations into actionable intelligence instantly",
+        "duration": "Real-time",
+        "details": [
+          "Live response monitoring",
+          "Sentiment analysis",
+          "NPS/CSAT/CES calculation",
+          "Custom dashboards",
+          "Summary insights",
+          "API access to raw data"
+        ]
+      }
+    }
+  },
+  "features": {
+    "title": "Enterprise-Grade AI Voice Research Platform",
+    "subtitle": "Built for scale, designed for insights. Professional-grade features that transform how you conduct voice research.",
+    "items": {
+      "conversationAi": {
+        "title": "Advanced Conversation AI",
+        "description": "AI-powered intelligence that understands context, handles interruptions, and asks smart follow-ups like a trained researcher.",
+        "details": [
+          "Natural conversation flow",
+          "Clarification questions",
+          "Sentiment-aware responses",
+          "Dynamic question adaptation",
+          "Open-ended analysis"
+        ]
+      },
+      "multilingual": {
+        "title": "True Multilingual Support",
+        "description": "20+ languages with native accents and cultural context. Not just translation — authentic conversation in every market.",
+        "details": [
+          "Native speaker-quality voices",
+          "Cultural idiom adaptation",
+          "Regional accent options",
+          "Automatic language detection",
+          "Mixed-language households"
+        ]
+      },
+      "realtime": {
+        "title": "Real-Time Intelligence",
+        "description": "Every response analyzed instantly. Sentiment scoring, trend detection, and anomaly alerts as conversations happen.",
+        "details": [
+          "Live dashboard updates",
+          "Automated trend detection",
+          "Quality monitoring",
+          "Summary Insights",
+          "Instant notifications"
+        ]
+      },
+      "compliance": {
+        "title": "Compliance Automation",
+        "description": "TCPA, GDPR and CCPA compliance built into every call. Automatic consent management, DNC checking, and detailed audit logs.",
+        "details": [
+          "Pre-call consent verification",
+          "DNC list integration",
+          "Call recording disclosure",
+          "GDPR data handling",
+          "Compliance reporting",
+          "Audit trail"
+        ]
+      },
+      "apiFirst": {
+        "title": "API-First Architecture",
+        "description": "RESTful API and webhooks for seamless integration. Embed voice surveys directly into your products or workflows.",
+        "details": [
+          "Complete API coverage",
+          "Webhook notifications",
+          "SDK libraries (Python, Node, Java)",
+          "Real-time data access",
+          "Custom integrations",
+          "Zapier connector"
+        ]
+      },
+      "targeting": {
+        "title": "Precision Targeting",
+        "description": "Smart targeting rules, quota management, and audience segmentation. Reach exactly who you need, when they're available.",
+        "details": [
+          "Demographic targeting",
+          "Behavioral segmentation",
+          "Quota controls",
+          "Call time optimization",
+          "Callback scheduling",
+          "Contact list management"
+        ]
+      }
+    }
+  },
+  "useCases": {
+    "title": "Built for Every Research Team",
+    "subtitle": "Whether you're a research professional, agency, or developer team, Voiceter.ai scales to meet your needs",
+    "scenario": "Scenario",
+    "tabs": {
+      "marketResearch": {
+        "title": "Market Research Professionals",
+        "headline": "Stop Managing Interviewers. Start Analyzing Insights.",
+        "scenario": "You're running a brand tracking study across 5 countries with 2,000 responses per country. Traditionally, this requires coordinating multilingual interviewer teams, managing schedules across time zones, and spending weeks in field.",
+        "withVoiceter": "With Voiceter.ai:",
+        "items": [
+          "Design your questionnaire (or use AI to generate it)",
+          "AI automatically translates to all 5 languages with cultural adaptation",
+          "Launch 10,000 interviews simultaneously",
+          "Complete entire study in 48 hours instead of 4 weeks",
+          "Real-time sentiment analysis identifies trends as they emerge",
+          "Cost: 70% less than traditional CATI"
+        ],
+        "results": "Results:",
+        "savedOnBudget": "Saved on project budget",
+        "completionTime": "Completion time",
+        "budgetValue": "$35,000",
+        "timeValue": "4 weeks to 2 days"
+      },
+      "agencies": {
+        "title": "Market Research Agencies",
+        "headline": "Serve More Clients. Deliver Faster. Scale Without Hiring.",
+        "scenario": "Your market research agency manages 15 active clients simultaneously, each running multiple studies per quarter. You're juggling interviewer schedules across different projects, managing quality control across teams, dealing with last-minute client changes, and struggling to take on new business because you're at capacity.",
+        "withVoiceter": "With Voiceter.ai:",
+        "items": [
+          "Create isolated workspaces for each client with separate billing",
+          "Run 15+ studies simultaneously without capacity constraints",
+          "Launch new client studies in hours, not days",
+          "Reduce interviewer costs by 70%",
+          "Scale from 40 to 120 studies per quarter with same team size",
+          "Accept same-day rush projects that you'd previously decline",
+          "Real-time quality monitoring across all clients from unified dashboard",
+          "Shift team from interviewer management to strategic consulting"
+        ],
+        "results": "Results:",
+        "revenueGrowth": "Annual revenue growth",
+        "teamReduction": "Team reduction",
+        "revenueValue": "110%",
+        "teamValue": "80%"
+      },
+      "developers": {
+        "title": "Developers & Product Teams",
+        "headline": "Voice Surveys as an API. Ship Faster.",
+        "scenario": "You're building a SaaS product and want to collect voice feedback from users after key milestones. Building this in-house would require telephony infrastructure, voice AI integration, compliance management, and months of development.",
+        "withVoiceter": "With Voiceter.ai:",
+        "results": "Results:",
+        "savedOnDev": "Saved on development costs",
+        "integrationTime": "Integration time",
+        "devValue": "$168,000",
+        "timeValue": "2 days"
+      }
+    }
+  },
+  "waitlist": {
+    "title": "Join the Waitlist",
+    "subtitle": "Be among the first to experience AI-powered market research. Get exclusive early access benefits and priority onboarding.",
+    "workEmail": "Work Email",
+    "name": "Name",
+    "companyName": "Company Name",
+    "companySize": "Company Size",
+    "role": "Role",
+    "selectSize": "Select size",
+    "selectRole": "Select role",
+    "emailPlaceholder": "you@company.com",
+    "namePlaceholder": "John Doe",
+    "companyPlaceholder": "Your Company Inc.",
+    "submit": "Secure My Spot",
+    "submitting": "Submitting...",
+    "success": "Successfully joined the waitlist!",
+    "successDetail": "Check your email for confirmation details.",
+    "error": "Something went wrong. Please try again.",
+    "required": "required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "nameRequired": "Name is required",
+    "nameInvalid": "Please enter a valid name",
+    "companyRequired": "Company name is required",
+    "privacyNote": "By submitting, you agree to receive communications from Voiceter AI. We respect your privacy and will never share your information.",
+    "companySizes": {
+      "1-50": "1-50 employees",
+      "51-200": "51-200 employees",
+      "201-500": "201-500 employees",
+      "501-1000": "501-1000 employees",
+      "1000+": "1000+ employees"
+    },
+    "roles": {
+      "marketResearch": "Market Research Professional",
+      "developer": "Developer",
+      "productManager": "Product Manager",
+      "cx": "CX",
+      "insightsLead": "Insights Lead",
+      "agencyOwner": "Agency Owner",
+      "other": "Other"
+    },
+    "benefits": {
+      "earlyAccess": "Early Access",
+      "earlyAccessDesc": "Be first to use new features",
+      "exclusivePricing": "Exclusive Pricing",
+      "exclusivePricingDesc": "Special rates for early adopters",
+      "prioritySupport": "Priority Support",
+      "prioritySupportDesc": "Dedicated onboarding team"
+    }
+  },
+  "footer": {
+    "description": "AI-powered CATI platform for market research. Conduct surveys 10× faster with human-like conversations in 47 languages.",
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company",
+    "features": "Features",
+    "useCases": "Use Cases",
+    "demo": "Demo",
+    "howItWorks": "How It Works",
+    "faq": "Frequently Asked Questions",
+    "securityCompliance": "Security & Compliance",
+    "joinWaitlist": "Join The Waitlist",
+    "privacyPolicy": "Privacy Policy",
+    "copyright": "© 2025 Voiceter AI. All rights reserved.",
+    "soc2": "SOC 2 Certified",
+    "gdpr": "GDPR Compliant",
+    "tcpa": "TCPA Compliant"
+  },
+  "demo": {
+    "title": "Live AI Voice Demo",
+    "subtitle": "Experience real-time conversation with our AI agent",
+    "selectLanguage": "Select Language",
+    "readyToStart": "Ready to Start",
+    "readyDescription": "Click below to begin your conversation with our AI voice agent",
+    "startDemo": "Start Demo",
+    "connecting": "Connecting...",
+    "connectingDescription": "Establishing secure connection with AI agent",
+    "connected": "Connected",
+    "endDemo": "End Demo",
+    "waitingForConversation": "Waiting for conversation to begin...",
+    "listening": "Listening... Speak now",
+    "clickToSpeak": "Click microphone to speak",
+    "browserCompatibility": "Browser Compatibility",
+    "browserCompatibilityDescription": "This demo requires a modern browser with WebRTC support. For best experience, use Chrome, Firefox, or Safari."
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Turkish",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "zh": "Chinese",
+    "ja": "Japanese",
+    "ar": "Arabic",
+    "hi": "Hindi"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Get answers to common questions about AI voice agents and our platform",
+    "categories": {
+      "technology": "Technology",
+      "languages": "Languages",
+      "compliance": "Compliance",
+      "useCases": "Use Cases",
+      "integration": "Integration",
+      "performance": "Performance",
+      "features": "Features",
+      "pricing": "Pricing",
+      "availability": "Availability",
+      "support": "Support",
+      "analytics": "Analytics",
+      "operations": "Operations"
+    },
+    "questions": {
+      "q1": {
+        "question": "How is this different from traditional CATI software?",
+        "answer": "Traditional CATI requires human interviewers who manually make calls. Voiceter.ai uses AI voice agents that conduct conversations automatically, enabling 24/7 operation, instant scalability, and 80% cost reduction while maintaining or improving quality."
+      },
+      "q2": {
+        "question": "Which languages do you support?",
+        "answer": "Initially we support English (US), English (UK), English (AU), Spanish, German, French, Italian, Portuguese, Hindi, Japanese, Korean and Chinese. Other languages will be supported within our roadmap."
+      },
+      "q3": {
+        "question": "Is it really compliant with TCPA and GDPR?",
+        "answer": "Yes. Compliance is built into every call. We automatically handle consent verification, DNC list checking, call recording disclosures, opt-out requests, and data handling requirements for both TCPA (US) and GDPR (EU), plus other regional regulations."
+      },
+      "q4": {
+        "question": "What kind of surveys work best with AI voice agents?",
+        "answer": "AI voice agents excel at structured surveys (NPS, CSAT, CES), product feedback, brand perception studies, employee engagement, and customer experience surveys. They handle complex skip logic, multiple question types, and even open-ended questions with sophisticated conversation AI."
+      },
+      "q5": {
+        "question": "Can I integrate this into my existing platform?",
+        "answer": "Absolutely. We're API-first. Use our RESTful API and webhooks to embed voice surveys into your product, connect with your CRM, or integrate with research platforms. We also offer pre-built connectors for Salesforce, Zapier, and major CX platforms."
+      },
+      "q6": {
+        "question": "What about response rates compared to traditional surveys?",
+        "answer": "Our AI voice agents achieve 40-60% better response rates than traditional CATI. The conversational, natural approach feels more engaging than robocalls, and our smart scheduling optimizes contact timing for each recipient."
+      },
+      "q7": {
+        "question": "How do you handle open-ended questions?",
+        "answer": "Our AI uses advanced natural language processing to understand, follow up, and accurately transcribe open-ended responses. It can ask clarifying questions, recognize sentiment, and even identify themes across responses automatically."
+      },
+      "q8": {
+        "question": "What's the pricing model?",
+        "answer": "We offer flexible pricing for different needs: per-minute pricing for occasional users, monthly subscriptions for regular research programs, and enterprise agreements for high-volume needs. Join our waitlist to get benefit from our early adaptor rates."
+      },
+      "q9": {
+        "question": "When will Voiceter.ai be generally available?",
+        "answer": "We're preparing our first public beta with early access partners. Join the waitlist and we'll keep you updated on the rollout — starting with US and EU research teams."
+      },
+      "q10": {
+        "question": "What kind of support do you provide?",
+        "answer": "All plans include email support and comprehensive documentation. Professional and Enterprise plans include priority support, dedicated account management, and onboarding assistance. API users get technical support from our engineering team."
+      },
+      "q11": {
+        "question": "Can I see my data in real-time?",
+        "answer": "Yes! Our dashboard updates in real-time as responses come in. You can monitor call progress, view completed responses instantly, and access live analytics. API users can also receive webhook notifications for immediate data processing."
+      },
+      "q12": {
+        "question": "What happens if someone doesn't answer?",
+        "answer": "Our system automatically handles retry logic based on your preferences. We optimize retry timing based on call patterns, respect do-not-disturb hours, and can schedule callbacks. You control the retry strategy and frequency."
+      }
+    }
+  },
+  "metadata": {
+    "title": "Voiceter AI - AI Voice Agents for Market Research Surveys",
+    "description": "Conduct market research surveys 10× faster with AI-powered CATI platform. Multilingual voice agents deliver human-like conversations and instant data insights across 47 languages."
+  },
+  "demoShowcase": {
+    "title": "Talk to Voiceter.ai — live demos",
+    "subtitle": "Click any scenario below to start a live conversation with our AI voice agent.",
+    "liveDemoPreview": "Live Demo Preview",
+    "avgDuration": "Avg. Duration: 3-4 minutes",
+    "launchFullDemo": "Launch Full Demo Experience",
+    "features": {
+      "realTimeTranscription": "Real-time Transcription",
+      "naturalConversations": "Natural Conversations",
+      "instantDataExtraction": "Instant Data Extraction"
+    },
+    "useCases": {
+      "electronicsRetail": {
+        "title": "Electronics Retail - In-Store Purchase Experience",
+        "description": "Post-transaction CSAT & NPS survey for offline electronics retail store purchases with personalization."
+      },
+      "conceptTest": {
+        "title": "Concept Test Snapshot",
+        "description": "Test a new product or creative idea with spontaneous, spoken reactions and follow-up probes."
+      },
+      "politicalPolling": {
+        "title": "Political & Opinion Polling",
+        "description": "See how AI handles screening, quotas, and sensitive questions while staying neutral and compliant."
+      },
+      "brandTracker": {
+        "title": "Brand Tracker Pulse",
+        "description": "Measure awareness, preference, and NPS in a 2-minute voice interview."
+      },
+      "ecommerceDelivery": {
+        "title": "E-Commerce - Online Delivery Experience",
+        "description": "Post-delivery CSAT & NPS survey for online marketplace orders with transaction personalization."
+      },
+      "automotiveService": {
+        "title": "Automotive After-Sales Service",
+        "description": "Post-service CSAT & NPS survey for automotive service center with service details personalization."
+      }
+    }
+  },
+  "compliance": {
+    "title": "Security and Compliance Built In, Not Bolted On",
+    "subtitle": "Your data security is our top priority. We maintain the highest standards of compliance and protection.",
+    "certificationsTitle": "Certifications & Compliance",
+    "securityFeaturesTitle": "Security Features",
+    "certifications": {
+      "soc2": {
+        "name": "SOC 2 Type II",
+        "description": "Comprehensive security and availability controls"
+      },
+      "tcpa": {
+        "name": "TCPA Compliant",
+        "description": "Telephone Consumer Protection Act compliance for calls"
+      },
+      "gdpr": {
+        "name": "GDPR Compliant",
+        "description": "Full compliance with EU data protection regulations"
+      },
+      "ccpa": {
+        "name": "CCPA Compliant",
+        "description": "California Consumer Privacy Act data privacy compliance"
+      },
+      "stirShaken": {
+        "name": "STIR/SHAKEN Compliant",
+        "description": "Call authentication framework to combat robocalls"
+      }
+    },
+    "securityFeatures": {
+      "encryption": {
+        "title": "End-to-End Encryption",
+        "description": "All data encrypted in transit and at rest using AES-256"
+      },
+      "consent": {
+        "title": "Automated Consent & Recording Disclosure",
+        "description": "Built-in consent scripting and automatic recording disclosures"
+      },
+      "accessControls": {
+        "title": "Access Controls",
+        "description": "Role-based permissions and multi-factor authentication"
+      },
+      "dncCompliance": {
+        "title": "DNC & Call-Time Compliance",
+        "description": "DNC list checks, call-time windows, and recording notices in flows"
+      }
+    }
+  },
+  "scrollProgress": {
+    "demo": "Demo",
+    "howItWorks": "How it Works",
+    "features": "Features",
+    "useCases": "Use Cases",
+    "faq": "FAQ"
+  },
+  "about": {
+    "email": "Email",
+    "location": "Location"
+  },
+  "fullDemo": {
+    "title": "Voiceter AI Demo",
+    "chooseDemo": "Choose Your Demo Experience",
+    "selectDemo": "Select a Voice Survey Demo",
+    "selectDemoDescription": "Experience the power of AI-driven voice surveys. Choose from our demo scenarios to see how Voiceter AI can transform your research and feedback collection.",
+    "loadingDemos": "Loading demo options...",
+    "keyFeatures": "Key Features",
+    "more": "more",
+    "startThisDemo": "Start This Demo",
+    "unableToLoad": "Unable to Load Demos",
+    "unableToLoadDescription": "We couldn't load the demo questionnaires. Please try refreshing the page.",
+    "refreshPage": "Refresh Page",
+    "realTimeVoiceSurvey": "Real-Time Voice Survey with AI",
+    "demoScenario": "Demo Scenario",
+    "language": "Language",
+    "voiceGender": "Voice Gender",
+    "voiceOption": "Voice Option",
+    "male": "Male",
+    "female": "Female",
+    "maleVoices": "Male Voices",
+    "femaleVoices": "Female Voices",
+    "showingMaleVoices": "Showing male voices only",
+    "showingFemaleVoices": "Showing female voices only",
+    "connecting": "Connecting...",
+    "startDemoCall": "Start Demo Call",
+    "endCall": "End Call",
+    "voiceAccents": {
+      "Warm & Friendly": "Warm & Friendly",
+      "Firm & Professional": "Firm & Professional",
+      "Calm & Soothing": "Calm & Soothing",
+      "Light & Airy": "Light & Airy",
+      "Clear & Bright": "Clear & Bright",
+      "Gentle & Soft": "Gentle & Soft",
+      "Melodic": "Melodic",
+      "Expressive": "Expressive",
+      "Warm": "Warm",
+      "Elegant": "Elegant",
+      "Informative & Clear": "Informative & Clear",
+      "Upbeat & Energetic": "Upbeat & Energetic",
+      "Excitable & Dynamic": "Excitable & Dynamic",
+      "Easygoing & Relaxed": "Easygoing & Relaxed",
+      "Deep & Resonant": "Deep & Resonant",
+      "Neutral": "Neutral",
+      "Confident": "Confident",
+      "Strong": "Strong",
+      "Smooth": "Smooth",
+      "Steady": "Steady",
+      "Calm": "Calm",
+      "Rich": "Rich",
+      "Friendly": "Friendly",
+      "Professional": "Professional",
+      "Authoritative": "Authoritative",
+      "Distinctive": "Distinctive"
+    },
+    "voiceNames": {
+      "Aoede": "Aoede",
+      "Kore": "Kore",
+      "Leda": "Leda",
+      "Zephyr": "Zephyr",
+      "Achernar": "Achernar",
+      "Autonoe": "Autonoe",
+      "Callirrhoe": "Callirrhoe",
+      "Gacrux": "Gacrux",
+      "Sulafat": "Sulafat",
+      "Vindemiatrix": "Vindemiatrix",
+      "Charon": "Charon",
+      "Puck": "Puck",
+      "Fenrir": "Fenrir",
+      "Orbit": "Orbit",
+      "Orus": "Orus",
+      "Achird": "Achird",
+      "Algenib": "Algenib",
+      "Algieba": "Algieba",
+      "Alnilam": "Alnilam",
+      "Enceladus": "Enceladus",
+      "Iapetus": "Iapetus",
+      "Umbriel": "Umbriel",
+      "Rasalgethi": "Rasalgethi",
+      "Sadachbia": "Sadachbia",
+      "Sadaltager": "Sadaltager",
+      "Schedar": "Schedar",
+      "Zubenelgenubi": "Zubenelgenubi"
+    },
+    "callActive": "Call Active - Listening",
+    "realTimeTranscription": "Real-Time Transcription",
+    "liveConversation": "Live conversation with speaker identification",
+    "startDemoPrompt": "Start the demo call to see the conversation transcript appear here in real-time",
+    "surveyAnswers": "Survey Answers",
+    "questionsAnswered": "question(s) answered",
+    "forDevelopers": "for Developers",
+    "surveyAnswersPrompt": "Survey answers will appear here as questions are answered",
+    "processingResults": "Processing survey results...",
+    "pleaseWait": "Please wait",
+    "textAnalytics": "Text Analytics",
+    "nlpAnalysis": "NLP analysis of open-ended responses",
+    "waitingForResponse": "Waiting for open-ended response",
+    "nlpWillAppear": "NLP analysis will appear after you answer an open-ended question",
+    "analyzingResponse": "Analyzing response...",
+    "overallSentiment": "Overall Sentiment Score",
+    "speaking": "speaking...",
+    "ai": "AI",
+    "you": "You",
+    "analyzedResponse": "Analyzed Response",
+    "detectedTopics": "Detected Topics",
+    "topic": "Topic",
+    "sentiment": "Sentiment",
+    "intent": "Intent",
+    "emotion": "Emotion",
+    "collectedDataJson": "Collected Data (JSON)",
+    "copyToClipboard": "Copy to Clipboard",
+    "close": "Close",
+    "demos": {
+      "demo-01a-electronics-retail-personalized": {
+        "title": "Electronics Retail - In-Store Purchase Experience",
+        "description": "Post-transaction CSAT & NPS survey for offline electronics retail store purchases with transaction data personalization",
+        "industry": "Retail - Electronics",
+        "features": ["CSAT rating scales", "NPS scoring", "Personalized questions", "Open-ended feedback"]
+      },
+      "demo-02-concept-test": {
+        "title": "FlexiDesk Pro - Concept Test Snapshot",
+        "description": "Test new product concept (AI-powered standing desk) with spontaneous reactions, purchase intent, feature priorities, and objection identification.",
+        "industry": "Consumer Products & Furniture",
+        "features": ["Spontaneous reaction capture", "Purchase intent measurement", "Feature prioritization", "Objection identification"]
+      },
+      "demo-03-political-polling": {
+        "title": "Political & Opinion Polling",
+        "description": "Professional political opinion poll with age screening, voter registration, and political affiliation with complete neutrality.",
+        "industry": "Political Research",
+        "features": ["Age screening", "Voter registration", "Political affiliation", "Complete neutrality"]
+      },
+      "demo-04-brand-tracker": {
+        "title": "Brand Tracker Pulse",
+        "description": "Quick brand awareness and preference measurement with unaided/aided awareness, consideration funnel, and brand perception.",
+        "industry": "Market Research",
+        "features": ["Unaided brand awareness", "Aided brand awareness", "Purchase consideration", "Brand preference"]
+      },
+      "demo-01b-ecommerce-delivery-personalized": {
+        "title": "E-Commerce - Online Delivery Experience",
+        "description": "Post-delivery CSAT & NPS survey for online marketplace orders with delivery timing and satisfaction measurement.",
+        "industry": "E-Commerce",
+        "features": ["Delivery satisfaction", "NPS scoring", "Personalized questions", "Open-ended feedback"]
+      },
+      "demo-01c-automotive-service-personalized": {
+        "title": "Automotive After-Sales Service",
+        "description": "Post-service CSAT & NPS survey for automotive service center with service quality and advisor satisfaction.",
+        "industry": "Automotive",
+        "features": ["Service satisfaction", "Advisor rating", "NPS scoring", "Open-ended feedback"]
+      }
+    }
+  }
+}

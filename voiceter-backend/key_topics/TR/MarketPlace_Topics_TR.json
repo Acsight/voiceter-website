@@ -1,0 +1,102 @@
+[
+    {
+      "topic_name": "Teslimat Hızı",
+      "description": "Siparişin vaat edilen veya beklenen sürelere kıyasla ne kadar hızlı teslim edildiğine dair müşteri algısı."
+    },
+    {
+      "topic_name": "Teslimat Doğruluğu",
+      "description": "Teslim edilen ürünlerin ürün, miktar, beden ve özellikler açısından orijinal siparişle ne ölçüde eşleştiği."
+    },
+    {
+      "topic_name": "Teslimat Deneyimi",
+      "description": "Kurye profesyonelliği, koordinasyon ve teslim alma kolaylığı dahil teslimat süreciyle ilgili genel deneyim."
+    },
+    {
+      "topic_name": "Ambalaj Kalitesi",
+      "description": "Ambalajın dayanıklılığı, temizliği ve ürünü taşıma sırasında koruma kapasitesinin değerlendirmesi."
+    },
+    {
+      "topic_name": "Varışta Ürün Durumu",
+      "description": "Ürünün hasarsız, sağlam ve kabul edilebilir fiziksel durumda gelip gelmediği."
+    },
+    {
+      "topic_name": "Ürün Kalitesi",
+      "description": "Ürünü aldıktan ve kullandıktan sonra malzeme, işçilik ve genel kalite hakkında müşteri değerlendirmesi."
+    },
+    {
+      "topic_name": "Ürün Orijinalliği",
+      "description": "Ürünün orijinal olduğuna ve sahte veya yanlış tanıtılmadığına dair müşteri güveni."
+    },
+    {
+      "topic_name": "Ürün Açıklaması Doğruluğu",
+      "description": "Çevrimiçi ürün açıklaması, görselleri ve özelliklerinin teslim edilen ürünü ne kadar doğru yansıttığı."
+    },
+    {
+      "topic_name": "Fiyat-Değer Dengesi",
+      "description": "Ürünün kalitesi, özellikleri ve genel değerine göre fiyatın algılanan adaleti."
+    },
+    {
+      "topic_name": "Satıcı Güvenilirliği",
+      "description": "Sipariş karşılama doğruluğu, dürüstlük ve tutarlılık temelinde satıcının güvenilirliği."
+    },
+    {
+      "topic_name": "Satıcı İletişimi",
+      "description": "Sipariş ve teslimat hakkında satıcının iletişiminin etkinliği ve netliği."
+    },
+    {
+      "topic_name": "Sipariş Takibi ve Güncellemeler",
+      "description": "Kargo takip bilgilerinin ve teslimat durumu güncellemelerinin mevcudiyeti ve doğruluğu."
+    },
+    {
+      "topic_name": "İade Süreci Kolaylığı",
+      "description": "Müşterilerin ürün iadesini başlatması ve tamamlamasının ne kadar basit ve rahat olduğu."
+    },
+    {
+      "topic_name": "Geri Ödeme Hızı",
+      "description": "İade veya iptal talebinden sonra geri ödeme işlemlerinin zamanlaması."
+    },
+    {
+      "topic_name": "Değişim Süreci",
+      "description": "Yanlış, kusurlu veya istenmeyen bir ürünü değiştirme konusunda müşteri deneyimi."
+    },
+    {
+      "topic_name": "Müşteri Destek Yanıt Hızı",
+      "description": "Teslimat sonrası sorunları ele alırken müşteri desteğinin hızı ve erişilebilirliği."
+    },
+    {
+      "topic_name": "Müşteri Destek Etkinliği",
+      "description": "Müşteri desteğinin sorunları tatmin edici şekilde çözme ve net çözümler sunma kapasitesi."
+    },
+    {
+      "topic_name": "Sorun Çözümü",
+      "description": "Teslimat, ürün veya hizmetle ilgili sorunların çözümündeki genel başarı."
+    },
+    {
+      "topic_name": "Teslimat Ücreti",
+      "description": "Kargo ücretlerine ve teslimat maliyetlerinin makul olup olmadığına dair müşteri algısı."
+    },
+    {
+      "topic_name": "Sipariş Eksiksizliği",
+      "description": "Sipariş edilen tüm ürünlerin, aksesuarların veya bileşenlerin teslimata dahil edilip edilmediği."
+    },
+    {
+      "topic_name": "Pazar Yerine Güven",
+      "description": "Adil işlemler ve güvenilir satıcılar sağlamak için pazar yeri platformuna duyulan genel güven."
+    },
+    {
+      "topic_name": "Yeniden Sipariş Niyeti",
+      "description": "Müşterinin aynı satıcı veya pazar yerinden tekrar satın alma isteği."
+    },
+    {
+      "topic_name": "Tavsiye Olasılığı",
+      "description": "Müşterinin satıcı veya pazar yerini başkalarına tavsiye etme olasılığı."
+    },
+    {
+      "topic_name": "Konu Yok",
+      "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+    },
+    {
+      "topic_name": "Diğer",
+      "description": "Başka herhangi bir konu içeren geri bildirimler."
+    }
+]

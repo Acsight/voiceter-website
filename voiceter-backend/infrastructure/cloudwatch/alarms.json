@@ -1,0 +1,365 @@
+{
+  "alarms": [
+    {
+      "alarmName": "voiceter-backend-high-error-rate",
+      "alarmDescription": "Triggers when error rate exceeds 5% over 5 minutes",
+      "metricName": "ErrorRate",
+      "namespace": "Voiceter/Backend",
+      "statistic": "Average",
+      "period": 300,
+      "evaluationPeriods": 1,
+      "threshold": 5.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Critical"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-high-latency-warning",
+      "alarmDescription": "Triggers when P95 latency exceeds 500ms over 5 minutes",
+      "metricName": "BedrockLatency",
+      "namespace": "Voiceter/Backend",
+      "extendedStatistic": "p95",
+      "period": 300,
+      "evaluationPeriods": 2,
+      "threshold": 500.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-high-latency-critical",
+      "alarmDescription": "Triggers when P95 latency exceeds 1000ms over 5 minutes",
+      "metricName": "BedrockLatency",
+      "namespace": "Voiceter/Backend",
+      "extendedStatistic": "p95",
+      "period": 300,
+      "evaluationPeriods": 1,
+      "threshold": 1000.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Critical"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-high-cpu",
+      "alarmDescription": "Triggers when CPU utilization exceeds 80% over 5 minutes",
+      "metricName": "CPUUtilization",
+      "namespace": "AWS/ECS",
+      "dimensions": [
+        {
+          "name": "ServiceName",
+          "value": "voiceter-backend-service"
+        },
+        {
+          "name": "ClusterName",
+          "value": "voiceter-cluster"
+        }
+      ],
+      "statistic": "Average",
+      "period": 300,
+      "evaluationPeriods": 2,
+      "threshold": 80.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts",
+        "arn:aws:autoscaling:REGION:ACCOUNT_ID:scalingPolicy:POLICY_ID:resource/ecs/service/voiceter-cluster/voiceter-backend-service:policyName/cpu-scale-up"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-high-memory",
+      "alarmDescription": "Triggers when memory utilization exceeds 85% over 5 minutes",
+      "metricName": "MemoryUtilization",
+      "namespace": "AWS/ECS",
+      "dimensions": [
+        {
+          "name": "ServiceName",
+          "value": "voiceter-backend-service"
+        },
+        {
+          "name": "ClusterName",
+          "value": "voiceter-cluster"
+        }
+      ],
+      "statistic": "Average",
+      "period": 300,
+      "evaluationPeriods": 2,
+      "threshold": 85.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts",
+        "arn:aws:autoscaling:REGION:ACCOUNT_ID:scalingPolicy:POLICY_ID:resource/ecs/service/voiceter-cluster/voiceter-backend-service:policyName/memory-scale-up"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-database-latency-high",
+      "alarmDescription": "Triggers when database latency exceeds 200ms over 5 minutes",
+      "metricName": "DatabaseLatency",
+      "namespace": "Voiceter/Backend",
+      "extendedStatistic": "p95",
+      "period": 300,
+      "evaluationPeriods": 2,
+      "threshold": 200.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-health-check-failures",
+      "alarmDescription": "Triggers when health check success rate drops below 80%",
+      "metricName": "HealthyHostCount",
+      "namespace": "AWS/ApplicationELB",
+      "dimensions": [
+        {
+          "name": "TargetGroup",
+          "value": "targetgroup/voiceter-backend-tg/TARGET_GROUP_ID"
+        },
+        {
+          "name": "LoadBalancer",
+          "value": "app/voiceter-backend-alb/LOAD_BALANCER_ID"
+        }
+      ],
+      "statistic": "Average",
+      "period": 60,
+      "evaluationPeriods": 2,
+      "threshold": 1.0,
+      "comparisonOperator": "LessThanThreshold",
+      "treatMissingData": "breaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Critical"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-concurrent-sessions-high",
+      "alarmDescription": "Triggers when concurrent sessions exceed 45 (90% of capacity)",
+      "metricName": "ConcurrentSessions",
+      "namespace": "Voiceter/Backend",
+      "statistic": "Maximum",
+      "period": 60,
+      "evaluationPeriods": 3,
+      "threshold": 45.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    },
+    {
+      "alarmName": "voiceter-backend-websocket-connection-failures",
+      "alarmDescription": "Triggers when WebSocket connection error rate exceeds 10%",
+      "metricName": "WebSocketConnectionErrors",
+      "namespace": "Voiceter/Backend",
+      "statistic": "Average",
+      "period": 300,
+      "evaluationPeriods": 1,
+      "threshold": 10.0,
+      "comparisonOperator": "GreaterThanThreshold",
+      "treatMissingData": "notBreaching",
+      "actionsEnabled": true,
+      "alarmActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "okActions": [
+        "arn:aws:sns:REGION:ACCOUNT_ID:voiceter-backend-alerts"
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Severity",
+          "value": "Warning"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    }
+  ],
+  "snsTopics": [
+    {
+      "topicName": "voiceter-backend-alerts",
+      "displayName": "Voiceter Backend Alerts",
+      "subscriptions": [
+        {
+          "protocol": "email",
+          "endpoint": "alerts@voiceter.com"
+        },
+        {
+          "protocol": "sms",
+          "endpoint": "+1234567890"
+        }
+      ],
+      "tags": [
+        {
+          "key": "Application",
+          "value": "Voiceter"
+        },
+        {
+          "key": "Component",
+          "value": "Backend"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "description": "CloudWatch alarms for Voiceter Backend monitoring and alerting",
+    "lastUpdated": "2025-12-16",
+    "requirements": "10.8"
+  }
+}

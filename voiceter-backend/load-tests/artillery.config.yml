@@ -1,0 +1,71 @@
+# Artillery Global Configuration
+# This file contains shared configuration for all load tests
+
+config:
+  # Default target (can be overridden in individual test files)
+  target: "http://localhost:8080"
+  
+  # HTTP configuration
+  http:
+    timeout: 30
+    maxSockets: 100
+  
+  # WebSocket configuration
+  ws:
+    timeout: 30
+  
+  # Processor for custom logic
+  processor: "./load-test-processor.js"
+  
+  # Plugins
+  plugins:
+    # Expect plugin for assertions
+    expect: {}
+    
+    # Metrics by endpoint
+    metrics-by-endpoint:
+      stripQueryString: true
+      metricsNamespace: "voiceter"
+    
+    # Publish metrics to CloudWatch (optional)
+    # publish-metrics:
+    #   - type: cloudwatch
+    #     region: us-east-1
+    #     namespace: VoiceterLoadTests
+  
+  # Default performance thresholds
+  ensure:
+    maxErrorRate: 1
+    p95: 300
+    p99: 500
+  
+  # Environment variables
+  environments:
+    local:
+      target: "http://localhost:8080"
+      phases:
+        - duration: 60
+          arrivalRate: 5
+    
+    staging:
+      target: "https://staging.voiceter.com"
+      phases:
+        - duration: 120
+          arrivalRate: 10
+    
+    production:
+      target: "https://api.voiceter.com"
+      phases:
+        - duration: 300
+          arrivalRate: 20
+
+# Custom metrics to track
+metrics:
+  - name: "session_duration"
+    type: "histogram"
+  - name: "audio_chunks_sent"
+    type: "counter"
+  - name: "tool_executions"
+    type: "counter"
+  - name: "errors_by_type"
+    type: "counter"

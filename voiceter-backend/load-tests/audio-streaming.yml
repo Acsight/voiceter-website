@@ -1,0 +1,124 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    # Single phase: Continuous audio streaming for 5 minutes
+    - duration: 300
+      arrivalRate: 10
+      name: "Continuous audio streaming - 5 minutes"
+  
+  # WebSocket engine configuration
+  engines:
+    socketio:
+      transports: ["websocket"]
+  
+  # Performance thresholds for audio streaming
+  ensure:
+    maxErrorRate: 1     # Max 1% error rate
+    p95: 300            # P95 latency < 300ms for audio chunks
+    p99: 500            # P99 latency < 500ms
+
+  # Metrics and reporting
+  plugins:
+    expect: {}
+    metrics-by-endpoint:
+      stripQueryString: true
+
+  # Variables for audio simulation
+  variables:
+    audioChunkSize: 512  # ~32ms of audio at 16kHz
+
+scenarios:
+  - name: "Continuous Audio Streaming Test"
+    engine: socketio
+    flow:
+      # Connect to WebSocket server
+      - emit:
+          channel: "connection"
+      
+      # Initialize connection
+      - think: 1
+      - emit:
+          channel: "initializeConnection"
+          data:
+            questionnaireId: "demo2_concept_test"
+            voiceId: "tiffany"
+          acknowledge:
+            match:
+              json: "$.success"
+              value: true
+      
+      # Wait for session ready
+      - think: 2
+      
+      # Send prompt start
+      - emit:
+          channel: "promptStart"
+      
+      # Send system prompt
+      - think: 1
+      - emit:
+          channel: "systemPrompt"
+          data:
+            content: "You are conducting a concept test survey."
+      
+      # Start audio streaming
+      - think: 1
+      - emit:
+          channel: "audioStart"
+      
+      # Wait for audio ready
+      - think: 2
+      
+      # Continuous audio streaming for ~60 seconds
+      # At 16kHz, 16-bit, mono: 32ms = ~512 bytes
+      # Send audio chunks every 32ms for 60 seconds = ~1875 chunks
+      - loop:
+          - emit:
+              channel: "audioInput"
+              data:
+                # Simulate base64-encoded PCM audio chunk
+                audio: "{{ $randomString(684) }}"  # ~512 bytes base64 encoded
+          - think: 0.032  # 32ms between chunks
+        count: 1875
+      
+      # Stop audio
+      - emit:
+          channel: "stopAudio"
+      
+      # Wait for final processing
+      - think: 5
+      
+      # Start another audio stream (simulate follow-up question)
+      - emit:
+          channel: "audioStart"
+      
+      - think: 1
+      
+      # Stream audio for another 30 seconds
+      - loop:
+          - emit:
+              channel: "audioInput"
+              data:
+                audio: "{{ $randomString(684) }}"
+          - think: 0.032
+        count: 937
+      
+      # Stop audio
+      - emit:
+          channel: "stopAudio"
+      
+      # Wait for processing
+      - think: 5
+      
+      # End session
+      - emit:
+          channel: "session:end"
+          data:
+            reason: "completed"
+      
+      # Wait for cleanup
+      - think: 2
+      
+      # Disconnect
+      - emit:
+          channel: "disconnect"

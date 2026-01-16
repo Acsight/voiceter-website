@@ -1,0 +1,102 @@
+[
+    {
+      "topic_name": "Delivery Speed",
+      "description": "Customer perception of how fast the order was delivered compared to promised or expected timelines."
+    },
+    {
+      "topic_name": "Delivery Accuracy",
+      "description": "Extent to which the delivered items match the original order in terms of product, quantity, size, and specifications."
+    },
+    {
+      "topic_name": "Delivery Experience",
+      "description": "Overall experience with the delivery process, including courier professionalism, coordination, and ease of receipt."
+    },
+    {
+      "topic_name": "Packaging Quality",
+      "description": "Evaluation of the packaging�s durability, cleanliness, and ability to protect the product during transit."
+    },
+    {
+      "topic_name": "Product Condition on Arrival",
+      "description": "Whether the product arrived undamaged, intact, and in acceptable physical condition."
+    },
+    {
+      "topic_name": "Product Quality",
+      "description": "Customer assessment of the product�s materials, workmanship, and overall quality after receiving and using it."
+    },
+    {
+      "topic_name": "Product Authenticity",
+      "description": "Customer confidence that the product is genuine and not counterfeit or misrepresented."
+    },
+    {
+      "topic_name": "Product Description Accuracy",
+      "description": "How accurately the online product description, images, and specifications reflect the delivered item."
+    },
+    {
+      "topic_name": "Price-Value Balance",
+      "description": "Perceived fairness of the price relative to the product�s quality, features, and overall value."
+    },
+    {
+      "topic_name": "Seller Reliability",
+      "description": "Trustworthiness of the seller based on fulfillment accuracy, honesty, and consistency."
+    },
+    {
+      "topic_name": "Seller Communication",
+      "description": "Effectiveness and clarity of communication from the seller regarding the order and delivery."
+    },
+    {
+      "topic_name": "Order Tracking & Updates",
+      "description": "Availability and accuracy of shipment tracking information and delivery status updates."
+    },
+    {
+      "topic_name": "Return Process Ease",
+      "description": "How simple and convenient it is for customers to initiate and complete a product return."
+    },
+    {
+      "topic_name": "Refund Speed",
+      "description": "Timeliness of refund processing after a return or cancellation request."
+    },
+    {
+      "topic_name": "Exchange Process",
+      "description": "Customer experience with replacing an incorrect, defective, or unwanted product."
+    },
+    {
+      "topic_name": "Customer Support Responsiveness",
+      "description": "Speed and availability of customer support when addressing post-delivery issues."
+    },
+    {
+      "topic_name": "Customer Support Effectiveness",
+      "description": "Ability of customer support to resolve issues satisfactorily and provide clear solutions."
+    },
+    {
+      "topic_name": "Problem Resolution",
+      "description": "Overall success in resolving delivery, product, or service-related problems."
+    },
+    {
+      "topic_name": "Delivery Cost",
+      "description": "Customer perception of shipping fees and whether delivery costs are reasonable."
+    },
+    {
+      "topic_name": "Order Completeness",
+      "description": "Whether all ordered items, accessories, or components were included in the delivery."
+    },
+    {
+      "topic_name": "Marketplace Trust",
+      "description": "Overall trust in the marketplace platform to ensure fair transactions and reliable sellers."
+    },
+    {
+      "topic_name": "Reorder Intent",
+      "description": "Customer willingness to purchase again from the same seller or marketplace."
+    },
+    {
+      "topic_name": "Recommendation Likelihood",
+      "description": "Likelihood that the customer would recommend the seller or marketplace to others."
+    },
+    {
+      "topic_name": "No Topic",
+      "description": "Feedback that does not clearly fall into any specific category"
+    },
+    {
+      "topic_name": "Other",
+      "description": "Feedback that contains any other topic"
+    }
+]

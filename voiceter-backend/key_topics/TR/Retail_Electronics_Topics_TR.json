@@ -1,0 +1,122 @@
+[
+  {
+    "topic_name": "Personel / Güler Yüzlülük",
+    "description": "Mağaza personelinin nezaketi, saygılılığı ve yaklaşılabilir tavrı."
+  },
+  {
+    "topic_name": "Personel / Ürün Bilgisi",
+    "description": "Özellikleri açıklama, modelleri karşılaştırma ve net öneriler verme kapasitesi."
+  },
+  {
+    "topic_name": "Personel / Erişilebilirlik",
+    "description": "Yoğun saatlerde personeli bulma ve zamanında ilgi görme kolaylığı."
+  },
+  {
+    "topic_name": "Personel / Sorun Çözümü",
+    "description": "Şikayetleri, istisnaları ve özel talepleri ele alma etkinliği."
+  },
+  {
+    "topic_name": "Ürün / Bulunabilirlik",
+    "description": "İstenen modellerin, renklerin ve miktarların raflarda mevcudiyeti."
+  },
+  {
+    "topic_name": "Ürün / Durum ve Orijinallik",
+    "description": "Beklenen durumda yeni, kapalı, orijinal ürünler (belirtilmedikçe açık kutu değil)."
+  },
+  {
+    "topic_name": "Ürün / Demo ve Deneme",
+    "description": "Satın alma öncesi çalışan demo ünitelere ve uygulamalı teste erişim."
+  },
+  {
+    "topic_name": "Ürün / Çeşitlilik",
+    "description": "Sunulan elektronik ürünlerin yelpazesi ve çeşitliliği."
+  },
+  {
+    "topic_name": "Fiyat / Etiket Tutarlılığı",
+    "description": "Raf fiyatı ile kasa fiyatı tutarlılığı."
+  },
+  {
+    "topic_name": "Fiyat / Fiyatlandırma ve Promosyonlar",
+    "description": "Fiyat ve değer, kampanya ve paketlerin çeşitliliği ve netliği."
+  },
+  {
+    "topic_name": "Fiyat / Karşılaştırma",
+    "description": "Rakip firmalarla fiyat karşılaştırması."
+  },
+  {
+    "topic_name": "Kasa / Hız ve Verimlilik",
+    "description": "Kasa ve servis masalarında bekleme süreleri ve verimlilik."
+  },
+  {
+    "topic_name": "Kasa / Ödeme Seçenekleri",
+    "description": "Kart, nakit, mobil ve alternatif ödemeler ile bölünmüş/bağlı taksit mevcudiyeti."
+  },
+  {
+    "topic_name": "Faturalama / Fatura Doğruluğu",
+    "description": "Doğru kalem dökümü, IMEI/seri numarası kaydı ve e-fatura/e-arşiv düzenlemesi."
+  },
+  {
+    "topic_name": "Adrese Teslimat",
+    "description": "Mağazadan satın alınan ürünlerin müşteri adresine teslimatı."
+  },
+  {
+    "topic_name": "Paketleme ve Sarma",
+    "description": "Ürünlerin paketlenmesi, sarılması ve taşıma için uygun koşulların sağlanması."
+  },
+  {
+    "topic_name": "İade ve Değişim Politikası",
+    "description": "İade/değişim süreci, zaman dilimleri, koşullar ve gerekli belgeler."
+  },
+  {
+    "topic_name": "Satış Sonrası / Garanti Koşulları",
+    "description": "Üretici garantilerinin kapsamı, süresi ve talep adımları."
+  },
+  {
+    "topic_name": "Satış Sonrası / Sigorta",
+    "description": "Mağazada sunulan cihaz sigortasının netliği ve değeri; neyin kapsandığı ve hariç tutulduğu, kasada kayıt kolaylığı."
+  },
+  {
+    "topic_name": "Satış Sonrası / Kurulum",
+    "description": "Beyaz eşya, TV ve ses sistemleri, klimalar ve akıllı cihazlar için marka yetkili kurulum ayarlama kolaylığı: randevu mevcudiyeti, ücretler veya ücretsiz kampanya teklifleri."
+  },
+  {
+    "topic_name": "Satış Sonrası / Uzatılmış Garanti",
+    "description": "Uzatılmış koruma planlarının değeri, istisnaları ve fiyatlandırması."
+  },
+  {
+    "topic_name": "Takas ve Cihaz Değerleme",
+    "description": "Cihaz takası değerlendirmesinin ve sürecinin netliği ve adaleti."
+  },
+  {
+    "topic_name": "Hediye Kartı",
+    "description": "Kasada hediye kartı veya kupon satın alma ve kullanma kolaylığı."
+  },
+  {
+    "topic_name": "Sürdürülebilirlik Uygulamaları",
+    "description": "Eski elektronikleri veya cihazları geri dönüşüm için iade seçenekleri."
+  },
+  {
+    "topic_name": "Mağaza / Temizlik ve Ambiyans",
+    "description": "Temizlik, aydınlatma, sıcaklık ve genel alışveriş konforu."
+  },
+  {
+    "topic_name": "Mağaza / Tabelalar ve Yönlendirme",
+    "description": "Kategori tabelalarının, fiyat etiketlerinin ve kampanya alanlarının netliği."
+  },
+  {
+    "topic_name": "Yönetim Duyarlılığı",
+    "description": "Sorunlar üst kademeye taşındığında yönetici erişilebilirliği ve etkinliği."
+  },
+  {
+    "topic_name": "Genel Memnuniyet",
+    "description": "Mağaza içi satın alma deneyimiyle genel memnuniyet."
+  },
+  {
+    "topic_name": "Konu Yok",
+    "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+  },
+  {
+    "topic_name": "Diğer",
+    "description": "Başka herhangi bir konu içeren geri bildirimler."
+  }
+]

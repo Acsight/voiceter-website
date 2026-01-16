@@ -1,0 +1,78 @@
+﻿{
+  "family": "voiceter-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::119764646179:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::119764646179:role/VoiceterBackendTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "voiceter-backend",
+      "image": "119764646179.dkr.ecr.us-east-1.amazonaws.com/voiceter-backend:latest",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "BEDROCK_MODEL_ID",
+          "value": "amazon.nova-2-sonic-v1:0"
+        },
+        {
+          "name": "DYNAMODB_TABLE_PREFIX",
+          "value": "website-demo-"
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "value": "website-demo-recordings-119764646179"
+        },
+        {
+          "name": "PORT",
+          "value": "8080"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "value": "INFO"
+        },
+        {
+          "name": "ENABLE_AUTH",
+          "value": "false"
+        },
+        {
+          "name": "SES_SENDER_EMAIL",
+          "value": "no_reply@voiceter.ai"
+        },
+        {
+          "name": "MARKETING_EMAILS",
+          "value": "jeff@voiceter.ai,mehmet@voiceter.ai"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/voiceter-backend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

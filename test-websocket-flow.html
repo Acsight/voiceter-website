@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Flow Test</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .log {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #ccc;
+            padding-left: 10px;
+        }
+        .log-entry.success {
+            border-left-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        .log-entry.error {
+            border-left-color: #f44336;
+            background: #FFEBEE;
+        }
+        .log-entry.info {
+            border-left-color: #2196F3;
+            background: #E3F2FD;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.connected {
+            background: #4CAF50;
+            color: white;
+        }
+        .status.disconnected {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 WebSocket Flow Test</h1>
+    <p>This page tests the complete WebSocket flow to identify issues.</p>
+
+    <div id="status" class="status disconnected">Status: Disconnected</div>
+
+    <div>
+        <button id="connectBtn" onclick="testConnect()">1. Connect to WebSocket</button>
+        <button id="startSessionBtn" onclick="testStartSession()" disabled>2. Start Session</button>
+        <button id="sendAudioBtn" onclick="testSendAudio()" disabled>3. Start Recording</button>
+        <button id="disconnectBtn" onclick="testDisconnect()" disabled>4. Disconnect</button>
+    </div>
+
+    <div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 5px;">
+        <h3 style="margin-top: 0;">💬 Text Response (Workaround for Speech Recognition)</h3>
+        <p style="margin: 5px 0; color: #666;">Type your response instead of speaking:</p>
+        <input type="text" id="responseInput" placeholder="Type your answer here..." style="width: 70%; padding: 8px; font-size: 14px;" />
+        <button id="sendTextBtn" onclick="sendTextResponse()" disabled style="padding: 8px 15px;">Send Text</button>
+    </div>
+
+    <h3>Event Log:</h3>
+    <div id="log" class="log"></div>
+
+    <script>
+        let socket = null;
+        let sessionId = null;
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        function updateStatus(connected) {
+            const statusDiv = document.getElementById('status');
+            if (connected) {
+                statusDiv.className = 'status connected';
+                statusDiv.textContent = 'Status: Connected';
+            } else {
+                statusDiv.className = 'status disconnected';
+                statusDiv.textContent = 'Status: Disconnected';
+            }
+        }
+
+        function updateButtons(connected, sessionReady) {
+            document.getElementById('connectBtn').disabled = connected;
+            document.getElementById('startSessionBtn').disabled = !connected || sessionReady;
+            document.getElementById('sendAudioBtn').disabled = !sessionReady;
+            document.getElementById('sendTextBtn').disabled = !sessionReady;
+            document.getElementById('disconnectBtn').disabled = !connected;
+        }
+
+        function testConnect() {
+            log('🔌 Connecting to ws://localhost:8080...', 'info');
+            
+            socket = io('http://localhost:8080', {
+                transports: ['websocket']
+            });
+
+            socket.on('connect', () => {
+                log('✅ Connected! Socket ID: ' + socket.id, 'success');
+                updateStatus(true);
+                updateButtons(true, false);
+            });
+
+            socket.on('disconnect', (reason) => {
+                log('❌ Disconnected: ' + reason, 'error');
+                updateStatus(false);
+                updateButtons(false, false);
+            });
+
+            socket.on('session:assigned', (data) => {
+                sessionId = data.data.sessionId;
+                log('📨 Received session:assigned - Session ID: ' + sessionId, 'success');
+            });
+
+            socket.on('session:ready', (data) => {
+                log('✅ Received session:ready!', 'success');
+                log('   Questionnaire: ' + data.data.questionnaireName, 'info');
+                log('   First Question: ' + data.data.firstQuestion.questionText, 'info');
+                updateButtons(true, true);
+            });
+
+            socket.on('audio:chunk', (data) => {
+                log('🔊 Received audio:chunk (length: ' + data.data.audioData.length + ')', 'success');
+                
+                // Play the audio
+                try {
+                    playAudio(data.data.audioData);
+                } catch (error) {
+                    log('❌ Failed to play audio: ' + error.message, 'error');
+                }
+            });
+
+            socket.on('transcription:user', (data) => {
+                log('💬 User transcription: ' + data.data.transcript, 'info');
+            });
+
+            socket.on('transcription:assistant', (data) => {
+                log('🤖 Assistant transcription: ' + data.data.transcript, 'info');
+            });
+
+            socket.on('error', (data) => {
+                log('❌ Error: ' + data.data.errorMessage, 'error');
+            });
+
+            socket.on('ping', () => {
+                log('📡 Received ping, sending pong', 'info');
+                socket.emit('pong');
+            });
+        }
+
+        function testStartSession() {
+            if (!socket || !socket.connected) {
+                log('❌ Not connected!', 'error');
+                return;
+            }
+
+            log('📤 Sending session:start event...', 'info');
+            
+            const data = {
+                questionnaireId: 'demo-01-csat-nps',
+                voiceId: 'matthew',
+                userId: 'test-user'
+            };
+
+            log('   Data: ' + JSON.stringify(data), 'info');
+            socket.emit('session:start', data);
+            log('✅ session:start event sent!', 'success');
+        }
+
+        let mediaRecorder = null;
+        let audioContext = null;
+        let isRecording = false;
+        let sequenceNumber = 0;
+
+        async function testSendAudio() {
+            if (!socket || !socket.connected) {
+                log('❌ Not connected!', 'error');
+                return;
+            }
+
+            if (isRecording) {
+                // Stop recording
+                stopRecording();
+                return;
+            }
+
+            // Start recording
+            try {
+                log('🎤 Requesting microphone access...', 'info');
+                
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    audio: {
+                        channelCount: 1,
+                        sampleRate: 16000,
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                    } 
+                });
+                
+                log('✅ Microphone access granted!', 'success');
+                
+                // Create audio context for processing
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+                const source = audioContext.createMediaStreamSource(stream);
+                
+                // Create script processor for raw audio data
+                const processor = audioContext.createScriptProcessor(4096, 1, 1);
+                
+                processor.onaudioprocess = (e) => {
+                    if (!isRecording) return;
+                    
+                    const inputData = e.inputBuffer.getChannelData(0);
+                    
+                    // Convert Float32Array to Int16Array (PCM)
+                    const pcmData = new Int16Array(inputData.length);
+                    for (let i = 0; i < inputData.length; i++) {
+                        const s = Math.max(-1, Math.min(1, inputData[i]));
+                        pcmData[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+                    }
+                    
+                    // Convert to base64
+                    const buffer = new Uint8Array(pcmData.buffer);
+                    const base64 = btoa(String.fromCharCode.apply(null, buffer));
+                    
+                    // Send to backend
+                    socket.emit('audio:chunk', {
+                        audioData: base64,
+                        sequenceNumber: sequenceNumber++
+                    });
+                };
+                
+                source.connect(processor);
+                processor.connect(audioContext.destination);
+                
+                isRecording = true;
+                mediaRecorder = { stream, processor, source };
+                
+                document.getElementById('sendAudioBtn').textContent = '4. Stop Recording';
+                log('🎤 Recording started! Speak now...', 'success');
+                
+            } catch (error) {
+                log('❌ Microphone error: ' + error.message, 'error');
+            }
+        }
+
+        function stopRecording() {
+            if (!mediaRecorder) return;
+            
+            log('⏹️ Stopping recording...', 'info');
+            
+            isRecording = false;
+            
+            if (mediaRecorder.processor) {
+                mediaRecorder.processor.disconnect();
+            }
+            if (mediaRecorder.source) {
+                mediaRecorder.source.disconnect();
+            }
+            if (mediaRecorder.stream) {
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+            
+            mediaRecorder = null;
+            document.getElementById('sendAudioBtn').textContent = '3. Start Recording';
+            log('✅ Recording stopped!', 'success');
+        }
+
+        function testDisconnect() {
+            if (socket) {
+                log('🔌 Disconnecting...', 'info');
+                socket.disconnect();
+                socket = null;
+                sessionId = null;
+                updateStatus(false);
+                updateButtons(false, false);
+            }
+        }
+
+        // Audio playback
+        let audioQueue = [];
+        let isPlayingAudio = false;
+
+        function playAudio(base64Audio) {
+            log('🎵 Queuing audio for playback...', 'info');
+            audioQueue.push(base64Audio);
+            
+            if (!isPlayingAudio) {
+                playNextAudio();
+            }
+        }
+
+        function playNextAudio() {
+            if (audioQueue.length === 0) {
+                isPlayingAudio = false;
+                log('✅ Audio playback queue empty', 'info');
+                return;
+            }
+
+            isPlayingAudio = true;
+            const base64Audio = audioQueue.shift();
+
+            try {
+                // Create data URL directly from base64 (simpler and more reliable)
+                const audioUrl = 'data:audio/mpeg;base64,' + base64Audio;
+
+                // Create audio element and play
+                const audio = new Audio(audioUrl);
+                
+                audio.onloadeddata = () => {
+                    log('✅ Audio loaded successfully', 'success');
+                };
+
+                audio.onended = () => {
+                    log('✅ Audio chunk finished playing', 'success');
+                    playNextAudio();
+                };
+
+                audio.onerror = (error) => {
+                    log('❌ Audio playback error: ' + JSON.stringify(error), 'error');
+                    playNextAudio();
+                };
+
+                audio.play().then(() => {
+                    log('▶️ Playing audio...', 'success');
+                }).catch((error) => {
+                    log('❌ Failed to play audio: ' + error.message, 'error');
+                    playNextAudio();
+                });
+
+            } catch (error) {
+                log('❌ Error processing audio: ' + error.message, 'error');
+                playNextAudio();
+            }
+        }
+
+        // Send text response
+        function sendTextResponse() {
+            const input = document.getElementById('responseInput');
+            const text = input.value.trim();
+            
+            if (!text || !socket || !socket.connected) {
+                log('❌ Cannot send: not connected or empty text', 'error');
+                return;
+            }
+            
+            log('📤 Sending text response: "' + text + '"', 'info');
+            
+            // Import sendTextMessage function and call it
+            // For now, we'll emit a custom event that the backend will handle
+            socket.emit('text:message', {
+                sessionId: sessionId,
+                text: text
+            });
+            
+            input.value = '';
+            log('✅ Text sent to AI', 'success');
+        }
+        
+        // Handle Enter key in text input
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('responseInput');
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendTextResponse();
+                    }
+                });
+            }
+        });
+
+        // Auto-connect on page load
+        window.onload = () => {
+            log('🚀 Page loaded. Click "Connect to WebSocket" to start.', 'info');
+        };
+    </script>
+</body>
+</html>

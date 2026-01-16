@@ -1,0 +1,110 @@
+[
+    {
+      "topic_name": "Service Appointment Scheduling",
+      "description": "Ease and convenience of booking a service appointment, including availability of time slots and booking channels."
+    },
+    {
+      "topic_name": "Service Reception Experience",
+      "description": "Customer experience during vehicle drop-off, including welcome, check-in process, and initial communication."
+    },
+    {
+      "topic_name": "Service Advisor Professionalism",
+      "description": "Perceived expertise, courtesy, and professionalism of the service advisor handling the case."
+    },
+    {
+      "topic_name": "Problem Diagnosis Accuracy",
+      "description": "Accuracy of identifying vehicle issues and correctly diagnosing the root cause of problems."
+    },
+    {
+      "topic_name": "Repair Quality",
+      "description": "Effectiveness and reliability of the repair or maintenance work performed on the vehicle."
+    },
+    {
+      "topic_name": "First-Time Fix Rate",
+      "description": "Whether the issue was resolved correctly on the first visit without the need for repeat service."
+    },
+    {
+      "topic_name": "Service Turnaround Time",
+      "description": "Time taken to complete the service compared to the promised or expected completion time."
+    },
+    {
+      "topic_name": "On-Time Delivery",
+      "description": "Whether the vehicle was returned to the customer at the agreed date and time."
+    },
+    {
+      "topic_name": "Cost Transparency",
+      "description": "Clarity and transparency of pricing, estimates, and final invoices before and after service."
+    },
+    {
+      "topic_name": "Price Fairness",
+      "description": "Customer perception of whether service and repair costs are reasonable and justified."
+    },
+    {
+      "topic_name": "Additional Work Approval",
+      "description": "Process of informing customers and obtaining consent for additional repairs or services."
+    },
+    {
+      "topic_name": "Spare Parts Availability",
+      "description": "Availability of required spare parts and its impact on service time and completion."
+    },
+    {
+      "topic_name": "Use of Genuine Parts",
+      "description": "Customer confidence that genuine or approved parts were used during service or repair."
+    },
+    {
+      "topic_name": "Warranty Handling",
+      "description": "Experience with warranty coverage, claims processing, and related communication."
+    },
+    {
+      "topic_name": "Vehicle Cleanliness After Service",
+      "description": "Condition and cleanliness of the vehicle when returned after service."
+    },
+    {
+      "topic_name": "Courtesy Vehicle Availability",
+      "description": "Availability and quality of replacement vehicles or mobility solutions during service."
+    },
+    {
+      "topic_name": "Service Status Updates",
+      "description": "Frequency and clarity of updates provided during the service or repair process."
+    },
+    {
+      "topic_name": "Customer Support Responsiveness",
+      "description": "Speed and accessibility of customer support for service-related questions or issues."
+    },
+    {
+      "topic_name": "Issue Recurrence",
+      "description": "Whether the same problem reappeared after the service was completed."
+    },
+    {
+      "topic_name": "Service Facility Quality",
+      "description": "Perception of the service center�s cleanliness, comfort, and overall environment."
+    },
+    {
+      "topic_name": "Staff Attitude",
+      "description": "Friendliness, respectfulness, and customer-oriented behavior of service staff."
+    },
+    {
+      "topic_name": "Post-Service Communication",
+      "description": "Quality of explanations and follow-up communication after service completion."
+    },
+    {
+      "topic_name": "Trust in Service Center",
+      "description": "Overall level of trust in the service center�s honesty, competence, and intentions."
+    },
+    {
+      "topic_name": "Loyalty and Repeat Service Intent",
+      "description": "Customer willingness to return to the same service center for future maintenance or repairs."
+    },
+    {
+      "topic_name": "Recommendation Likelihood",
+      "description": "Likelihood that the customer would recommend the service center to others."
+    },
+    {
+      "topic_name": "No Topic",
+      "description": "Feedback that does not clearly fall into any specific category"
+    },
+    {
+      "topic_name": "Other",
+      "description": "Feedback that contains any other topic"
+    }
+]

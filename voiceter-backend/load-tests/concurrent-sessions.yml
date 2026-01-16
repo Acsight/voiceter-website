@@ -1,0 +1,131 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    # Warm-up phase: 5 users over 30 seconds
+    - duration: 30
+      arrivalRate: 5
+      name: "Warm-up"
+    
+    # Ramp-up phase: Gradually increase to 50 concurrent sessions over 2 minutes
+    - duration: 120
+      arrivalRate: 1
+      rampTo: 25
+      name: "Ramp-up to 25 sessions"
+    
+    # Peak load phase: Maintain 50 concurrent sessions for 3 minutes
+    - duration: 180
+      arrivalRate: 25
+      name: "Peak load - 50 concurrent sessions"
+    
+    # Ramp-down phase: Gradually decrease load over 1 minute
+    - duration: 60
+      arrivalRate: 25
+      rampTo: 5
+      name: "Ramp-down"
+  
+  # WebSocket engine configuration
+  engines:
+    socketio:
+      transports: ["websocket"]
+  
+  # Performance thresholds
+  ensure:
+    maxErrorRate: 1  # Max 1% error rate
+    p95: 300         # P95 latency < 300ms
+    p99: 500         # P99 latency < 500ms
+
+  # Metrics and reporting
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+
+scenarios:
+  - name: "Concurrent Session Load Test"
+    engine: socketio
+    flow:
+      # Connect to WebSocket server
+      - emit:
+          channel: "connection"
+      
+      # Initialize connection and start session
+      - think: 1
+      - emit:
+          channel: "initializeConnection"
+          data:
+            questionnaireId: "demo1_csat_nps"
+            voiceId: "matthew"
+          acknowledge:
+            match:
+              json: "$.success"
+              value: true
+      
+      # Wait for session ready
+      - think: 2
+      
+      # Send prompt start
+      - emit:
+          channel: "promptStart"
+      
+      # Send system prompt
+      - think: 1
+      - emit:
+          channel: "systemPrompt"
+          data:
+            content: "You are a professional survey interviewer conducting a customer satisfaction survey."
+      
+      # Start audio streaming
+      - think: 1
+      - emit:
+          channel: "audioStart"
+      
+      # Wait for audio ready confirmation
+      - think: 2
+      
+      # Simulate audio streaming (send 10 audio chunks)
+      - loop:
+          - emit:
+              channel: "audioInput"
+              data:
+                audio: "{{ $randomString() }}"  # Simulated base64 audio
+          - think: 0.1
+        count: 10
+      
+      # Stop audio
+      - think: 1
+      - emit:
+          channel: "stopAudio"
+      
+      # Wait for processing
+      - think: 3
+      
+      # Simulate answering 3 questions
+      - loop:
+          # Send audio for response
+          - loop:
+              - emit:
+                  channel: "audioInput"
+                  data:
+                    audio: "{{ $randomString() }}"
+              - think: 0.1
+            count: 5
+          
+          # Stop audio
+          - emit:
+              channel: "stopAudio"
+          
+          # Wait for AI response and next question
+          - think: 5
+        count: 3
+      
+      # End session
+      - emit:
+          channel: "session:end"
+          data:
+            reason: "completed"
+      
+      # Wait for cleanup
+      - think: 2
+      
+      # Disconnect
+      - emit:
+          channel: "disconnect"

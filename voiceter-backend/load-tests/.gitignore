@@ -1,0 +1,12 @@
+# Artillery reports and logs
+*.json
+*.html
+*.log
+
+# Test results
+results/
+reports/
+
+# Temporary files
+*.tmp
+*.temp

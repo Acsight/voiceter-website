@@ -1,0 +1,47 @@
+{
+  "serviceName": "voiceter-backend-service",
+  "clusterName": "voiceter-backend-cluster",
+  "scalableTarget": {
+    "serviceNamespace": "ecs",
+    "resourceId": "service/voiceter-backend-cluster/voiceter-backend-service",
+    "scalableDimension": "ecs:service:DesiredCount",
+    "minCapacity": 2,
+    "maxCapacity": 10,
+    "roleARN": "arn:aws:iam::ACCOUNT_ID:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+  },
+  "scalingPolicies": [
+    {
+      "policyName": "voiceter-backend-cpu-scaling-policy",
+      "policyType": "TargetTrackingScaling",
+      "targetTrackingScalingPolicyConfiguration": {
+        "targetValue": 70.0,
+        "predefinedMetricSpecification": {
+          "predefinedMetricType": "ECSServiceAverageCPUUtilization"
+        },
+        "scaleInCooldown": 300,
+        "scaleOutCooldown": 60
+      }
+    },
+    {
+      "policyName": "voiceter-backend-memory-scaling-policy",
+      "policyType": "TargetTrackingScaling",
+      "targetTrackingScalingPolicyConfiguration": {
+        "targetValue": 80.0,
+        "predefinedMetricSpecification": {
+          "predefinedMetricType": "ECSServiceAverageMemoryUtilization"
+        },
+        "scaleInCooldown": 300,
+        "scaleOutCooldown": 60
+      }
+    }
+  ],
+  "description": "Auto-scaling configuration for Voiceter Backend ECS service",
+  "notes": [
+    "Min capacity: 2 tasks for high availability",
+    "Max capacity: 10 tasks for cost control",
+    "CPU target: 70% utilization",
+    "Memory target: 80% utilization",
+    "Scale-out cooldown: 60 seconds (fast response to load)",
+    "Scale-in cooldown: 300 seconds (5 minutes, prevent flapping)"
+  ]
+}

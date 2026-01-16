@@ -1,0 +1,162 @@
+{
+  "family": "voiceter-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/voiceter-backend-execution-role",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/voiceter-backend-task-role",
+  "containerDefinitions": [
+    {
+      "name": "voiceter-backend",
+      "image": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/voiceter-backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp",
+          "name": "http"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "PORT",
+          "value": "8080"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "BEDROCK_MODEL_ID",
+          "value": "amazon.nova-2-sonic-v1:0"
+        },
+        {
+          "name": "DYNAMODB_TABLE_PREFIX",
+          "value": "demo-"
+        },
+        {
+          "name": "DYNAMODB_SESSIONS_TABLE",
+          "value": "demo-sessions"
+        },
+        {
+          "name": "DYNAMODB_RESPONSES_TABLE",
+          "value": "demo-responses"
+        },
+        {
+          "name": "DYNAMODB_TRANSCRIPTS_TABLE",
+          "value": "demo-transcripts"
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "value": "voiceter-demo-recordings"
+        },
+        {
+          "name": "S3_AUDIO_PREFIX",
+          "value": "recordings/"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "value": "INFO"
+        },
+        {
+          "name": "ENABLE_AUTH",
+          "value": "false"
+        },
+        {
+          "name": "ENABLE_AUDIO_RECORDING",
+          "value": "false"
+        },
+        {
+          "name": "ENABLE_SENTIMENT_ANALYSIS",
+          "value": "false"
+        },
+        {
+          "name": "ENABLE_QUOTA_MANAGEMENT",
+          "value": "false"
+        },
+        {
+          "name": "MAX_MESSAGES_PER_SECOND",
+          "value": "100"
+        },
+        {
+          "name": "MAX_AUDIO_CHUNK_SIZE_MB",
+          "value": "1"
+        },
+        {
+          "name": "SESSION_TIMEOUT_MINUTES",
+          "value": "30"
+        },
+        {
+          "name": "CLEANUP_TIMEOUT_SECONDS",
+          "value": "5"
+        },
+        {
+          "name": "DISCONNECT_CLEANUP_TIMEOUT_SECONDS",
+          "value": "3"
+        },
+        {
+          "name": "CLOUDWATCH_NAMESPACE",
+          "value": "Voiceter/Backend"
+        },
+        {
+          "name": "ENABLE_XRAY_TRACING",
+          "value": "false"
+        },
+        {
+          "name": "CORS_ORIGIN",
+          "value": "*"
+        }
+      ],
+      "secrets": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/voiceter-backend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "node -e \"require('http').get('http://localhost:8080/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})\""
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      },
+      "stopTimeout": 30,
+      "ulimits": [
+        {
+          "name": "nofile",
+          "softLimit": 65536,
+          "hardLimit": 65536
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": []
+    }
+  ],
+  "volumes": [],
+  "tags": [
+    {
+      "key": "Application",
+      "value": "Voiceter"
+    },
+    {
+      "key": "Environment",
+      "value": "Production"
+    },
+    {
+      "key": "ManagedBy",
+      "value": "ECS"
+    }
+  ]
+}

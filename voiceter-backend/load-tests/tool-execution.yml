@@ -1,0 +1,150 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    # Warm-up phase
+    - duration: 30
+      arrivalRate: 5
+      name: "Warm-up"
+    
+    # High-frequency tool execution phase
+    - duration: 180
+      arrivalRate: 20
+      name: "High-frequency tool execution - 3 minutes"
+    
+    # Cool-down phase
+    - duration: 30
+      arrivalRate: 20
+      rampTo: 5
+      name: "Cool-down"
+  
+  # WebSocket engine configuration
+  engines:
+    socketio:
+      transports: ["websocket"]
+  
+  # Performance thresholds for tool execution
+  ensure:
+    maxErrorRate: 1     # Max 1% error rate
+    p95: 500            # P95 latency < 500ms for tool execution
+    p99: 1000           # P99 latency < 1000ms
+
+  # Metrics and reporting
+  plugins:
+    expect: {}
+    metrics-by-endpoint:
+      stripQueryString: true
+
+  # Variables for tool testing
+  variables:
+    questionIds:
+      - "q1_satisfaction"
+      - "q2_nps"
+      - "q3_feedback"
+      - "q4_improvement"
+      - "q5_recommendation"
+    responses:
+      - "Very satisfied"
+      - "8"
+      - "The product is excellent"
+      - "Better documentation"
+      - "Yes, definitely"
+
+scenarios:
+  - name: "High-Frequency Tool Execution Test"
+    engine: socketio
+    flow:
+      # Connect to WebSocket server
+      - emit:
+          channel: "connection"
+      
+      # Initialize connection
+      - think: 1
+      - emit:
+          channel: "initializeConnection"
+          data:
+            questionnaireId: "demo1_csat_nps"
+            voiceId: "matthew"
+          acknowledge:
+            match:
+              json: "$.success"
+              value: true
+      
+      # Wait for session ready
+      - think: 2
+      
+      # Send prompt start
+      - emit:
+          channel: "promptStart"
+      
+      # Send system prompt
+      - think: 1
+      - emit:
+          channel: "systemPrompt"
+          data:
+            content: "You are a professional survey interviewer."
+      
+      # Start audio streaming
+      - think: 1
+      - emit:
+          channel: "audioStart"
+      
+      # Wait for audio ready
+      - think: 1
+      
+      # Rapid-fire tool execution simulation
+      # Simulate 10 question-answer cycles with tool calls
+      - loop:
+          # Get demo context (tool call)
+          - think: 0.5
+          
+          # Send brief audio input
+          - loop:
+              - emit:
+                  channel: "audioInput"
+                  data:
+                    audio: "{{ $randomString(684) }}"
+              - think: 0.032
+            count: 31  # ~1 second of audio
+          
+          # Stop audio
+          - emit:
+              channel: "stopAudio"
+          
+          # Wait for tool execution (get_next_question, validate_answer, record_response)
+          - think: 2
+          
+          # Simulate AI asking question and user responding
+          - think: 1
+          
+          # Send audio response
+          - loop:
+              - emit:
+                  channel: "audioInput"
+                  data:
+                    audio: "{{ $randomString(684) }}"
+              - think: 0.032
+            count: 62  # ~2 seconds of audio
+          
+          # Stop audio
+          - emit:
+              channel: "stopAudio"
+          
+          # Wait for tool execution (record_response, get_next_question)
+          - think: 2
+        count: 10
+      
+      # Get demo context one final time
+      - think: 1
+      
+      # End session
+      - emit:
+          channel: "session:end"
+          data:
+            reason: "completed"
+      
+      # Wait for cleanup
+      - think: 2
+      
+      # Disconnect
+      - emit:
+          channel: "disconnect"

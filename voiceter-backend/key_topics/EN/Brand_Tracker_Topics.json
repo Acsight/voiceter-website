@@ -1,0 +1,98 @@
+[
+    {
+      "topic_name": "Overall Brand Perception",
+      "description": "General sentiment and impressions of the brand, including how it is perceived emotionally and functionally."
+    },
+    {
+      "topic_name": "Sustainability Credibility",
+      "description": "Perceived authenticity and trustworthiness of the brand�s sustainability claims and practices."
+    },
+    {
+      "topic_name": "Environmental Impact Awareness",
+      "description": "Customer awareness and understanding of the brand�s environmental impact and eco-friendly initiatives."
+    },
+    {
+      "topic_name": "Materials and Eco-Friendly Components",
+      "description": "Opinions on the use of recycled, bio-based, or sustainable materials in the footwear."
+    },
+    {
+      "topic_name": "Product Comfort",
+      "description": "Perceptions of comfort during wear, including cushioning, fit, and long-term use."
+    },
+    {
+      "topic_name": "Performance and Functionality",
+      "description": "Evaluation of how well the footwear performs during athletic or everyday activities."
+    },
+    {
+      "topic_name": "Durability and Build Quality",
+      "description": "Customer perceptions of product longevity, resistance to wear, and overall construction quality."
+    },
+    {
+      "topic_name": "Design and Style Appeal",
+      "description": "Reactions to the visual design, colors, and overall aesthetic of the footwear."
+    },
+    {
+      "topic_name": "Fit and Sizing Accuracy",
+      "description": "Feedback on how well sizing aligns with expectations and accommodates different foot shapes."
+    },
+    {
+      "topic_name": "Price Perception",
+      "description": "Opinions on pricing levels and whether the footwear is considered affordable or premium."
+    },
+    {
+      "topic_name": "Value for Money",
+      "description": "Assessment of whether the quality, performance, and sustainability justify the price paid."
+    },
+    {
+      "topic_name": "Comparison to Conventional Athletic Brands",
+      "description": "How the brand is compared to non-sustainable or mainstream athletic footwear brands."
+    },
+    {
+      "topic_name": "Brand Trust and Transparency",
+      "description": "Perceived openness about sourcing, manufacturing processes, and sustainability reporting."
+    },
+    {
+      "topic_name": "Ethical Manufacturing Practices",
+      "description": "Opinions on labor practices, factory conditions, and ethical standards in production."
+    },
+    {
+      "topic_name": "Innovation in Sustainability",
+      "description": "Perception of the brand�s innovation in developing new sustainable technologies or processes."
+    },
+    {
+      "topic_name": "Packaging Sustainability",
+      "description": "Feedback on eco-friendly packaging, minimal waste, and recyclability."
+    },
+    {
+      "topic_name": "Brand Differentiation",
+      "description": "Perceived uniqueness of the brand compared to other sustainable or athletic footwear brands."
+    },
+    {
+      "topic_name": "Lifestyle and Identity Fit",
+      "description": "Extent to which customers feel the brand aligns with their personal values and lifestyle."
+    },
+    {
+      "topic_name": "Usage Scenarios",
+      "description": "How customers use the footwear, such as for sports, casual wear, commuting, or outdoor activities."
+    },
+    {
+      "topic_name": "Repurchase Intent",
+      "description": "Likelihood of buying the brand again in the future."
+    },
+    {
+      "topic_name": "Recommendation Likelihood",
+      "description": "Willingness to recommend the brand to friends, family, or peers."
+    },
+    {
+      "topic_name": "Improvement Opportunities",
+      "description": "Suggestions or criticisms related to products, sustainability efforts, or brand communication."
+    },
+    {
+      "topic_name": "No Topic",
+      "description": "Feedback that does not clearly fall into any specific category"
+    },
+    {
+      "topic_name": "Other",
+      "description": "Feedback that contains any other topic"
+    }  
+]

@@ -1,0 +1,110 @@
+[
+    {
+      "topic_name": "Randevu Süreci",
+      "description": "Servis randevusu almanın kolaylığı ve rahatlığı; uygun zaman dilimlerinin ve rezervasyon kanallarının mevcudiyeti."
+    },
+    {
+      "topic_name": "Karşılama Deneyimi",
+      "description": "Araç teslimi sırasında müşteri deneyimi; karşılama, kayıt işlemi ve ilk iletişim."
+    },
+    {
+      "topic_name": "Servis Danışmanı Profesyonelliği",
+      "description": "İşlemi yürüten servis danışmanının algılanan uzmanlığı, nezaketi ve profesyonelliği."
+    },
+    {
+      "topic_name": "Arıza Teşhis Doğruluğu",
+      "description": "Araç sorunlarını belirleme ve problemlerin kök nedenini doğru teşhis etme başarısı."
+    },
+    {
+      "topic_name": "Onarım Kalitesi",
+      "description": "Araç üzerinde gerçekleştirilen onarım veya bakım işlemlerinin etkinliği ve güvenilirliği."
+    },
+    {
+      "topic_name": "İlk Seferde Çözüm Oranı",
+      "description": "Sorunun ilk ziyarette doğru şekilde çözülüp çözülmediği; tekrar servise gerek kalıp kalmadığı."
+    },
+    {
+      "topic_name": "Servis Tamamlanma Süresi",
+      "description": "Servisin tamamlanma süresi ile vaat edilen veya beklenen süre karşılaştırması."
+    },
+    {
+      "topic_name": "Zamanında Teslimat",
+      "description": "Aracın müşteriye kararlaştırılan tarih ve saatte teslim edilip edilmediği."
+    },
+    {
+      "topic_name": "Fiyat Şeffaflığı",
+      "description": "Servis öncesi ve sonrasında fiyatlandırma, tahminler ve son faturaların netliği ve şeffaflığı."
+    },
+    {
+      "topic_name": "Fiyat Adaleti",
+      "description": "Servis ve onarım maliyetlerinin makul ve haklı olup olmadığına dair müşteri algısı."
+    },
+    {
+      "topic_name": "Ek İş Onayı",
+      "description": "Ek onarım veya hizmetler için müşteriyi bilgilendirme ve onay alma süreci."
+    },
+    {
+      "topic_name": "Yedek Parça Bulunabilirliği",
+      "description": "Gerekli yedek parçaların mevcudiyeti ve bunun servis süresi ile tamamlanmasına etkisi."
+    },
+    {
+      "topic_name": "Orijinal Parça Kullanımı",
+      "description": "Servis veya onarım sırasında orijinal veya onaylı parçaların kullanıldığına dair müşteri güveni."
+    },
+    {
+      "topic_name": "Garanti İşlemleri",
+      "description": "Garanti kapsamı, talep süreçleri ve ilgili iletişim deneyimi."
+    },
+    {
+      "topic_name": "Servis Sonrası Araç Temizliği",
+      "description": "Servis sonrasında aracın iade edildiğinde durumu ve temizliği."
+    },
+    {
+      "topic_name": "İkame Araç Mevcudiyeti",
+      "description": "Servis süresince ikame araçların veya mobilite çözümlerinin mevcudiyeti ve kalitesi."
+    },
+    {
+      "topic_name": "Servis Durum Güncellemeleri",
+      "description": "Servis veya onarım sürecinde sağlanan güncellemelerin sıklığı ve netliği."
+    },
+    {
+      "topic_name": "Müşteri Destek Yanıt Hızı",
+      "description": "Servis ile ilgili sorular veya sorunlar için müşteri desteğinin hızı ve erişilebilirliği."
+    },
+    {
+      "topic_name": "Sorun Tekrarı",
+      "description": "Servis tamamlandıktan sonra aynı sorunun tekrar ortaya çıkıp çıkmadığı."
+    },
+    {
+      "topic_name": "Servis Tesisi Kalitesi",
+      "description": "Servis merkezinin temizliği, konforu ve genel ortamına ilişkin algı."
+    },
+    {
+      "topic_name": "Personel Tutumu",
+      "description": "Servis personelinin güler yüzlülüğü, saygılılığı ve müşteri odaklı davranışı."
+    },
+    {
+      "topic_name": "Servis Sonrası İletişim",
+      "description": "Servis tamamlandıktan sonraki açıklamaların ve takip iletişiminin kalitesi."
+    },
+    {
+      "topic_name": "Servis Merkezine Güven",
+      "description": "Servis merkezinin dürüstlüğüne, yetkinliğine ve niyetlerine duyulan genel güven düzeyi."
+    },
+    {
+      "topic_name": "Sadakat ve Tekrar Servis Niyeti",
+      "description": "Müşterinin gelecekteki bakım veya onarımlar için aynı servis merkezine dönme isteği."
+    },
+    {
+      "topic_name": "Tavsiye Olasılığı",
+      "description": "Müşterinin servis merkezini başkalarına tavsiye etme olasılığı."
+    },
+    {
+      "topic_name": "Konu Yok",
+      "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+    },
+    {
+      "topic_name": "Diğer",
+      "description": "Başka herhangi bir konu içeren geri bildirimler."
+    }
+]

@@ -1,0 +1,98 @@
+[
+    {
+      "topic_name": "Genel Marka Algısı",
+      "description": "Marka hakkındaki genel duygu ve izlenimler; duygusal ve işlevsel olarak nasıl algılandığı."
+    },
+    {
+      "topic_name": "Sürdürülebilirlik Güvenilirliği",
+      "description": "Markanın sürdürülebilirlik iddialarının ve uygulamalarının algılanan özgünlüğü ve güvenilirliği."
+    },
+    {
+      "topic_name": "Çevresel Etki Farkındalığı",
+      "description": "Müşterinin markanın çevresel etkisi ve çevre dostu girişimleri hakkındaki farkındalığı ve anlayışı."
+    },
+    {
+      "topic_name": "Malzemeler ve Çevre Dostu Bileşenler",
+      "description": "Ayakkabıda geri dönüştürülmüş, biyo-bazlı veya sürdürülebilir malzeme kullanımına ilişkin görüşler."
+    },
+    {
+      "topic_name": "Ürün Konforu",
+      "description": "Kullanım sırasında konfor algısı; yastıklama, kalıp ve uzun süreli kullanım."
+    },
+    {
+      "topic_name": "Performans ve İşlevsellik",
+      "description": "Ayakkabının atletik veya günlük aktiviteler sırasında ne kadar iyi performans gösterdiğinin değerlendirmesi."
+    },
+    {
+      "topic_name": "Dayanıklılık ve Yapım Kalitesi",
+      "description": "Ürün ömrü, aşınmaya dayanıklılık ve genel yapım kalitesine ilişkin müşteri algıları."
+    },
+    {
+      "topic_name": "Tasarım ve Stil Çekiciliği",
+      "description": "Ayakkabının görsel tasarımı, renkleri ve genel estetiğine verilen tepkiler."
+    },
+    {
+      "topic_name": "Kalıp ve Numara Doğruluğu",
+      "description": "Numaralandırmanın beklentilerle ne kadar uyuştuğu ve farklı ayak şekillerine uyumu hakkında geri bildirimler."
+    },
+    {
+      "topic_name": "Fiyat Algısı",
+      "description": "Fiyat seviyeleri ve ayakkabının ekonomik mi yoksa premium mi olarak değerlendirildiğine dair görüşler."
+    },
+    {
+      "topic_name": "Paranın Karşılığı",
+      "description": "Kalite, performans ve sürdürülebilirliğin ödenen fiyatı haklı çıkarıp çıkarmadığının değerlendirmesi."
+    },
+    {
+      "topic_name": "Geleneksel Atletik Markalarla Karşılaştırma",
+      "description": "Markanın sürdürülebilir olmayan veya ana akım atletik ayakkabı markalarıyla nasıl karşılaştırıldığı."
+    },
+    {
+      "topic_name": "Marka Güveni ve Şeffaflık",
+      "description": "Tedarik, üretim süreçleri ve sürdürülebilirlik raporlaması konusundaki algılanan açıklık."
+    },
+    {
+      "topic_name": "Etik Üretim Uygulamaları",
+      "description": "Üretimdeki işçilik uygulamaları, fabrika koşulları ve etik standartlara ilişkin görüşler."
+    },
+    {
+      "topic_name": "Sürdürülebilirlikte Yenilikçilik",
+      "description": "Markanın yeni sürdürülebilir teknolojiler veya süreçler geliştirme konusundaki yenilikçilik algısı."
+    },
+    {
+      "topic_name": "Ambalaj Sürdürülebilirliği",
+      "description": "Çevre dostu ambalaj, minimum atık ve geri dönüştürülebilirlik hakkında geri bildirimler."
+    },
+    {
+      "topic_name": "Marka Farklılaşması",
+      "description": "Markanın diğer sürdürülebilir veya atletik ayakkabı markalarına kıyasla algılanan benzersizliği."
+    },
+    {
+      "topic_name": "Yaşam Tarzı ve Kimlik Uyumu",
+      "description": "Müşterilerin markanın kişisel değerleri ve yaşam tarzlarıyla ne ölçüde uyumlu olduğunu hissetmesi."
+    },
+    {
+      "topic_name": "Kullanım Senaryoları",
+      "description": "Müşterilerin ayakkabıyı nasıl kullandığı; spor, günlük giyim, ulaşım veya açık hava aktiviteleri gibi."
+    },
+    {
+      "topic_name": "Yeniden Satın Alma Niyeti",
+      "description": "Gelecekte markayı tekrar satın alma olasılığı."
+    },
+    {
+      "topic_name": "Tavsiye Olasılığı",
+      "description": "Markayı arkadaşlara, aileye veya çevreye tavsiye etme isteği."
+    },
+    {
+      "topic_name": "İyileştirme Fırsatları",
+      "description": "Ürünler, sürdürülebilirlik çabaları veya marka iletişimi ile ilgili öneriler veya eleştiriler."
+    },
+    {
+      "topic_name": "Konu Yok",
+      "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+    },
+    {
+      "topic_name": "Diğer",
+      "description": "Başka herhangi bir konu içeren geri bildirimler."
+    }
+]

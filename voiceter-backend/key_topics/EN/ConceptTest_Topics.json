@@ -1,0 +1,110 @@
+[
+    {
+      "topic_name": "Overall Concept Appeal",
+      "description": "General attractiveness and interest level of the SecureView 360 Camera concept as perceived by respondents."
+    },
+    {
+      "topic_name": "Perceived Value Proposition",
+      "description": "Clarity and strength of the benefits offered by the concept compared to perceived effort or cost."
+    },
+    {
+      "topic_name": "Feature Attractiveness",
+      "description": "Customer reactions to the specific features included in the concept, such as 360-degree coverage, AI detection, and night vision."
+    },
+    {
+      "topic_name": "360-Degree Coverage Benefit",
+      "description": "Perceived usefulness and differentiation of full pan-and-tilt coverage versus fixed-angle cameras."
+    },
+    {
+      "topic_name": "Video Quality Perception",
+      "description": "Customer expectations and opinions regarding the 2K HD video quality."
+    },
+    {
+      "topic_name": "AI Detection Usefulness",
+      "description": "Perceived usefulness of AI-powered person, pet, and vehicle detection in real-life scenarios."
+    },
+    {
+      "topic_name": "False Alert Concerns",
+      "description": "Concerns about receiving unnecessary or inaccurate motion alerts."
+    },
+    {
+      "topic_name": "Alert Timeliness",
+      "description": "Expectations regarding how fast and reliable instant motion alerts would be."
+    },
+    {
+      "topic_name": "Privacy and Data Security",
+      "description": "Concerns or confidence related to data privacy, local storage, and handling of recorded footage."
+    },
+    {
+      "topic_name": "No Subscription Appeal",
+      "description": "Customer perception of the one-time purchase model and the absence of mandatory monthly fees."
+    },
+    {
+      "topic_name": "Cloud Storage Offering",
+      "description": "Reactions to the inclusion of free 7-day cloud storage and whether it is seen as sufficient."
+    },
+    {
+      "topic_name": "Local Storage Preference",
+      "description": "Interest in having local storage as an alternative or complement to cloud storage."
+    },
+    {
+      "topic_name": "Ease of Installation",
+      "description": "Perceived simplicity and convenience of the installation process and mounting options."
+    },
+    {
+      "topic_name": "Indoor and Outdoor Usability",
+      "description": "Perceived suitability of the camera for both indoor and outdoor use due to weather resistance."
+    },
+    {
+      "topic_name": "Design and Form Factor",
+      "description": "Reactions to the physical design, size, and visual appeal of the camera."
+    },
+    {
+      "topic_name": "Smart Home Compatibility",
+      "description": "Perceived value of compatibility with Alexa and Google Home ecosystems."
+    },
+    {
+      "topic_name": "Two-Way Audio Use Cases",
+      "description": "Customer expectations around using two-way audio for communication, deterrence, or monitoring."
+    },
+    {
+      "topic_name": "Customization and Control",
+      "description": "Interest in customizable activity zones, settings, and user control over alerts and monitoring."
+    },
+    {
+      "topic_name": "Reliability Expectations",
+      "description": "Perceived reliability of the camera in terms of connectivity, uptime, and consistent performance."
+    },
+    {
+      "topic_name": "Competitive Comparison",
+      "description": "How respondents compare the concept to existing security camera solutions they know or use."
+    },
+    {
+      "topic_name": "Use Case Fit",
+      "description": "Perceived relevance of the concept for personal needs such as home security, pet monitoring, or outdoor surveillance."
+    },
+    {
+      "topic_name": "Purchase Intent",
+      "description": "Likelihood of purchasing the SecureView 360 Camera based on the concept description."
+    },
+    {
+      "topic_name": "Price Sensitivity",
+      "description": "Reactions to the implied pricing model and perceived acceptable price range."
+    },
+    {
+      "topic_name": "Trust and Brand Credibility",
+      "description": "Level of trust respondents feel toward the product concept and the company behind it."
+    },
+    {
+      "topic_name": "Improvement Suggestions",
+      "description": "Ideas, feature requests, or changes suggested by respondents to improve the concept."
+    },
+    {
+      "topic_name": "No Topic",
+      "description": "Feedback that does not clearly fall into any specific category"
+    },
+    {
+      "topic_name": "Other",
+      "description": "Feedback that contains any other topic"
+    }
+]

@@ -1,0 +1,27 @@
+{
+  "name": "voiceter-backend-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for Voiceter Backend",
+  "main": "bin/app.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy": "cdk deploy --all",
+    "deploy:script": "bash scripts/deploy.sh",
+    "deploy:script:ps": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
+    "destroy": "cdk destroy --all",
+    "destroy:script": "bash scripts/destroy.sh",
+    "synth": "cdk synth",
+    "diff": "cdk diff"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "aws-cdk": "^2.100.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.100.0",
+    "constructs": "^10.0.0"
+  }
+}

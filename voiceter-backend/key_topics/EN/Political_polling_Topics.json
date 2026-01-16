@@ -1,0 +1,106 @@
+[
+    {
+      "topic_name": "Overall Political Mood",
+      "description": "General emotional tone and sentiment toward the political environment and direction of the country."
+    },
+    {
+      "topic_name": "Government Performance Evaluation",
+      "description": "Perceptions of how effectively the current government is performing its duties."
+    },
+    {
+      "topic_name": "Economic Conditions",
+      "description": "Opinions about inflation, cost of living, employment, wages, and overall economic stability."
+    },
+    {
+      "topic_name": "Personal Financial Impact",
+      "description": "How government policies are perceived to affect respondents' personal or household finances."
+    },
+    {
+      "topic_name": "Healthcare Policy",
+      "description": "Views on access, affordability, and quality of healthcare and related government actions."
+    },
+    {
+      "topic_name": "Education Policy",
+      "description": "Opinions on public education quality, funding, higher education, and student-related policies."
+    },
+    {
+      "topic_name": "Public Safety and Crime",
+      "description": "Concerns or satisfaction related to crime rates, policing, and community safety."
+    },
+    {
+      "topic_name": "Immigration Policy",
+      "description": "Attitudes toward immigration levels, border control, and integration policies."
+    },
+    {
+      "topic_name": "Foreign Policy and National Security",
+      "description": "Perceptions of the country's global role, diplomacy, defense, and international conflicts."
+    },
+    {
+      "topic_name": "Social Issues and Values",
+      "description": "Views on social and cultural issues influencing political preferences and voting behavior."
+    },
+    {
+      "topic_name": "Environmental and Climate Policy",
+      "description": "Opinions on climate change, environmental protection, and sustainability initiatives."
+    },
+    {
+      "topic_name": "Trust in Political Institutions",
+      "description": "Level of trust or skepticism toward institutions such as parliament, courts, and regulatory bodies."
+    },
+    {
+      "topic_name": "Trust in Politicians",
+      "description": "Perceptions of honesty, integrity, and credibility of political leaders and candidates."
+    },
+    {
+      "topic_name": "Political Polarization",
+      "description": "Perceived division between political parties, ideologies, or social groups."
+    },
+    {
+      "topic_name": "Party Preference Drivers",
+      "description": "Key reasons influencing support or opposition toward specific political parties."
+    },
+    {
+      "topic_name": "Candidate Leadership Qualities",
+      "description": "Expectations and evaluations of leadership traits such as competence, empathy, and decisiveness."
+    },
+    {
+      "topic_name": "Policy Priorities",
+      "description": "Issues respondents believe should be prioritized by elected officials after the midterm elections."
+    },
+    {
+      "topic_name": "Media Influence",
+      "description": "Perceived role of traditional and social media in shaping political opinions and narratives."
+    },
+    {
+      "topic_name": "Misinformation and Fact Trust",
+      "description": "Concerns about misinformation, fake news, and the reliability of political information."
+    },
+    {
+      "topic_name": "Voter Motivation",
+      "description": "Factors that motivate or discourage respondents from participating in the midterm elections."
+    },
+    {
+      "topic_name": "Voting Intent Stability",
+      "description": "Indications of whether respondents' voting preferences are firm or subject to change."
+    },
+    {
+      "topic_name": "Protest and Dissatisfaction Signals",
+      "description": "Expressions of anger, frustration, or protest-oriented attitudes toward the political system."
+    },
+    {
+      "topic_name": "Democratic Process Confidence",
+      "description": "Confidence in the fairness, transparency, and legitimacy of the electoral process."
+    },
+    {
+      "topic_name": "Expectations from the Midterm Results",
+      "description": "Hopes or concerns about how the 2026 midterm election outcomes may impact governance."
+    },
+    {
+      "topic_name": "No Topic",
+      "description": "Feedback that does not clearly fall into any specific category"
+    },
+    {
+      "topic_name": "Other",
+      "description": "Feedback that contains any other topic"
+    }
+]

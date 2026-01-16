@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background Colors - Updated to Deep Blue */
+    --color-background: #152C5B;
+    --color-foreground: #F8FAFC;
+    
+    /* Surface Colors - Updated with Deep Blue tones */
+    --color-card: #1A3A6B;
+    --color-card-foreground: #F8FAFC;
+    --color-popover: #1A3A6B;
+    --color-popover-foreground: #F8FAFC;
+    
+    /* Muted Colors - Updated with Deep Blue tones */
+    --color-muted: #1F4578;
+    --color-muted-foreground: #CBD5E1;
+    
+    /* Border & Input - Updated with Deep Blue tones */
+    --color-border: #2A5085;
+    --color-input: #2A5085;
+    --color-ring: #7C3AED;
+    
+    /* Primary Brand Colors - Electric Violet */
+    --color-primary: #7C3AED;
+    --color-primary-foreground: #FFFFFF;
+    
+    /* Secondary Colors - Aqua */
+    --color-secondary: #2DD4BF;
+    --color-secondary-foreground: #FFFFFF;
+    
+    /* Accent Colors - Keep Aqua as accent */
+    --color-accent: #2DD4BF;
+    --color-accent-foreground: #152C5B;
+    
+    /* Semantic Colors */
+    --color-success: #2DD4BF;
+    --color-success-foreground: #FFFFFF;
+    
+    --color-warning: #F59E0B;
+    --color-warning-foreground: #152C5B;
+    
+    --color-error: #EF4444;
+    --color-error-foreground: #FFFFFF;
+    
+    --color-destructive: #EF4444;
+    --color-destructive-foreground: #FFFFFF;
+    
+    /* Additional UI Colors */
+    --color-text-secondary: #CBD5E1;
+    --color-surface: #1A3A6B;
+    
+    /* Gradient Colors - Updated with brand colors */
+    --gradient-primary: linear-gradient(135deg, #7C3AED 0%, #2DD4BF 100%);
+    --gradient-cta: linear-gradient(135deg, #7C3AED 0%, #2DD4BF 100%);
+    
+    /* Shadow Colors - Updated with Electric Violet */
+    --shadow-primary: rgba(124, 58, 237, 0.25);
+    --shadow-card: rgba(0, 0, 0, 0.3);
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+
+    /* Spacing */
+    --nav-height: 80px;
+    --nav-padding-x: 2rem;
+    --nav-item-spacing: 2rem;
+    --mobile-padding: 1.5rem;
+
+    /* Z-Index */
+    --z-navigation: 1000;
+    --z-demo-overlay: 1100;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-cta {
+    background: var(--gradient-cta);
+  }
+  
+  .shadow-primary {
+    box-shadow: 0 4px 14px 0 var(--shadow-primary);
+  }
+  
+  .shadow-card {
+    box-shadow: 0 8px 25px -5px var(--shadow-card);
+  }
+  
+  .transition-smooth {
+    transition: all 250ms ease-out;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Custom Spacing */
+  .h-nav-height {
+    height: var(--nav-height);
+  }
+
+  .px-nav-padding-x {
+    padding-left: var(--nav-padding-x);
+    padding-right: var(--nav-padding-x);
+  }
+
+  .px-mobile-padding {
+    padding-left: var(--mobile-padding);
+    padding-right: var(--mobile-padding);
+  }
+
+  .space-x-nav-item-spacing > * + * {
+    margin-left: var(--nav-item-spacing);
+  }
+
+  /* Custom Z-Index */
+  .z-navigation {
+    z-index: var(--z-navigation);
+  }
+
+  .z-demo-overlay {
+    z-index: var(--z-demo-overlay);
+  }
+
+  /* Text Sizes */
+  .text-nav {
+    font-size: 0.9375rem;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

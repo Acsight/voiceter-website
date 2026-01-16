@@ -1,0 +1,106 @@
+[
+    {
+      "topic_name": "Genel Siyasi Atmosfer",
+      "description": "Siyasi ortama ve ülkenin gidişatına yönelik genel duygusal ton ve duyarlılık."
+    },
+    {
+      "topic_name": "Hükümet Performans Değerlendirmesi",
+      "description": "Mevcut hükümetin görevlerini ne kadar etkili yerine getirdiğine dair algılar."
+    },
+    {
+      "topic_name": "Ekonomik Koşullar",
+      "description": "Enflasyon, yaşam maliyeti, istihdam, ücretler ve genel ekonomik istikrar hakkındaki görüşler."
+    },
+    {
+      "topic_name": "Kişisel Mali Etki",
+      "description": "Hükümet politikalarının katılımcıların kişisel veya hane halkı mali durumunu nasıl etkilediğine dair algı."
+    },
+    {
+      "topic_name": "Sağlık Politikası",
+      "description": "Sağlık hizmetlerine erişim, karşılanabilirlik, kalite ve ilgili hükümet eylemlerine ilişkin görüşler."
+    },
+    {
+      "topic_name": "Eğitim Politikası",
+      "description": "Kamu eğitimi kalitesi, finansman, yükseköğretim ve öğrenciyle ilgili politikalar hakkındaki görüşler."
+    },
+    {
+      "topic_name": "Kamu Güvenliği ve Suç",
+      "description": "Suç oranları, polis uygulamaları ve toplum güvenliğiyle ilgili endişeler veya memnuniyet."
+    },
+    {
+      "topic_name": "Göç Politikası",
+      "description": "Göç seviyeleri, sınır kontrolü ve entegrasyon politikalarına yönelik tutumlar."
+    },
+    {
+      "topic_name": "Dış Politika ve Ulusal Güvenlik",
+      "description": "Ülkenin küresel rolü, diplomasi, savunma ve uluslararası çatışmalara ilişkin algılar."
+    },
+    {
+      "topic_name": "Sosyal Konular ve Değerler",
+      "description": "Siyasi tercihleri ve oy verme davranışını etkileyen sosyal ve kültürel konulara ilişkin görüşler."
+    },
+    {
+      "topic_name": "Çevre ve İklim Politikası",
+      "description": "İklim değişikliği, çevre koruma ve sürdürülebilirlik girişimleri hakkındaki görüşler."
+    },
+    {
+      "topic_name": "Siyasi Kurumlara Güven",
+      "description": "Meclis, mahkemeler ve düzenleyici kurumlar gibi kurumlara duyulan güven veya şüphecilik düzeyi."
+    },
+    {
+      "topic_name": "Politikacılara Güven",
+      "description": "Siyasi liderlerin ve adayların dürüstlük, bütünlük ve güvenilirliğine dair algılar."
+    },
+    {
+      "topic_name": "Siyasi Kutuplaşma",
+      "description": "Siyasi partiler, ideolojiler veya sosyal gruplar arasındaki algılanan bölünme."
+    },
+    {
+      "topic_name": "Parti Tercih Faktörleri",
+      "description": "Belirli siyasi partilere destek veya muhalefeti etkileyen temel nedenler."
+    },
+    {
+      "topic_name": "Aday Liderlik Özellikleri",
+      "description": "Yetkinlik, empati ve kararlılık gibi liderlik özelliklerine ilişkin beklentiler ve değerlendirmeler."
+    },
+    {
+      "topic_name": "Politika Öncelikleri",
+      "description": "Katılımcıların ara seçimlerden sonra seçilmiş yetkililerce önceliklendirilmesi gerektiğine inandığı konular."
+    },
+    {
+      "topic_name": "Medya Etkisi",
+      "description": "Geleneksel ve sosyal medyanın siyasi görüşleri ve anlatıları şekillendirmedeki algılanan rolü."
+    },
+    {
+      "topic_name": "Dezenformasyon ve Gerçek Güveni",
+      "description": "Dezenformasyon, sahte haberler ve siyasi bilgilerin güvenilirliği konusundaki endişeler."
+    },
+    {
+      "topic_name": "Seçmen Motivasyonu",
+      "description": "Katılımcıları ara seçimlere katılmaya teşvik eden veya caydıran faktörler."
+    },
+    {
+      "topic_name": "Oy Verme Niyeti Kararlılığı",
+      "description": "Katılımcıların oy verme tercihlerinin kesin mi yoksa değişime açık mı olduğuna dair göstergeler."
+    },
+    {
+      "topic_name": "Protesto ve Memnuniyetsizlik Sinyalleri",
+      "description": "Siyasi sisteme yönelik öfke, hayal kırıklığı veya protesto odaklı tutumların ifadeleri."
+    },
+    {
+      "topic_name": "Demokratik Süreç Güveni",
+      "description": "Seçim sürecinin adilliği, şeffaflığı ve meşruiyetine duyulan güven."
+    },
+    {
+      "topic_name": "Ara Seçim Sonuçlarından Beklentiler",
+      "description": "2026 ara seçim sonuçlarının yönetimi nasıl etkileyebileceğine dair umutlar veya endişeler."
+    },
+    {
+      "topic_name": "Konu Yok",
+      "description": "Belirli bir kategoriye açıkça girmeyen geri bildirimler."
+    },
+    {
+      "topic_name": "Diğer",
+      "description": "Başka herhangi bir konu içeren geri bildirimler."
+    }
+]

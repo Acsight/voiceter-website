@@ -1,0 +1,122 @@
+[
+ {
+  "topic_name": "Staff / Friendliness",
+  "description": "Courtesy, respect and approachable attitude of store staff."
+ },
+ {
+  "topic_name": "Staff / Product Knowledge",
+  "description": "Ability to explain features, compare models and give clear recommendations."
+ },
+ {
+  "topic_name": "Staff / Availability",
+  "description": "Ease of finding staff and getting timely attention during busy hours."
+ },
+ {
+  "topic_name": "Staff / Problem Resolution",
+  "description": "Effectiveness in handling complaints, exceptions and special requests."
+ },
+ {
+  "topic_name": "Product / Availability",
+  "description": "Presence of desired models, colors and quantities on shelves."
+ },
+ {
+  "topic_name": "Product / Condition & Authenticity",
+  "description": "New, sealed, original products in expected condition (no open-box unless stated)."
+ },
+ {
+  "topic_name": "Product / Demo & Hands‑on",
+  "description": "Access to working demo units and hands-on testing before purchase."
+ },
+ {
+  "topic_name": "Product / Variety",
+  "description": "Range and diversity of electronic products offered"
+ },
+ {
+  "topic_name": "Price / Label Consistency",
+  "description": "Shelf price vs checkout price consistency"
+ },
+ {
+  "topic_name": "Price / Pricing & Promotions",
+  "description": "Price and value, variety and clarity of campaigns and bundles."
+ },
+ {
+  "topic_name": "Price / Comparison",
+  "description": "Price comparison with competitor companies."
+ },
+ {
+  "topic_name": "Checkout / Speed & Efficiency",
+  "description": "Waiting times and efficiency at checkout and service desks."
+ },
+ {
+  "topic_name": "Checkout / Payment Options",
+  "description": "Card, cash, mobile and alternative payments and split/tied installment availability."
+ },
+ {
+  "topic_name": "Billing / Invoice Accuracy",
+  "description": "Correct itemization, IMEI/serial capture and e-invoice/e-archive issuance."
+ },
+ {
+  "topic_name": "Address Delivery",
+  "description": "Delivery of products to customer address bought from the store."
+ },
+ {
+  "topic_name": "Packaging & Wrapping",
+  "description": "Packaging, wrapping and providing appropriate conditions for transportation of products."
+ },
+ {
+  "topic_name": "Return and Exchange Policy",
+  "description": "Return/exchange process, timeframes, conditions and required documents."
+ },
+ {
+  "topic_name": "Aftersales / Warranty Terms",
+  "description": "Coverage, duration and claim steps for manufacturer warranties."
+ },
+ {
+  "topic_name": "Aftersales / Insurance",
+  "description": "Ease of arranging brand-authorized installation for white goods, TVs and audio, air conditioners and smart devices at the store: appointment availability, fees or free campaign offers"
+ },
+ {
+  "topic_name": "Aftersales / Installation",
+  "description": "Clarity and value of device insurance offered in-store,  what is covered and excluded, ease of enrollment at checkout,"
+ },
+ {
+  "topic_name": "Aftersales / Extended Warranty",
+  "description": "Value, exclusions and pricing of extended protection plans."
+ },
+ {
+  "topic_name": "Trade‑in & Device Appraisal",
+  "description": "Clarity and fairness of device trade‑in evaluation and process."
+ },
+ {
+  "topic_name": "Gift Card",
+  "description": "Ease of buying and redeeming gift cards or vouchers at checkout."
+ },
+ {
+  "topic_name": "Sustainability Practices",
+  "description": "Options to return old electronics or appliances for recycling."
+ },
+ {
+  "topic_name": "Store / Cleanliness & Ambience",
+  "description": "Cleanliness, lighting, temperature and overall shopping comfort."
+ },
+ {
+  "topic_name": "Store / Signage & Navigation",
+  "description": "Clarity of category signage, pricing labels and campaign areas."
+ },
+ {
+  "topic_name": "Management Responsiveness",
+  "description": "Manager availability and effectiveness when issues are escalated."
+ },
+ {
+  "topic_name": "Overall Satisfaction",
+  "description": "Overall satisfaction with the in‑store buying experience."
+ },
+ {
+  "topic_name": "No Topic",
+  "description": "Feedback that does not clearly fall into any specific category"
+ },
+ {
+  "topic_name": "Other",
+  "description": "Feedback that contains any other topic"
+ }
+]

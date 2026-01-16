@@ -1,0 +1,244 @@
+# Implementation Plan: Direct WebSocket to Bedrock
+
+## Overview
+
+This implementation plan transforms the Voiceter backend from a proxy architecture (backend relays WebSocket to Bedrock) to a direct architecture (browser connects directly to Bedrock). The backend continues to handle tool execution, session management, and data persistence.
+
+## Tasks
+
+- [x] 1. Implement Pre-Signed URL Generation
+  - [x] 1.1 Create pre-signed URL generator module
+    - Create `voiceter-backend/src/bedrock/presigned-url.ts`
+    - Implement AWS SigV4 signing for WebSocket URLs
+    - Support configurable expiration time (default 5 minutes)
+    - Target endpoint: `wss://bedrock-runtime.{region}.amazonaws.com/model/amazon.nova-2-sonic-v1%3A0/invoke-with-bidirectional-stream-websocket`
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [x] 1.2 Write property test for pre-signed URL SigV4 parameters
+    - **Property 1: Pre-signed URL contains valid SigV4 parameters**
+    - **Validates: Requirements 1.2, 1.3, 1.4, 1.6**
+
+- [x] 2. Create REST API Endpoints for Direct Mode
+  - [x] 2.1 Create session start endpoint
+    - Create `voiceter-backend/src/server/routes/session.ts`
+    - Implement POST /api/session/start
+    - Return pre-signed URL, session ID, system prompt, tools, questionnaire config
+    - _Requirements: 1.1, 11.1, 11.5_
+  - [x] 2.2 Create tool execution endpoint
+    - Implement POST /api/tool/execute
+    - Accept tool name, parameters, session ID, tool use ID
+    - Execute tool via existing ToolExecutor
+    - Return result in format suitable for Bedrock toolResult event
+    - _Requirements: 6.2, 6.3_
+  - [x] 2.3 Create transcript endpoint
+    - Implement POST /api/transcript
+    - Accept session ID, role, content, timestamp
+    - Persist to DynamoDB via TranscriptRepository
+    - Apply guardrails checking
+    - _Requirements: 8.3, 8.4, 8.6_
+  - [x] 2.4 Create audio chunk endpoint
+    - Implement POST /api/audio/chunk
+    - Accept session ID, source (user/assistant), audio data
+    - Buffer audio via RecordingRepository
+    - _Requirements: 10.1, 10.2, 10.3_
+  - [x] 2.5 Create session end endpoint
+    - Implement POST /api/session/end
+    - Finalize audio recording (upload to S3)
+    - Clean up session state
+    - Return session summary
+    - _Requirements: 7.7, 10.4, 10.5_
+  - [x] 2.6 Write property test for session configuration completeness
+    - **Property 11: Session configuration completeness**
+    - **Validates: Requirements 11.1, 11.3, 11.5**
+
+- [x] 3. Update Session Manager for Direct Mode
+  - [x] 3.1 Refactor session manager to support both modes
+    - Update `voiceter-backend/src/session/manager.ts`
+    - Add connection mode flag to session state
+    - Remove Bedrock stream management for direct mode
+    - Keep session state management (responses, questions, history)
+    - _Requirements: 7.1, 12.1, 12.2, 12.3_
+  - [x] 3.2 Update session creation for direct mode
+    - Generate pre-signed URL when direct mode enabled
+    - Return system prompt and tools in session info
+    - _Requirements: 4.7, 11.2_
+  - [x] 3.3 Write property test for session lifecycle
+    - **Property 6: Session state lifecycle**
+    - **Validates: Requirements 7.1, 7.7**
+
+- [x] 4. Checkpoint - Backend API Complete
+  - Ensure all API endpoints are working
+  - Run existing unit tests
+  - Ask the user if questions arise
+
+- [x] 5. Implement Frontend Event Stream Codec
+  - [x] 5.1 Create Event Stream encoder/decoder
+    - Create `voiceter-frontend/src/services/bedrock/EventStreamCodec.ts`
+    - Implement AWS Event Stream binary format encoding
+    - Implement AWS Event Stream binary format decoding
+    - Handle headers: event-type, message-type, content-type
+    - Handle payload wrapper format: `{"bytes": "base64-encoded-json"}`
+    - _Requirements: 3.1, 3.2, 3.3, 3.4_
+  - [x] 5.2 Write property test for Event Stream round-trip
+    - **Property 2: Event Stream encoding round-trip**
+    - **Validates: Requirements 3.1, 3.2, 3.3, 3.4**
+
+- [x] 6. Implement Frontend Bedrock WebSocket Client
+  - [x] 6.1 Create Bedrock WebSocket client
+    - Create `voiceter-frontend/src/services/bedrock/BedrockWebSocketClient.ts`
+    - Implement WebSocket connection with pre-signed URL
+    - Send binary messages (opcode 2)
+    - Receive and decode binary messages
+    - Handle connection errors and reconnection
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
+  - [x] 6.2 Implement session initialization sequence
+    - Send sessionStart event with inference config
+    - Send promptStart event with audio config and tools
+    - Send contentStart (SYSTEM), textInput (system prompt), contentEnd
+    - Send contentStart (AUDIO) for user input
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6_
+  - [x] 6.3 Implement audio streaming
+    - Send audioInput events with base64 PCM (24kHz, 16-bit, mono)
+    - Send chunks of ~32ms (768 samples, 1536 bytes)
+    - Stream immediately without buffering
+    - _Requirements: 5.1, 5.2, 5.3, 5.4_
+  - [x] 6.4 Write property test for audio chunk format
+    - **Property 4: Audio chunk format compliance**
+    - **Validates: Requirements 5.2, 5.3**
+
+- [x] 7. Implement Frontend Backend Event Service
+  - [x] 7.1 Create backend event service
+    - Create `voiceter-frontend/src/services/bedrock/BackendEventService.ts`
+    - Implement startSession() - calls POST /api/session/start
+    - Implement executeTool() - calls POST /api/tool/execute
+    - Implement sendTranscript() - calls POST /api/transcript
+    - Implement sendAudioChunk() - calls POST /api/audio/chunk
+    - Implement endSession() - calls POST /api/session/end
+    - _Requirements: 6.1, 8.1, 8.2, 10.1, 10.2_
+  - [x] 7.2 Implement tool use coordination
+    - Handle toolUse events from Bedrock
+    - Forward to backend for execution
+    - Send toolResult back to Bedrock (contentStart, toolResult, contentEnd)
+    - Handle tool execution errors
+    - _Requirements: 6.1, 6.4, 6.5, 6.6_
+
+- [x] 8. Integrate Direct Mode into Voice Demo Interface
+  - [x] 8.1 Update VoiceDemoInterface component
+    - Update `voiceter-frontend/src/components/demo/VoiceDemoInterface.tsx`
+    - Detect connection mode from backend response
+    - Use BedrockWebSocketClient for direct mode
+    - Use existing WebSocketService for proxy mode
+    - _Requirements: 12.5_
+  - [x] 8.2 Update audio capture integration
+    - Connect AudioCaptureService to BedrockWebSocketClient
+    - Forward audio chunks directly to Bedrock
+    - Forward audio chunks to backend for recording
+    - _Requirements: 5.1, 10.1_
+  - [x] 8.3 Update audio playback integration
+    - Receive audioOutput events from Bedrock
+    - Play audio via AudioPlaybackService
+    - Forward audio to backend for recording
+    - _Requirements: 5.5, 10.2_
+  - [x] 8.4 Update transcription handling
+    - Receive textOutput events from Bedrock
+    - Display transcriptions in UI
+    - Forward to backend for persistence
+    - _Requirements: 8.1, 8.2, 8.5_
+
+- [x] 9. Checkpoint - Frontend Integration Complete ✓
+  - [x] Ensure direct mode connects to Bedrock
+  - [x] Ensure audio streaming works
+  - [x] Ensure tool execution works
+  - [x] Ask the user if questions arise
+
+- [x] 10. Implement Error Handling and Recovery
+  - [x] 10.1 Implement connection error handling
+    - Handle pre-signed URL expiration
+    - Implement reconnection with new URL (max 3 attempts)
+    - Handle WebSocket disconnection
+    - _Requirements: 9.1, 9.2_
+  - [x] 10.2 Implement Bedrock error handling
+    - Handle modelStreamErrorException
+    - Handle internalServerException
+    - Forward errors to backend for logging
+    - Display user-friendly error messages
+    - _Requirements: 9.3, 9.4, 9.6_
+  - [x] 10.3 Write property test for error logging completeness
+    - **Property 9: Error logging completeness**
+    - **Validates: Requirements 9.5, 9.6**
+
+- [x] 11. Add Configuration for Mode Switching
+  - [x] 11.1 Add environment configuration
+    - Add BEDROCK_CONNECTION_MODE env variable (direct/proxy)
+    - Update backend config to read mode
+    - Update frontend config to detect mode
+    - _Requirements: 12.1_
+  - [x] 11.2 Implement mode-based routing
+    - Backend: Use direct mode endpoints when enabled
+    - Backend: Use existing proxy mode when disabled
+    - Frontend: Detect mode from session start response
+    - _Requirements: 12.2, 12.3, 12.5_
+  - [x] 11.3 Write property test for API contract consistency
+    - **Property 12: API contract consistency across modes**
+    - **Validates: Requirements 12.4**
+
+- [x] 12. Implement Remaining Property Tests
+  - [x] 12.1 Write property test for system prompt generation
+    - **Property 3: System prompt generation consistency**
+    - **Validates: Requirements 4.7, 11.2**
+  - [x] 12.2 Write property test for tool execution
+    - **Property 5: Tool execution produces valid result**
+    - **Validates: Requirements 6.2, 6.3, 6.4**
+  - [x] 12.3 Write property test for data persistence
+    - **Property 7: Data persistence completeness**
+    - **Validates: Requirements 7.2, 7.3, 7.4, 8.3, 8.4**
+  - [x] 12.4 Write property test for guardrails checking
+    - **Property 8: Guardrails checking**
+    - **Validates: Requirements 8.6**
+  - [x] 12.5 Write property test for audio recording lifecycle
+    - **Property 10: Audio recording lifecycle**
+    - **Validates: Requirements 10.3, 10.4, 10.5**
+
+- [x] 13. Final Checkpoint - All Tests Pass
+  - Run all unit tests
+  - Run all property tests
+  - Run integration tests
+  - Verify both direct and proxy modes work
+  - Ask the user if questions arise
+
+- [x] 14. Cleanup Proxy Mode Files (After Direct Mode Verified)
+  - [x] 14.1 Remove proxy mode backend files
+    - Delete `voiceter-backend/src/bedrock/nova-sonic-bidirectional.ts` (HTTP/2 SDK streaming client)
+    - Remove proxy-specific code from `voiceter-backend/src/bedrock/session-manager.ts`
+    - Delete `voiceter-backend/src/websocket/bidirectional-server.ts` if only used for proxy relay
+    - Remove unused imports and dependencies from package.json (@smithy/node-http-handler if no longer needed)
+    - _Requirements: Post-migration cleanup_
+  - [x] 14.2 Remove proxy mode configuration
+    - Remove BEDROCK_CONNECTION_MODE environment variable handling
+    - Remove mode switching logic from backend config
+    - Remove mode detection from frontend
+    - Update documentation to reflect direct-only architecture
+    - _Requirements: Post-migration cleanup_
+  - [x] 14.3 Clean up unused types and interfaces
+    - Remove proxy-specific types from `voiceter-backend/src/bedrock/types.ts`
+    - Remove unused session data interfaces
+    - Remove HTTP/2 handler configuration types
+    - _Requirements: Post-migration cleanup_
+  - [x] 14.4 Update tests to remove proxy mode coverage
+    - Remove proxy mode test cases
+    - Update integration tests to only test direct mode
+    - Remove mock HTTP/2 handlers from test fixtures
+    - _Requirements: Post-migration cleanup_
+  - [x] 14.5 Final verification after cleanup
+    - Run all tests to ensure nothing is broken
+    - Verify direct mode still works end-to-end
+    - Check for any orphaned imports or dead code
+    - _Requirements: Post-migration cleanup_
+
+## Notes
+
+- All tasks are required for comprehensive implementation
+- Each task references specific requirements for traceability
+- Checkpoints ensure incremental validation
+- Property tests validate universal correctness properties
+- Unit tests validate specific examples and edge cases
+- Direct WebSocket mode is now the only supported architecture (proxy mode removed)
