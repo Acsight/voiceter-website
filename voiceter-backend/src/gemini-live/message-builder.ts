@@ -22,8 +22,9 @@ import {
  * - Response modalities set to AUDIO
  * - System instruction from config
  * - Tool function declarations (if provided)
- * - Input and output audio transcription enabled
  * - Voice configuration
+ *
+ * NOTE: Vertex AI WebSocket API requires snake_case field names!
  *
  * @param config - Session configuration including voice, system prompt, and tools
  * @returns Formatted setup message for Gemini Live API
@@ -33,69 +34,47 @@ export function buildSetupMessage(
 ): GeminiSetupMessage {
   const geminiConfig = getGeminiConfig();
 
-  // Build speech config with voice only (no languageCode for native audio models)
-  // NOTE: Native audio models like gemini-live-2.5-flash-native-audio auto-detect language
-  // and don't support explicit languageCode. Language guidance is provided via system prompt.
-  const speechConfig: any = {
-    voiceConfig: {
-      prebuiltVoiceConfig: {
-        voiceName: config.voiceName || geminiConfig.defaultVoice,
-      },
-    },
-  };
-
-  // Build generation config
-  const generationConfig: any = {
-    responseModalities: ['AUDIO'],
-    speechConfig,
-  };
-
-  // Build system instruction with language guidance
-  // For non-English languages, explicitly tell the model to respond in that language
-  let systemInstructionText = config.systemPrompt;
-
-  /* if (config.languageCode && !config.languageCode.startsWith('en')) {
-    const languageName = getLanguageName(config.languageCode);
-    // Google's recommended approach for non-English responses
-    systemInstructionText = `${config.systemPrompt}
-
-    LANGUAGE INSTRUCTION: RESPOND IN ${languageName.toUpperCase()}. YOU MUST RESPOND UNMISTAKABLY IN ${languageName.toUpperCase()}.`;
-    
-    console.log(`🌐 Non-English language detected: ${config.languageCode} (${languageName})`);
-    console.log(`   Added language instruction to system prompt`);
-  } */
-
-  // Build the setup object with basic settings
+  // Build the setup object with snake_case field names (required by Vertex AI WebSocket API)
   const setup: any = {
-    // Specify model
+    // Specify model (full resource name)
     model: `projects/${geminiConfig.projectId}/locations/${geminiConfig.region}/publishers/google/models/${geminiConfig.model}`,
 
-    // Set responseModalities to AUDIO
-    generationConfig,
-
-    // Include system instruction
-    systemInstruction: {
-      parts: [{ text: systemInstructionText }],
+    // Generation config with voice settings (snake_case)
+    generation_config: {
+      response_modalities: ['AUDIO'],
+      speech_config: {
+        voice_config: {
+          prebuilt_voice_config: {
+            voice_name: config.voiceName || geminiConfig.defaultVoice,
+          },
+        },
+      },
     },
 
-    // Enable transcription (native audio models auto-detect language)
-    inputAudioTranscription: {},
-    outputAudioTranscription: {},
+    // System instruction (snake_case)
+    system_instruction: {
+      parts: [{ text: config.systemPrompt }],
+    },
 
-    // Configure VAD (Voice Activity Detection) for better conversation flow
-    // - Low start sensitivity: Avoid false triggers from background noise
-    // - Low end sensitivity: Wait longer before assuming user finished speaking
-    // - Longer silence duration: Give user time to think between sentences (1.5s)
-    realtimeInputConfig: {
-      automaticActivityDetection: {
-        startOfSpeechSensitivity: 'START_SENSITIVITY_LOW',   // Avoid false triggers
-        endOfSpeechSensitivity: 'END_SENSITIVITY_LOW',       // Wait longer for user to finish
-        prefixPaddingMs: 200,                                // Buffer before speech starts
-        silenceDurationMs: 1500,                             // Wait 1.5 seconds of silence before responding
+    // Enable transcription for both input (user speech) and output (AI speech)
+    // These are required to receive transcription events from Gemini
+    input_audio_transcription: {},
+    output_audio_transcription: {},
+
+    // Configure VAD (Voice Activity Detection) for better conversation flow (snake_case)
+    realtime_input_config: {
+      automatic_activity_detection: {
+        start_of_speech_sensitivity: 'START_SENSITIVITY_LOW',   // Avoid false triggers
+        end_of_speech_sensitivity: 'END_SENSITIVITY_LOW',       // Wait longer for user to finish
+        prefix_padding_ms: 200,                                 // Buffer before speech starts
+        silence_duration_ms: 1500,                              // Wait 1.5 seconds of silence before responding
       },
-      activityHandling: 'START_OF_ACTIVITY_INTERRUPTS',      // Enable barge-in
+      activity_handling: 'START_OF_ACTIVITY_INTERRUPTS',        // Enable barge-in
     },
   };
+
+  // NOTE: Native audio models (gemini-live-2.5-flash-native-audio) auto-detect language
+  // and do NOT support explicit language_code. Language is detected from audio stream.
 
   // Include tool function declarations (only if tools are provided)
   const toolsArray = buildToolsArray(config.tools);
@@ -104,16 +83,14 @@ export function buildSetupMessage(
   }
 
   // 🔍 DETAILED LOGGING: Log the complete setup message structure
- /*  console.log('\n🔧 ========== GEMINI LIVE SETUP MESSAGE ==========');
+  console.log('\n🔧 ========== GEMINI LIVE SETUP MESSAGE ==========');
   console.log('📍 Model:', setup.model);
-  console.log('🎤 Voice:', speechConfig.voiceConfig.prebuiltVoiceConfig.voiceName);
+  console.log('🎤 Voice:', setup.generation_config.speech_config.voice_config.prebuilt_voice_config.voice_name);
+  console.log('🌐 Language:', 'auto-detect (native audio model)');
   console.log('📝 System prompt length:', config.systemPrompt?.length || 0, 'chars');
   console.log('🔧 Tools count:', toolsArray.length > 0 ? toolsArray[0].functionDeclarations?.length || 0 : 0);
-  console.log('🎙️ Input Audio Transcription:', JSON.stringify(setup.inputAudioTranscription));
-  console.log('🔊 Output Audio Transcription:', JSON.stringify(setup.outputAudioTranscription));
-  console.log('🎯 VAD Config:', JSON.stringify(setup.realtimeInputConfig, null, 2));
-  console.log('📦 Full setup keys:', Object.keys(setup).join(', '));
-  console.log('================================================\n'); */
+  console.log('📦 Full setup structure keys:', Object.keys(setup).join(', '));
+  console.log('================================================\n');
 
   return { setup } as GeminiSetupMessage;
 }

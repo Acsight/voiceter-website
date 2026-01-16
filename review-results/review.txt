@@ -1,0 +1,84 @@
+To answer your question directly: No, the code as currently written in message-builder.ts will not work with the Gemini Vertex AI Live Voice API.
+
+The error message you received, Unknown name "speechConfig" at 'setup': Cannot find field, is correct because the API expects a very specific nested structure. Based on the official Vertex AI Multimodal Live API specifications, here is what needs to be fixed to make your code functional.
+
+1. Correct the Setup Message Structure
+In your current buildSetupMessage function, speechConfig is being placed at the top level of the setup object. In Vertex AI, it must be nested inside generationConfig. Additionally, the field names should use snake_case for the raw JSON over WebSockets.
+
+Incorrect Structure (Your Current Code):
+{
+  "setup": {
+    "model": "...",
+    "generationConfig": { "responseModalities": ["AUDIO"] },
+    "speechConfig": { ... } // WRONG: Top-level field
+  }
+}
+
+Correct Structure (Required by Vertex AI):
+{
+  "setup": {
+    "model": "projects/{PROJECT_ID}/locations/{LOCATION}/publishers/google/models/{MODEL_ID}",
+    "generation_config": {
+      "response_modalities": ["AUDIO"],
+      "speech_config": {
+        "voice_config": {
+          "prebuilt_voice_config": {
+            "voice_name": "Charon"
+          }
+        }
+      }
+    },
+    "system_instruction": { "parts": [{ "text": "..." }] }
+  }
+}
+
+2. Mandatory Model Format
+Vertex AI requires the full resource name for the model field, which your code appears to handle correctly, but ensure it follows this exact pattern: projects/{project}/locations/{location}/publishers/google/models/{model}.
+
+3. Handle Language Auto-Detection
+You mentioned issues with Turkish transcription. Native audio models like gemini-live-2.5-flash-native-audio auto-detect the language from the audio stream and do not support an explicit language_code in the setup message.
+
+Fix: Remove any languageCode fields from the setup JSON to avoid "unknown field" errors.
+
+Guidance: Use the system_instruction to tell the model: "You are a helpful assistant. Please conduct the entire conversation in Turkish (Türkçe).".
+
+4. Audio Format Requirements
+Ensure your frontend and backend adhere to these exact specifications for live voice:
+
+Input Audio: Raw 16-bit PCM, 16kHz, mono, little-endian.
+
+Output Audio: Raw 16-bit PCM, 24kHz, mono, little-endian.
+
+Message Type: Use the realtime_input field for sending audio chunks.
+
+Recommended Code Update for message-builder.ts:
+export function buildSetupMessage(config: GeminiSessionConfig): any {
+  const geminiConfig = getGeminiConfig();
+
+  return {
+    setup: {
+      model: `projects/${geminiConfig.projectId}/locations/${geminiConfig.region}/publishers/google/models/${geminiConfig.model}`,
+      generation_config: {
+        response_modalities: ["AUDIO"],
+        speech_config: {
+          voice_config: {
+            prebuilt_voice_config: {
+              voice_name: config.voiceName || geminiConfig.defaultVoice,
+            },
+          },
+        },
+      },
+      system_instruction: {
+        parts: [{ text: config.systemPrompt }],
+      },
+      // Optional: VAD configuration
+      realtime_input_config: {
+        automatic_activity_detection: {
+          start_of_speech_sensitivity: "START_SENSITIVITY_LOW",
+        }
+      }
+    },
+  };
+}
+
+Note: Ensure you update your GeminiSetupMessage interface in types.ts to match this nested structure.
