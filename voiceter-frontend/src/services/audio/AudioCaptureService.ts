@@ -5,7 +5,10 @@
  * for real-time voice communication with the backend.
  * 
  * IMPORTANT: Gemini Live API requires 16kHz, 16-bit PCM, mono audio input.
- * Most browsers capture at 44.1kHz or 48kHz, so we must resample to 16kHz.
+ * 
+ * IMPROVEMENTS (based on Gemini review):
+ * 1. Uses browser native resampling (AudioContext sampleRate) where possible.
+ * 2. Implements a Noise Gate to prevent "hallucinations" during silence.
  */
 
 /**
@@ -21,6 +24,10 @@ export interface AudioCaptureConfig {
 
 // Target sample rate for Gemini Live API
 const GEMINI_TARGET_SAMPLE_RATE = 16000;
+
+// Noise Gate Threshold (0.015 is roughly -36dB). 
+// Signals below this are treated as silence to prevent hallucinations like "All, the".
+const NOISE_GATE_THRESHOLD = 0.015;
 
 /**
  * Audio capture state
@@ -124,18 +131,19 @@ export class AudioCaptureService {
    * Initialize audio capture
    * Requests microphone permission and sets up audio processing pipeline
    * 
-   * IMPORTANT: Most browsers don't support 16kHz AudioContext natively.
-   * We capture at the browser's native rate and resample to 16kHz for Gemini.
+   * CRITICAL FIX: Try to initialize AudioContext at 16000Hz.
+   * If the browser supports this, it uses a high-quality native polyphase filter 
+   * instead of our "dirty" linear interpolation.
    */
   public async initialize(): Promise<void> {
     try {
       this.updateState(CaptureState.REQUESTING_PERMISSION);
 
       // Request microphone access
-      // Note: sampleRate constraint is often ignored by browsers
+      // Try to request 16k at the source (some browsers ignore this)
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          sampleRate: this.config.sampleRate,
+          sampleRate: GEMINI_TARGET_SAMPLE_RATE,
           channelCount: this.config.channelCount,
           echoCancellation: this.config.echoCancellation,
           noiseSuppression: this.config.noiseSuppression,
@@ -146,20 +154,28 @@ export class AudioCaptureService {
 
       this.updateState(CaptureState.INITIALIZING);
 
-      // Create audio context - let browser choose optimal sample rate
-      // We'll resample to 16kHz ourselves for Gemini Live
-      this.audioContext = new AudioContext();
+      // CRITICAL FIX: Try to initialize AudioContext at 16000Hz.
+      // If the browser supports this, it uses a high-quality native polyphase filter 
+      // instead of our "dirty" linear interpolation.
+      try {
+        this.audioContext = new AudioContext({ sampleRate: GEMINI_TARGET_SAMPLE_RATE });
+        console.log(`[AudioCapture] Native 16kHz AudioContext created (High Quality)`);
+      } catch (e) {
+        console.warn('[AudioCapture] Browser does not support forced sample rate, falling back to native rate.');
+        this.audioContext = new AudioContext(); // Fallback to system rate (usually 44.1k/48k)
+      }
+
       this.actualSampleRate = this.audioContext.sampleRate;
       
-      // Check if we need to resample (almost always yes)
+      // Check if we need to resample
       if (this.actualSampleRate !== GEMINI_TARGET_SAMPLE_RATE) {
         this.needsResampling = true;
         this.resampleRatio = this.actualSampleRate / GEMINI_TARGET_SAMPLE_RATE;
-        console.log(`[AudioCapture] Will resample from ${this.actualSampleRate}Hz to ${GEMINI_TARGET_SAMPLE_RATE}Hz (ratio: ${this.resampleRatio.toFixed(4)})`);
+        console.log(`[AudioCapture] Resampling active: ${this.actualSampleRate}Hz -> ${GEMINI_TARGET_SAMPLE_RATE}Hz (ratio: ${this.resampleRatio.toFixed(4)})`);
       } else {
         this.needsResampling = false;
         this.resampleRatio = 1;
-        console.log(`[AudioCapture] No resampling needed - native ${GEMINI_TARGET_SAMPLE_RATE}Hz support`);
+        console.log(`[AudioCapture] Native 16kHz mode active (High Quality)`);
       }
 
       // Load audio processor worklet
@@ -275,7 +291,7 @@ export class AudioCaptureService {
 
   /**
    * Handle audio buffer from worklet
-   * Resamples to 16kHz if needed before sending to Gemini
+   * Resamples to 16kHz if needed and applies noise gate before sending to Gemini
    */
   private handleAudioBuffer(buffer: Float32Array): void {
     if (this.state !== CaptureState.CAPTURING) {
@@ -293,6 +309,15 @@ export class AudioCaptureService {
       let processedBuffer = buffer;
       if (this.needsResampling) {
         processedBuffer = this.resampleTo16kHz(buffer);
+      }
+
+      // NOISE GATE: Check RMS (volume)
+      // If the audio is just background hiss, silence it completely to prevent hallucinations
+      const rms = Math.sqrt(processedBuffer.reduce((sum, x) => sum + x * x, 0) / processedBuffer.length);
+      if (rms < NOISE_GATE_THRESHOLD) {
+        // Send actual digital silence (zeros) instead of room noise
+        processedBuffer = new Float32Array(processedBuffer.length);
+        processedBuffer.fill(0);
       }
 
       // Convert Float32Array to 16-bit PCM

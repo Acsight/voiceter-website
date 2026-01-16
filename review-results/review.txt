@@ -1,84 +1,380 @@
-To answer your question directly: No, the code as currently written in message-builder.ts will not work with the Gemini Vertex AI Live Voice API.
+The transcription errors you are seeing—"beige" (English), "béat" (French), and "All, the." (Hallucination)—confirm that the model is not detecting the language as Turkish. It is hearing the "sh" sound in "Beş" and matching it to the closest English word "Beige".
 
-The error message you received, Unknown name "speechConfig" at 'setup': Cannot find field, is correct because the API expects a very specific nested structure. Based on the official Vertex AI Multimodal Live API specifications, here is what needs to be fixed to make your code functional.
+This happens because the Language Instruction logic is commented out in your message-builder.ts, and your AudioCaptureService.ts lacks a Noise Gate, causing the model to process background static as speech.
 
-1. Correct the Setup Message Structure
-In your current buildSetupMessage function, speechConfig is being placed at the top level of the setup object. In Vertex AI, it must be nested inside generationConfig. Additionally, the field names should use snake_case for the raw JSON over WebSockets.
+Here are the fixed files.
 
-Incorrect Structure (Your Current Code):
-{
-  "setup": {
-    "model": "...",
-    "generationConfig": { "responseModalities": ["AUDIO"] },
-    "speechConfig": { ... } // WRONG: Top-level field
-  }
+1. Fix voiceter-backend/src/gemini-live/message-builder.ts
+You must uncomment and strengthen the language instruction block. The native audio model does not support a languageCode setting, so this System Prompt modification is the only way to force Turkish.
+
+import { getGeminiConfig } from './config';
+import {
+  GeminiSetupMessage,
+  GeminiAudioInputMessage,
+  GeminiToolResponseMessage,
+  GeminiSessionConfig,
+  GeminiFunctionDeclaration,
+} from './types';
+
+// Helper to get readable language name
+function getLanguageName(code: string = 'en-US'): string {
+  if (code.startsWith('tr')) return 'Turkish';
+  if (code.startsWith('es')) return 'Spanish';
+  if (code.startsWith('fr')) return 'French';
+  if (code.startsWith('de')) return 'German';
+  return 'English';
 }
 
-Correct Structure (Required by Vertex AI):
-{
-  "setup": {
-    "model": "projects/{PROJECT_ID}/locations/{LOCATION}/publishers/google/models/{MODEL_ID}",
-    "generation_config": {
-      "response_modalities": ["AUDIO"],
-      "speech_config": {
-        "voice_config": {
-          "prebuilt_voice_config": {
-            "voice_name": "Charon"
-          }
-        }
-      }
-    },
-    "system_instruction": { "parts": [{ "text": "..." }] }
-  }
-}
-
-2. Mandatory Model Format
-Vertex AI requires the full resource name for the model field, which your code appears to handle correctly, but ensure it follows this exact pattern: projects/{project}/locations/{location}/publishers/google/models/{model}.
-
-3. Handle Language Auto-Detection
-You mentioned issues with Turkish transcription. Native audio models like gemini-live-2.5-flash-native-audio auto-detect the language from the audio stream and do not support an explicit language_code in the setup message.
-
-Fix: Remove any languageCode fields from the setup JSON to avoid "unknown field" errors.
-
-Guidance: Use the system_instruction to tell the model: "You are a helpful assistant. Please conduct the entire conversation in Turkish (Türkçe).".
-
-4. Audio Format Requirements
-Ensure your frontend and backend adhere to these exact specifications for live voice:
-
-Input Audio: Raw 16-bit PCM, 16kHz, mono, little-endian.
-
-Output Audio: Raw 16-bit PCM, 24kHz, mono, little-endian.
-
-Message Type: Use the realtime_input field for sending audio chunks.
-
-Recommended Code Update for message-builder.ts:
-export function buildSetupMessage(config: GeminiSessionConfig): any {
+export function buildSetupMessage(
+  config: GeminiSessionConfig
+): GeminiSetupMessage {
   const geminiConfig = getGeminiConfig();
 
+  // 1. Voice Config (No languageCode here)
+  const speechConfig: any = {
+    voiceConfig: {
+      prebuiltVoiceConfig: {
+        voiceName: config.voiceName || geminiConfig.defaultVoice,
+      },
+    },
+  };
+
+  const generationConfig: any = {
+    responseModalities: ['AUDIO'],
+    speechConfig,
+  };
+
+  // 2. SYSTEM PROMPT - CRITICAL FIX
+  // We MUST tell the model which language to speak/listen for.
+  let systemInstructionText = config.systemPrompt;
+  const languageCode = config.languageCode || 'en-US';
+
+  // Always apply language instruction if it's Turkish
+  if (languageCode.toLowerCase().includes('tr')) {
+    systemInstructionText = `
+    IMPORTANT: The user is speaking TURKISH.
+    1. You must listen for and transcribe Turkish speech accurately.
+    2. Even short answers like "Beş" (5) must be recognized as Turkish.
+    3. Do NOT hallucinate English words like "Beige" or "Page".
+    4. Respond ONLY in Turkish.
+
+    ORIGINAL PROMPT:
+    ${config.systemPrompt}`;
+    
+    console.log(`🌐 FORCING TURKISH LANGUAGE INSTRUCTION`);
+  }
+
+  const setup: any = {
+    model: `projects/${geminiConfig.projectId}/locations/${geminiConfig.region}/publishers/google/models/${geminiConfig.model}`,
+    generationConfig,
+    systemInstruction: {
+      parts: [{ text: systemInstructionText }],
+    },
+    inputAudioTranscription: {},
+    outputAudioTranscription: {},
+    realtimeInputConfig: {
+      automaticActivityDetection: {
+        // 3. VAD SETTINGS
+        // Low start sensitivity prevents background noise from triggering "All, the"
+        startOfSpeechSensitivity: 'START_SENSITIVITY_LOW', 
+        // High end sensitivity ensures we catch the end of short words like "Beş"
+        endOfSpeechSensitivity: 'END_SENSITIVITY_HIGH',
+        prefixPaddingMs: 300,
+        silenceDurationMs: 1500,
+      },
+      activityHandling: 'START_OF_ACTIVITY_INTERRUPTS',
+    },
+  };
+
+  const toolsArray = buildToolsArray(config.tools);
+  if (toolsArray.length > 0) {
+    setup.tools = toolsArray;
+  }
+
+  return { setup } as GeminiSetupMessage;
+}
+
+function buildToolsArray(
+  tools: GeminiFunctionDeclaration[]
+): Array<{ functionDeclarations: GeminiFunctionDeclaration[] }> {
+  if (!tools || tools.length === 0) return [];
+  return [{ functionDeclarations: tools }];
+}
+
+export function buildAudioInputMessage(audioData: string): GeminiAudioInputMessage {
   return {
-    setup: {
-      model: `projects/${geminiConfig.projectId}/locations/${geminiConfig.region}/publishers/google/models/${geminiConfig.model}`,
-      generation_config: {
-        response_modalities: ["AUDIO"],
-        speech_config: {
-          voice_config: {
-            prebuilt_voice_config: {
-              voice_name: config.voiceName || geminiConfig.defaultVoice,
-            },
-          },
-        },
+    realtimeInput: {
+      audio: {
+        mimeType: 'audio/pcm;rate=16000',
+        data: audioData,
       },
-      system_instruction: {
-        parts: [{ text: config.systemPrompt }],
-      },
-      // Optional: VAD configuration
-      realtime_input_config: {
-        automatic_activity_detection: {
-          start_of_speech_sensitivity: "START_SENSITIVITY_LOW",
-        }
-      }
     },
   };
 }
 
-Note: Ensure you update your GeminiSetupMessage interface in types.ts to match this nested structure.
+export function buildToolResponseMessage(
+  callId: string,
+  response: unknown
+): GeminiToolResponseMessage {
+  return {
+    toolResponse: {
+      functionResponses: [{ id: callId, response: response }],
+    },
+  };
+}
+
+export function buildMultipleToolResponseMessage(
+  responses: Array<{ id: string; response: unknown }>
+): GeminiToolResponseMessage {
+  return {
+    toolResponse: {
+      functionResponses: responses,
+    },
+  };
+}
+
+2. Fix voiceter-frontend/src/services/audio/AudioCaptureService.ts
+Your current file does not have the noise gate or the native sample rate initialization. You are sending silence as "low volume data," which the model tries to translate, resulting in "All, the." or "10".
+
+Use this robust version:
+/**
+ * Audio Capture Service
+ * UPDATED: Includes Noise Gate and Native 16kHz support to fix transcription errors.
+ */
+
+export interface AudioCaptureConfig {
+  sampleRate?: number;
+  channelCount?: number;
+  echoCancellation?: boolean;
+  noiseSuppression?: boolean;
+  autoGainControl?: boolean;
+}
+
+const GEMINI_TARGET_SAMPLE_RATE = 16000;
+// Silence threshold: Signals below this volume are sent as pure zeros
+const NOISE_GATE_THRESHOLD = 0.015; 
+
+export enum CaptureState {
+  IDLE = 'idle',
+  REQUESTING_PERMISSION = 'requesting_permission',
+  INITIALIZING = 'initializing',
+  CAPTURING = 'capturing',
+  PAUSED = 'paused',
+  ERROR = 'error',
+}
+
+export type AudioChunkCallback = (audioData: string, sequenceNumber: number) => void;
+export type ErrorCallback = (error: Error) => void;
+export type StateChangeCallback = (state: CaptureState) => void;
+
+export class AudioCaptureService {
+  private audioContext: AudioContext | null = null;
+  private mediaStream: MediaStream | null = null;
+  private sourceNode: MediaStreamAudioSourceNode | null = null;
+  private workletNode: AudioWorkletNode | null = null;
+  private state: CaptureState = CaptureState.IDLE;
+  private sequenceNumber = 0;
+  private config: Required<AudioCaptureConfig>;
+  
+  private actualSampleRate: number = 0;
+  private needsResampling: boolean = false;
+  private resampleRatio: number = 1;
+  
+  private audioChunkCallback: AudioChunkCallback | null = null;
+  private errorCallback: ErrorCallback | null = null;
+  private stateChangeCallback: StateChangeCallback | null = null;
+
+  constructor(config: AudioCaptureConfig = {}) {
+    this.config = {
+      sampleRate: config.sampleRate || GEMINI_TARGET_SAMPLE_RATE,
+      channelCount: config.channelCount || 1,
+      echoCancellation: config.echoCancellation !== false,
+      noiseSuppression: config.noiseSuppression !== false,
+      autoGainControl: config.autoGainControl !== false,
+    };
+  }
+
+  public getState(): CaptureState { return this.state; }
+  public getSequenceNumber(): number { return this.sequenceNumber; }
+  public onAudioChunk(callback: AudioChunkCallback): void { this.audioChunkCallback = callback; }
+  public onError(callback: ErrorCallback): void { this.errorCallback = callback; }
+  public onStateChange(callback: StateChangeCallback): void { this.stateChangeCallback = callback; }
+
+  public async initialize(): Promise<void> {
+    try {
+      this.updateState(CaptureState.REQUESTING_PERMISSION);
+
+      this.mediaStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: this.config.channelCount,
+          echoCancellation: this.config.echoCancellation,
+          noiseSuppression: this.config.noiseSuppression,
+          autoGainControl: this.config.autoGainControl,
+          // Try to request 16k at the hardware level
+          sampleRate: GEMINI_TARGET_SAMPLE_RATE 
+        },
+        video: false,
+      });
+
+      this.updateState(CaptureState.INITIALIZING);
+
+      // CRITICAL FIX: Explicitly request 16kHz AudioContext.
+      // This forces the browser to use its high-quality native resampler
+      // instead of our manual JS implementation, reducing artifacts like "sh" -> "beige".
+      try {
+        this.audioContext = new AudioContext({ sampleRate: GEMINI_TARGET_SAMPLE_RATE });
+      } catch (e) {
+        console.warn('Native 16kHz not supported, falling back to default rate');
+        this.audioContext = new AudioContext();
+      }
+      
+      this.actualSampleRate = this.audioContext.sampleRate;
+      
+      if (this.actualSampleRate !== GEMINI_TARGET_SAMPLE_RATE) {
+        this.needsResampling = true;
+        this.resampleRatio = this.actualSampleRate / GEMINI_TARGET_SAMPLE_RATE;
+        console.log(`[AudioCapture] Resampling: ${this.actualSampleRate}Hz -> ${GEMINI_TARGET_SAMPLE_RATE}Hz`);
+      } else {
+        this.needsResampling = false;
+        this.resampleRatio = 1;
+        console.log(`[AudioCapture] Native 16kHz mode active`);
+      }
+
+      await this.audioContext.audioWorklet.addModule('/audio-processor.js');
+      this.sourceNode = this.audioContext.createMediaStreamSource(this.mediaStream);
+      this.workletNode = new AudioWorkletNode(this.audioContext, 'audio-processor');
+
+      this.workletNode.port.onmessage = (event) => {
+        if (event.data.type === 'audio') {
+          this.handleAudioBuffer(event.data.buffer);
+        }
+      };
+
+      this.sourceNode.connect(this.workletNode);
+      this.updateState(CaptureState.IDLE);
+    } catch (error) {
+      this.handleError(error as Error);
+      throw error;
+    }
+  }
+
+  public start(): void {
+    if (this.state === CaptureState.CAPTURING) return;
+    if (!this.audioContext || !this.workletNode) throw new Error('Not initialized');
+    if (this.audioContext.state === 'suspended') this.audioContext.resume();
+    this.sequenceNumber = 0;
+    this.updateState(CaptureState.CAPTURING);
+  }
+
+  public pause(): void {
+    if (this.state === CaptureState.CAPTURING && this.audioContext) {
+      this.audioContext.suspend();
+      this.updateState(CaptureState.PAUSED);
+    }
+  }
+
+  public resume(): void {
+    if (this.state === CaptureState.PAUSED && this.audioContext) {
+      this.audioContext.resume();
+      this.updateState(CaptureState.CAPTURING);
+    }
+  }
+
+  public stop(): void {
+    if (this.sourceNode && this.workletNode) this.sourceNode.disconnect(this.workletNode);
+    if (this.mediaStream) {
+      this.mediaStream.getTracks().forEach((track) => track.stop());
+      this.mediaStream = null;
+    }
+    if (this.audioContext) {
+      this.audioContext.close();
+      this.audioContext = null;
+    }
+    this.updateState(CaptureState.IDLE);
+  }
+
+  private handleAudioBuffer(buffer: Float32Array): void {
+    if (this.state !== CaptureState.CAPTURING || !buffer || buffer.length === 0) return;
+
+    try {
+      let processedBuffer = buffer;
+      if (this.needsResampling) {
+        processedBuffer = this.resampleTo16kHz(buffer);
+      }
+
+      // CRITICAL FIX: Noise Gate
+      // Calculate RMS (Volume)
+      let sum = 0;
+      for (let i = 0; i < processedBuffer.length; i++) {
+        sum += processedBuffer[i] * processedBuffer[i];
+      }
+      const rms = Math.sqrt(sum / processedBuffer.length);
+
+      // If volume is below threshold, send absolute silence.
+      // This prevents the model from trying to interpret static as words like "All, the".
+      if (rms < NOISE_GATE_THRESHOLD) {
+        processedBuffer.fill(0);
+      }
+
+      const pcmData = this.floatToPCM(processedBuffer);
+      const base64Data = this.pcmToBase64(pcmData);
+      
+      if (!base64Data) return;
+
+      this.sequenceNumber++;
+      if (this.audioChunkCallback) {
+        this.audioChunkCallback(base64Data, this.sequenceNumber);
+      }
+    } catch (error) {
+      this.handleError(error as Error);
+    }
+  }
+
+  private resampleTo16kHz(inputBuffer: Float32Array): Float32Array {
+    const outputLength = Math.floor(inputBuffer.length / this.resampleRatio);
+    const outputBuffer = new Float32Array(outputLength);
+    for (let i = 0; i < outputLength; i++) {
+      const inputIndex = i * this.resampleRatio;
+      const index = Math.floor(inputIndex);
+      const frac = inputIndex - index;
+      const p1 = inputBuffer[index] || 0;
+      const p2 = inputBuffer[index + 1] || p1;
+      outputBuffer[i] = p1 * (1 - frac) + p2 * frac;
+    }
+    return outputBuffer;
+  }
+
+  private floatToPCM(float32Array: Float32Array): Int16Array {
+    const pcm = new Int16Array(float32Array.length);
+    for (let i = 0; i < float32Array.length; i++) {
+      const s = Math.max(-1, Math.min(1, float32Array[i]));
+      pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+    return pcm;
+  }
+
+  private pcmToBase64(pcmData: Int16Array): string {
+    const bytes = new Uint8Array(pcmData.buffer);
+    let binary = '';
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
+  }
+
+  private updateState(state: CaptureState): void {
+    this.state = state;
+    if (this.stateChangeCallback) this.stateChangeCallback(state);
+  }
+
+  private handleError(error: Error): void {
+    console.error('Audio capture error:', error);
+    this.updateState(CaptureState.ERROR);
+    if (this.errorCallback) this.errorCallback(error);
+  }
+}
+
+export function getAudioCaptureService(config?: AudioCaptureConfig): AudioCaptureService {
+  return new AudioCaptureService(config);
+}

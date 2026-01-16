@@ -20,7 +20,7 @@ import {
  * This function creates a properly formatted setup message that includes:
  * - Model specification
  * - Response modalities set to AUDIO
- * - System instruction from config
+ * - System instruction from config (with language instruction for non-English)
  * - Tool function declarations (if provided)
  * - Voice configuration
  *
@@ -33,6 +33,27 @@ export function buildSetupMessage(
   config: GeminiSessionConfig
 ): GeminiSetupMessage {
   const geminiConfig = getGeminiConfig();
+
+  // CRITICAL FIX: Add language instruction to system prompt for non-English languages
+  // Native audio models don't support languageCode, so we must instruct via system prompt
+  let systemInstructionText = config.systemPrompt;
+  const languageCode = config.languageCode || 'en-US';
+
+  // Force Turkish language instruction if language code indicates Turkish
+  if (languageCode.toLowerCase().includes('tr')) {
+    systemInstructionText = `
+IMPORTANT LANGUAGE INSTRUCTION: The user is speaking TURKISH (Türkçe).
+1. You MUST listen for and transcribe Turkish speech accurately.
+2. Even short answers like "Beş" (5), "Evet" (Yes), "Hayır" (No) must be recognized as Turkish.
+3. Do NOT hallucinate English words like "Beige", "Page", or "All, the" when hearing Turkish.
+4. Respond ONLY in Turkish.
+5. Numbers should be recognized in Turkish: Bir (1), İki (2), Üç (3), Dört (4), Beş (5), etc.
+
+ORIGINAL PROMPT:
+${config.systemPrompt}`;
+    
+    console.log(`🌐 FORCING TURKISH LANGUAGE INSTRUCTION in system prompt`);
+  }
 
   // Build the setup object with snake_case field names (required by Vertex AI WebSocket API)
   const setup: any = {
@@ -51,9 +72,9 @@ export function buildSetupMessage(
       },
     },
 
-    // System instruction (snake_case)
+    // System instruction with language guidance (snake_case)
     system_instruction: {
-      parts: [{ text: config.systemPrompt }],
+      parts: [{ text: systemInstructionText }],
     },
 
     // Enable transcription for both input (user speech) and output (AI speech)
@@ -62,19 +83,19 @@ export function buildSetupMessage(
     output_audio_transcription: {},
 
     // Configure VAD (Voice Activity Detection) for better conversation flow (snake_case)
+    // Settings optimized based on Gemini review:
+    // - LOW start sensitivity: prevents background noise from triggering
+    // - HIGH end sensitivity: ensures we catch the end of short words like "Beş"
     realtime_input_config: {
       automatic_activity_detection: {
-        start_of_speech_sensitivity: 'START_SENSITIVITY_LOW',   // Avoid false triggers
-        end_of_speech_sensitivity: 'END_SENSITIVITY_LOW',       // Wait longer for user to finish
-        prefix_padding_ms: 200,                                 // Buffer before speech starts
+        start_of_speech_sensitivity: 'START_SENSITIVITY_LOW',   // Don't trigger on background noise
+        end_of_speech_sensitivity: 'END_SENSITIVITY_HIGH',      // Catch short words like "Beş" fully
+        prefix_padding_ms: 300,                                 // Buffer before speech starts
         silence_duration_ms: 1500,                              // Wait 1.5 seconds of silence before responding
       },
       activity_handling: 'START_OF_ACTIVITY_INTERRUPTS',        // Enable barge-in
     },
   };
-
-  // NOTE: Native audio models (gemini-live-2.5-flash-native-audio) auto-detect language
-  // and do NOT support explicit language_code. Language is detected from audio stream.
 
   // Include tool function declarations (only if tools are provided)
   const toolsArray = buildToolsArray(config.tools);
@@ -86,8 +107,9 @@ export function buildSetupMessage(
   console.log('\n🔧 ========== GEMINI LIVE SETUP MESSAGE ==========');
   console.log('📍 Model:', setup.model);
   console.log('🎤 Voice:', setup.generation_config.speech_config.voice_config.prebuilt_voice_config.voice_name);
-  console.log('🌐 Language:', 'auto-detect (native audio model)');
-  console.log('📝 System prompt length:', config.systemPrompt?.length || 0, 'chars');
+  console.log('🌐 Language Code:', languageCode);
+  console.log('🌐 Turkish Instruction:', languageCode.toLowerCase().includes('tr') ? 'ENABLED' : 'disabled');
+  console.log('📝 System prompt length:', systemInstructionText?.length || 0, 'chars');
   console.log('🔧 Tools count:', toolsArray.length > 0 ? toolsArray[0].functionDeclarations?.length || 0 : 0);
   console.log('📦 Full setup structure keys:', Object.keys(setup).join(', '));
   console.log('================================================\n');
